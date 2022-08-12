@@ -52,7 +52,20 @@
   height: 225px;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+}
+
+.headerTitle {
+  font-size: 40px;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
+  color: rgb(216, 216, 216);
 }/*# sourceMappingURL=index.css.map */
