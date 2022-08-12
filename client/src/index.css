@@ -6,6 +6,7 @@
 }
 
 .bookCard {
+  transform: scale(0.95);
   margin-right: 2.5%;
   margin-top: 2.5%;
   background-color: rgba(128, 128, 128, 0.467);
