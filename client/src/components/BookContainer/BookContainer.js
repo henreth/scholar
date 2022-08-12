@@ -1,26 +1,17 @@
-export default function BookContainer({ testData }) {
+import BookCard from "../BookCard/BookCard"
 
+export default function BookContainer({ testData }) {
     if (!testData.items) return null
 
-
-    let firstBook = testData.items[0].volumeInfo
-
-    let bookCover = firstBook.imageLinks.thumbnail
-
-    let bookTitle = firstBook.title
-    let bookAuthor = firstBook.authors[0]
-
+    let booksToDisplay = testData.items.map(book=>{
+        return (<BookCard 
+            key={book.id}
+            book={book}
+        />)
+    })
     return (
         <div className='bookContainer'>
-            <div className="bookCard">
-                <div className="bookCardHalf top">
-                    <img className='bookCover' src={bookCover} />
-                </div>
-                <div className="bookCardHalf bottom">
-                    <div className="bookTitle">{bookTitle}</div>
-                    <div className='bookAuthor'>{bookAuthor}</div>
-                </div>
-            </div>
+            {booksToDisplay}
         </div>
     )
 }
