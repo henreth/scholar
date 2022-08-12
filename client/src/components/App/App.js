@@ -15,7 +15,9 @@ export default function App() {
 
   return (
     <div>
-      <Header />
+      <Header
+        setTestData={setTestData}
+      />
       <hr></hr>
       <Routes>
         <Route path='/*' element ={

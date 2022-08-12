@@ -64,6 +64,49 @@
   font-size: 40px;
 }
 
+.searchBar {
+  justify-self: end;
+  width: 100px;
+  align-self: center;
+  margin-top: 2.5%;
+  font-size: 18px;
+  transition: 1s;
+  background-color: rgba(128, 128, 128, 0.247);
+  height: 40px;
+  border: none;
+  color: transparent;
+  border-radius: 5px;
+}
+.searchBar::-moz-placeholder {
+  color: transparent;
+}
+.searchBar:-ms-input-placeholder {
+  color: transparent;
+}
+.searchBar::placeholder {
+  color: transparent;
+}
+.searchBar:focus {
+  width: 301px;
+  transition: 1s;
+  background-color: rgba(128, 128, 128, 0.247);
+  color: rgb(216, 216, 216);
+}
+.searchBar:focus::-moz-placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  -moz-transition: 1s;
+  transition: 1s;
+}
+.searchBar:focus:-ms-input-placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  -ms-transition: 1s;
+  transition: 1s;
+}
+.searchBar:focus::placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  transition: 1s;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
