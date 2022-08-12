@@ -7,7 +7,7 @@ import Home from '../Home/Home';
 export default function App() {
   let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=camus&printType=books&key=' + key
   let [testData, setTestData] = useState([])
-  useEffect(() => {
+  useEffect(  () => {
     axios.get(booksUrl)
       .then(r => setTestData(r.data))
   }, [])
@@ -16,7 +16,9 @@ export default function App() {
     <div>
       <Routes>
         <Route path='/*' element ={
-          <Home />
+          <Home 
+            testData={testData}
+          />
         }
         />
       </Routes>

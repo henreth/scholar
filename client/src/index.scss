@@ -2,3 +2,8 @@
 @use './components/Home/Home';
 @use './components/BookContainer/BookContainer';
 @use './components/BookCard/BookCard';
+
+body{
+    background-color: rgb(23, 23, 23);
+    font-family: 'Hind', sans-serif;
+}
