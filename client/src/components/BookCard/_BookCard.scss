@@ -1,9 +1,9 @@
 @use '../../styles' as s;
 
 .bookCard{
-    transform: scale(.95);
+    transform: scale(.9);
     margin-right: 2.5%;
-    margin-top: 2.5%;
+    // margin-top: 2.5%;
     background-color: s.$primary;
     display: flex;
     flex-direction: column;
@@ -33,13 +33,12 @@
 
 .bookTitle{
     font-weight: 600;
-    font-size: 21px;
+    font-size: 19px;
 }
 
 .bookAuthor{
     font-weight: 100;
     font-size: 13px;
-    justify-self: center;
     color: rgba(s.$text, .65)
 }
 

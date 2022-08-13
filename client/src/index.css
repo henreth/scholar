@@ -3,12 +3,13 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .bookCard {
-  transform: scale(0.95);
+  transform: scale(0.9);
   margin-right: 2.5%;
-  margin-top: 2.5%;
   background-color: rgba(128, 128, 128, 0.467);
   display: flex;
   flex-direction: column;
@@ -37,13 +38,12 @@
 
 .bookTitle {
   font-weight: 600;
-  font-size: 21px;
+  font-size: 19px;
 }
 
 .bookAuthor {
   font-weight: 100;
   font-size: 13px;
-  justify-self: center;
   color: rgba(216, 216, 216, 0.65);
 }
 

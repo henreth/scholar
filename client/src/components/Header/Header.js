@@ -6,7 +6,7 @@ export default function Header({setTestData}) {
     let [searchTerm, setSearchTerm] = useState('')
     const handleSearchChange = (e) => setSearchTerm(e.target.value)
 
-    let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&printType=books&key=' + key
+    let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
 
     function handleSearchSubmit(e) {
         e.preventDefault()
