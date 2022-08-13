@@ -15,16 +15,20 @@
 
 .searchBar {
     justify-self: end;
-    width: 100px;
+    width: 20px;
     align-self: center;
     margin-top: 2.5%;
-    font-size: 18px;
+    font-size: 19px;
     transition: 1s;
     background-color: rgba(128, 128, 128, 0.247);
+    background: url('./images/search.png') left no-repeat;
+    align-self: center;
     height: 40px;
     border: none;
     color: transparent;
-    border-radius: 5px;
+    border-radius: s.$radius;
+    text-align: right;
+    cursor: pointer;
 
     &::placeholder {
         color: transparent;
@@ -36,6 +40,8 @@
         transition: 1s;
         background-color: rgba(128, 128, 128, 0.247);
         color: s.$text;
+        text-align: right;
+        cursor: text;
 
         &::placeholder {
             color: rgba(s.$text, 0.5);

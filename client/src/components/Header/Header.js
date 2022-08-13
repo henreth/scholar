@@ -9,6 +9,7 @@ export default function Header({setTestData}) {
     let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
 
     function handleSearchSubmit(e) {
+        document.title='Search Results - ' + searchTerm
         e.preventDefault()
         axios.get(booksUrl)
             .then(r => {
@@ -29,7 +30,7 @@ export default function Header({setTestData}) {
                 <input
                     type='text'
                     value={searchTerm}
-                    placeholder='Search...'
+                    placeholder='...Search'
                     className="searchBar"
                     onChange={handleSearchChange}
                 />
