@@ -1,6 +1,6 @@
 @use '../../styles' as s;
 
-.bookCard{
+.bookCard {
     transform: scale(.9);
     margin-right: 2.5%;
     // margin-top: 2.5%;
@@ -15,34 +15,45 @@
     width: 200px;
 }
 
-.bookCardHalf{
+.bookCardHalf {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     padding: 12px;
-    
-    &.top{
+
+    &.top {
         padding-bottom: 0px;
     }
-    &.bottom{
+
+    &.bottom {
         flex-direction: column;
         align-items: center;
     }
 }
 
-.bookTitle{
+.bookTitle {
     font-weight: 600;
     font-size: 19px;
+
+    &.extended {
+        font-size: 17px;
+        background-color: s.$primary;
+        border-radius: 0px 0px s.$radius s.$radius;
+        padding: 12px;
+        padding-top: 0px;
+        margin-top: -12px;
+
+    }
 }
 
-.bookAuthor{
+.bookAuthor {
     font-weight: 100;
     font-size: 13px;
     color: rgba(s.$text, .65)
 }
 
-.bookCover{
+.bookCover {
     border-radius: s.$radius s.$radius 0px 0px;
     height: 225px;
 }
