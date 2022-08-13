@@ -39,14 +39,15 @@
 .bookTitle {
   font-weight: 600;
   font-size: 19px;
+  transition: 0.5s;
 }
 .bookTitle.extended {
-  font-size: 17px;
+  font-size: 16px;
   background-color: rgba(128, 128, 128, 0.467);
   border-radius: 0px 0px 5px 5px;
-  padding: 12px;
-  padding-top: 0px;
+  padding: 9px;
   margin-top: -12px;
+  transition: 0.25s;
 }
 
 .bookAuthor {
