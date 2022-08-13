@@ -2,8 +2,17 @@
 @use './components/Home/Home';
 @use './components/BookContainer/BookContainer';
 @use './components/BookCard/BookCard';
+@use './components/Header/Header';
+
+@use './styles' as s;
 
 body{
     background-color: rgb(23, 23, 23);
     font-family: 'Hind', sans-serif;
+    color: s.$text;
+}
+
+.hidden{
+    display: hidden;
+    color: transparent;
 }
