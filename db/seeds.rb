@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'Removing Previous Data'
+User.destroy_all
+
+User.create!([
+    username: 'test',
+    password:'12345',
+    shelves: {
+        "tbr": [],
+        "current": [],
+        "DNF": [],
+        "favorites": []
+    }
+])
+
+puts 'Completed Seeding Data'
