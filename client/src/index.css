@@ -58,6 +58,7 @@
 .bookCover {
   border-radius: 5px 5px 0px 0px;
   height: 225px;
+  cursor: pointer;
 }
 
 .header {
@@ -70,6 +71,7 @@
 
 .headerTitle {
   font-size: 40px;
+  cursor: pointer;
 }
 
 .searchBar {
