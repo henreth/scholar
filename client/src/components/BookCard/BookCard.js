@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function BookCard({ book }) {
     let [displayTitle, setDisplayTitle] = useState(false)
+    let navigate = useNavigate()
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
     let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 25) + '...' : book.volumeInfo.title
@@ -21,11 +23,14 @@ export default function BookCard({ book }) {
     function handleMouseOver() { if (book.volumeInfo.title.length > 20) setDisplayTitle(true) }
     function handleMouseOff() { setDisplayTitle(false) }
 
+    function handleCoverClick(){
+        navigate('/book/'+book.id)
+    }
 
     return (
         <div className="bookCard">
             <div className="bookCardHalf top">
-                <img className='bookCover' src={bookCover} alt={bookTitle} />
+                <img className='bookCover' src={bookCover} alt={bookTitle} onClick={handleCoverClick}/>
             </div>
             <div className="bookCardHalf bottom">
                 <div className={titleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
