@@ -35,7 +35,7 @@
 .bookTitle {
     font-weight: 600;
     font-size: 19px;
-    transition: .5s;
+    transition: .15s;
 
     &.extended {
         font-size: 16px;
@@ -43,7 +43,7 @@
         border-radius: 0px 0px s.$radius s.$radius;
         padding: 9px;
         margin-top: -12px;
-        transition: .25s;
+        // transition: .25s;
 
     }
 }

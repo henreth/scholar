@@ -4,13 +4,13 @@ export default function BookCard({ book }) {
     let [displayTitle, setDisplayTitle] = useState(false)
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
-    let bookTitle = book.volumeInfo.title.length > 20 ? book.volumeInfo.title.slice(0, 20) + '...' : book.volumeInfo.title
+    let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 25) + '...' : book.volumeInfo.title
     let titleClass = displayTitle ? 'bookTitle extended' : 'bookTitle'
 
 
 
     // let bookAuthor = book.volumeInfo.authors[0].length > 20 ? book.volumeInfo.authors[0].slice(0,20) +'...' : book.volumeInfo.authors[0]
-    let authorToDisplay = book.volumeInfo.authors ? book.volumeInfo.authors[0].length > 20 ? book.volumeInfo.authors[0].slice(0, 20) + '...' : book.volumeInfo.authors[0] : null
+    // let authorToDisplay = book.volumeInfo.authors ? bookAuthor : null
     let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.map(author => { 
         let authorClass = displayTitle ? 'bookAuthor hidden' : 'bookAuthor'
         
