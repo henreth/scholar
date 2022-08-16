@@ -3,19 +3,36 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import key from '../../apiKey'
 
-export default function BookPage(){
+export default function BookPage() {
     let params = useParams()
     let id = params.id
-    let [pageData,setPageData] = useState({})
+    let [pageData, setPageData] = useState({})
 
 
-    useEffect(()=>{
+    useEffect(() => {
         let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
         axios.get(url)
-        .then(r=>setPageData(r.data))
-    },[])
+            .then(r => setPageData(r.data))
+    }, [])
 
-    if (!pageData.volumeInfo) return false
+    if (!pageData.volumeInfo) return null
+
+    let bookCover = pageData.volumeInfo.imageLinks ? pageData.volumeInfo.imageLinks.thumbnail : ''
+
+    let bookTitle = pageData.volumeInfo.title
+
+    let allAuthors = pageData.volumeInfo.authors ? pageData.volumeInfo.authors.map(author => {
+        return (<div className=''>{author}</div>)
+    }
+    ) : null
+
+    let bookDescription = pageData.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
+
+    let publishDate = new Date(pageData.volumeInfo.publishedDate).toDateString()
+    // let publishYear = publishDate.getFullYear()
+
+    let language = pageData.volumeInfo.language
+    let pageCount = pageData.volumeInfo.pageCount
 
     return (
         <div className="mainContainer">
@@ -24,8 +41,20 @@ export default function BookPage(){
             </div>
             <div className="display">
                 <div className="bookPageCard">
-                    <div className="bookPageCardCover">Left</div>
-                    <div className="bookPageCardInformation">Right</div>
+                    <div className="bookPageCardSide">
+                        <img className='bookPageCardCover' src={bookCover} />
+                    </div>
+                    <div className="bookPageCardMain">
+                        <div className="bookPageCardInformation">
+                            <div>{bookTitle}</div>
+                            {allAuthors}
+                            <div>{bookDescription}</div>
+                            <hr></hr>
+                            <div>Published: {publishDate}</div>
+                            <div>Pages: {pageCount}</div>
+                            <div>Language: {language}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
