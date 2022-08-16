@@ -20,11 +20,9 @@ export default function BookPage() {
     let bookCover = pageData.volumeInfo.imageLinks ? pageData.volumeInfo.imageLinks.thumbnail : ''
 
     let bookTitle = pageData.volumeInfo.title
+    let bookSubtitle = pageData.volumeInfo.subtitle
 
-    let allAuthors = pageData.volumeInfo.authors ? pageData.volumeInfo.authors.map(author => {
-        return (<div className=''>{author}</div>)
-    }
-    ) : null
+    let allAuthors = pageData.volumeInfo.authors ? pageData.volumeInfo.authors.join(', ') : null
 
     let bookDescription = pageData.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
 
@@ -33,6 +31,8 @@ export default function BookPage() {
 
     let language = pageData.volumeInfo.language
     let pageCount = pageData.volumeInfo.pageCount
+
+    let allCategories = pageData.volumeInfo.categories.join(' / ')
 
     return (
         <div className="mainContainer">
@@ -47,12 +47,15 @@ export default function BookPage() {
                     <div className="bookPageCardMain">
                         <div className="bookPageCardInformation">
                             <div>{bookTitle}</div>
+                            <div>{bookSubtitle}</div>
                             {allAuthors}
+                            <hr></hr>
                             <div>{bookDescription}</div>
                             <hr></hr>
                             <div>Published: {publishDate}</div>
                             <div>Pages: {pageCount}</div>
                             <div>Language: {language}</div>
+                            <div>Categories: {allCategories}</div>
                         </div>
                     </div>
                 </div>
