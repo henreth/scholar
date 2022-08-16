@@ -39,7 +39,7 @@ export default function Header({setSearchResults}) {
                 <input
                     type='text'
                     value={searchTerm}
-                    placeholder='...Search'
+                    placeholder='Search'
                     className="searchBar"
                     onChange={handleSearchChange}
                 />

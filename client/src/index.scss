@@ -15,6 +15,26 @@ body{
     color: s.$text;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: s.$primary;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(s.$text,0.9);
+    border-radius: s.$radius;
+    transition: .5s;
+    &:hover{
+        background-color: rgba(s.$text,0.75);
+        transition: .5s;
+    }
+
+    &:active{
+        background-color: rgba(s.$text,0.5);
+    }
+  }
+
 .hidden{
     display: hidden;
     color: transparent;
