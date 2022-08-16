@@ -36,8 +36,8 @@ export default function BookPage() {
         return str[0].toUpperCase() + str.slice(1).toLowerCase()
     }
 
-    let categories = pageData.volumeInfo.categories.join(' / ').split(' / ').map(cat=>capitalize(cat))
-    let allCategories = categories.filter((cat,idx)=>categories.indexOf(cat) == idx).join(' / ')
+    let categories = pageData.volumeInfo.categories ? pageData.volumeInfo.categories.join(' / ').split(' / ').map(cat=>capitalize(cat)) : ''
+    let allCategories =  pageData.volumeInfo.categories ? categories.filter((cat,idx)=>categories.indexOf(cat) == idx).join(' / ') : ''
 
     return (
         <div className="mainContainer">
