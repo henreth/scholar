@@ -1,7 +1,8 @@
 import BookContainer from "../BookContainer/BookContainer";
 import axios from 'axios'
 
-export default function Home({testData}){
+export default function Home({testData,user}){
+    if (!user.current) return null 
 
     const handleLogIn = () => {
         axios.post('/login',{"username":"test",
@@ -14,6 +15,7 @@ export default function Home({testData}){
         .then(r=>console.log(r.data))
     }
 
+    let currentlyReadingBooks = user.current
 
     return (
         <div>
