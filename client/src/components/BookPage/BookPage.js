@@ -32,7 +32,12 @@ export default function BookPage() {
     let language = pageData.volumeInfo.language
     let pageCount = pageData.volumeInfo.pageCount
 
-    let allCategories = pageData.volumeInfo.categories.join(' / ')
+    function capitalize(str){
+        return str[0].toUpperCase() + str.slice(1).toLowerCase()
+    }
+
+    let categories = pageData.volumeInfo.categories.join(' / ').split(' / ').map(cat=>capitalize(cat))
+    let allCategories = categories.filter((cat,idx)=>categories.indexOf(cat) == idx).join(' / ')
 
     return (
         <div className="mainContainer">
@@ -46,16 +51,16 @@ export default function BookPage() {
                     </div>
                     <div className="bookPageCardMain">
                         <div className="bookPageCardInformation">
-                            <div>{bookTitle}</div>
-                            <div>{bookSubtitle}</div>
-                            {allAuthors}
+                            <h1 className="bookPageTitle">{bookTitle}</h1>
+                            <h4 className="bookPageSubtitle">{bookSubtitle}</h4>
+                            <h3 className="bookPageAuthors">{allAuthors}</h3>
                             <hr></hr>
                             <div>{bookDescription}</div>
                             <hr></hr>
-                            <div>Published: {publishDate}</div>
-                            <div>Pages: {pageCount}</div>
-                            <div>Language: {language}</div>
-                            <div>Categories: {allCategories}</div>
+                            <div><b>Published:</b> {publishDate}</div>
+                            <div><b>Pages:</b> {pageCount}</div>
+                            <div><b>Language:</b> {language}</div>
+                            <div><b>Categories:</b> {allCategories}</div>
                         </div>
                     </div>
                 </div>
