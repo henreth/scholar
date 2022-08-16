@@ -6,10 +6,9 @@ export default function BookCard({ book }) {
     let navigate = useNavigate()
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
-    let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 25) + '...' : book.volumeInfo.title
-    let titleClass = displayTitle ? 'bookTitle extended' : 'bookTitle'
-
-
+    let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 40) + '...' : book.volumeInfo.title
+    let titleClass =  book.volumeInfo.title.length > 25 ? 'bookTitle shrunk' : 'bookTitle'
+    let displayTitleClass = displayTitle ? 'bookTitle extended' : titleClass
 
     // let bookAuthor = book.volumeInfo.authors[0].length > 20 ? book.volumeInfo.authors[0].slice(0,20) +'...' : book.volumeInfo.authors[0]
     // let authorToDisplay = book.volumeInfo.authors ? bookAuthor : null
@@ -33,7 +32,7 @@ export default function BookCard({ book }) {
                 <img className='bookCover' src={bookCover} alt={bookTitle} onClick={handleCoverClick}/>
             </div>
             <div className="bookCardHalf bottom">
-                <div className={titleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
+                <div className={displayTitleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
                 {/* {displayTitle ? <div className="bookTitle">{book.volumeInfo.title}</div> : null} */}
                 {/* <div className='bookAuthor'>{authorToDisplay}</div> */}
                 {allAuthors}

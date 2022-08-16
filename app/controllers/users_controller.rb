@@ -34,7 +34,7 @@ class UsersController < ApplicationController
             msg = 'This book is currently in your list'
             render json: msg, status: :ok
         else
-        userCurrent << book
+        userCurrent << bookToAdd
         @current_user.update!(current: userCurrent)
         render json: @current_user
         end 

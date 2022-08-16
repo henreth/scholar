@@ -48,6 +48,9 @@
   padding: 9px;
   margin-top: -12px;
 }
+.bookTitle.shrunk {
+  font-size: 16px;
+}
 
 .bookAuthor {
   font-weight: 100;
@@ -123,6 +126,56 @@
   transition: 1s;
 }
 
+.bookPageCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgba(128, 128, 128, 0.467);
+  height: 75%;
+  width: 80%;
+  border-radius: 5px;
+  color: rgb(216, 216, 216);
+}
+
+.bookPageCardSide {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(128, 128, 128);
+  border-radius: 5px 0px 0px 5px;
+  height: 100%;
+  width: 35%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.bookPageCardMain {
+  height: 100%;
+  width: 65%;
+}
+
+.bookPageCardInformation {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.bookPageCardCover {
+  margin-top: 10%;
+  width: 90%;
+}
+
+.bookPageTitle {
+  margin-bottom: -2.5%;
+}
+
+.bookPageSubtitle {
+  margin-bottom: -1%;
+}
+
+.bookPageAuthors {
+  margin-bottom: -1%;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
@@ -142,7 +195,7 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
-  height: 730px;
+  height: 745px;
 }
 
 .sidebar {
@@ -150,7 +203,7 @@ body {
   flex-direction: column;
   background-color: rgb(135, 222, 141);
   height: 100%;
-  width: 25%;
+  width: 20%;
   align-items: center;
 }
 
@@ -159,6 +212,7 @@ body {
   flex-direction: column;
   background-color: pink;
   height: 100%;
-  width: 85%;
+  width: 80%;
   align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=index.css.map */

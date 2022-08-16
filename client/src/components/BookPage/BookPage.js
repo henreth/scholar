@@ -2,20 +2,21 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import key from '../../apiKey'
+import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
-export default function BookPage(){
+export default function BookPage() {
     let params = useParams()
     let id = params.id
-    let [pageData,setPageData] = useState({})
+    let [pageData, setPageData] = useState({})
 
 
-    useEffect(()=>{
+    useEffect(() => {
         let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
         axios.get(url)
-        .then(r=>setPageData(r.data))
-    },[])
+            .then(r => setPageData(r.data))
+    }, [])
 
-    if (!pageData.volumeInfo) return false
+    if (!pageData.volumeInfo) return null
 
     return (
         <div className="mainContainer">
@@ -23,7 +24,9 @@ export default function BookPage(){
                 Sidebar
             </div>
             <div className="display">
-                Display
+               <FeaturedBook 
+                book={pageData}
+               />
             </div>
         </div>
     )

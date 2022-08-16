@@ -9,9 +9,12 @@ import BookPage from '../BookPage/BookPage';
 export default function App() {
   let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=camus&maxResults=30&printType=books&key=' + key
   let [testData, setTestData] = useState([])
+  let [user,setUser] = useState({})
   useEffect(() => {
     axios.get(booksUrl)
       .then(r => setTestData(r.data))
+    axios.get('/me')
+      .then(r => setUser(r.data))
   }, [])
 
   return (
@@ -24,6 +27,7 @@ export default function App() {
         <Route path='/*' element={
           <Home
             testData={testData}
+            user={user}
           />} />
         <Route path='/book/:id' element={
           <BookPage

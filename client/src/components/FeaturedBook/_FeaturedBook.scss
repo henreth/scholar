@@ -1,0 +1,54 @@
+@use '../../styles' as s;
+
+.bookPageCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: s.$primary;
+    height: 75%;
+    width: 80%;
+    border-radius: s.$radius;
+    color: s.$text;
+}
+
+.bookPageCardSide {
+    display: flex;
+    flex-direction: column;
+    background-color: s.$primary-extended;
+    border-radius: s.$radius 0px 0px s.$radius;
+    height: 100%;
+    width: 35%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.bookPageCardMain{
+    // background-color: rgb(176, 207, 230);
+    height: 100%;
+    width: 65%;
+}
+
+.bookPageCardInformation {
+    display: flex;
+    flex-direction: column;
+    // justify-content: flex-start;
+    padding: 30px;
+}
+
+.bookPageCardCover{
+    margin-top: 10%;
+    // height: 40%;
+    width: 90%;
+}
+
+.bookPageTitle{
+    margin-bottom: -2.5%;
+}
+
+.bookPageSubtitle{
+    margin-bottom: -1%;
+}
+
+.bookPageAuthors{
+    margin-bottom: -1%;
+}

@@ -3,6 +3,8 @@
 @use './components/BookContainer/BookContainer';
 @use './components/BookCard/BookCard';
 @use './components/Header/Header';
+@use './components/BookPage/BookPage';
+@use './components/FeaturedBook/FeaturedBook';
 
 @use './styles' as s;
 
@@ -25,7 +27,7 @@ body{
     justify-content: center;
     align-content: center;
     align-items: center;
-    height: 730px;
+    height: 745px;
 }
 
 .sidebar {
@@ -33,7 +35,7 @@ body{
     flex-direction: column;
     background-color: rgb(135, 222, 141);
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
 }
 
@@ -42,6 +44,11 @@ body{
     flex-direction: column;
     background-color: pink;
     height: 100%;
-    width: 85%;
+    width: 80%;
     align-items: center;
+    justify-content: center;
+
+    div {
+        // color: s.$text;
+    }
 }
