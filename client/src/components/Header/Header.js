@@ -15,8 +15,10 @@ export default function Header({setTestData}) {
         e.preventDefault()
         axios.get(booksUrl)
             .then(r => {
-                if (r.data.items[0]){
+                if (r.data.items){
                     setTestData(r.data)
+                } else {
+                    alert('No results found!')
                 }
             
             })
