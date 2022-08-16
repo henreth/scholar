@@ -2,6 +2,8 @@ import BookContainer from "../BookContainer/BookContainer";
 import axios from 'axios'
 
 export default function Home({testData,user}){
+    document.title='Untitled Book App'
+
     if (!user.current) return null 
 
     const handleLogIn = () => {
