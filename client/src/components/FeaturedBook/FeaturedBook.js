@@ -8,14 +8,19 @@ export default function FeaturedBook({book}) {
 
     let bookDescription = book.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
 
+    let shortenedDescription = bookDescription.slice(0,750)+'...'
+
+    let bookDescriptionToDisplay = bookDescription.length > 1000 ? shortenedDescription : bookDescription
+
+
     let publishDate = new Date(book.volumeInfo.publishedDate).toDateString()
-    // let publishYear = publishDate.getFullYear()
 
     let language = book.volumeInfo.language
     let pageCount = book.volumeInfo.pageCount
 
     function capitalize(str){
-        return str[0].toUpperCase() + str.slice(1).toLowerCase()
+        let words = str.split(' ')
+        return words.map(word=> word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ')
     }
 
     let categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(' / ').split(' / ').map(cat=>capitalize(cat)) : ''
@@ -33,7 +38,7 @@ export default function FeaturedBook({book}) {
                     <h4 className="bookPageSubtitle">{bookSubtitle}</h4>
                     <h3 className="bookPageAuthors">{allAuthors}</h3>
                     <hr></hr>
-                    <div>{bookDescription}</div>
+                    <div>{bookDescriptionToDisplay}</div>
                     <hr></hr>
                     <div><b>Published:</b> {publishDate}</div>
                     <div><b>Pages:</b> {pageCount}</div>
