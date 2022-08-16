@@ -16,7 +16,8 @@ User.create!([
         "current": [],
         "DNF": [],
         "favorites": []
-    }
+    },
+    tbr: []
 ])
 
 puts 'Completed Seeding Data'

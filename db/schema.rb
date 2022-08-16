@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_08_13_211910) do
     t.string "username"
     t.string "password_digest"
     t.hstore "shelves"
+    t.hstore "tbr", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
