@@ -5,5 +5,10 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
+
+  #User
+  post "/addtocurrent", to: "users#add_to_current"
+  post "/removefromcurrent", to: "users#remove_from_current"
    
 end

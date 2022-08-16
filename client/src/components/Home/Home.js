@@ -20,8 +20,8 @@ export default function Home({testData}){
             <BookContainer 
                 testData={testData}
             />
-            {/* <button onClick={handleLogIn}>Log In</button>
-            <button onClick={handleShowMe}>Show Me</button> */}
+            <button onClick={handleLogIn}>Log In</button>
+            <button onClick={handleShowMe}>Show Me</button>
 
         </div>
     )

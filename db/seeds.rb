@@ -9,14 +9,18 @@ puts 'Removing Previous Data'
 User.destroy_all
 
 User.create!([
-    username: 'test',
+    {username: 'test',
     password:'12345',
     shelves: {
         "tbr": [],
         "current": [],
         "DNF": [],
         "favorites": []
-    }
+    },
+    complete: [],
+    toberead: [],
+    didnotfinish: [],
+    current: []}
 ])
 
 puts 'Completed Seeding Data'
