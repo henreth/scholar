@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 
   #User
   post "/addtocurrent", to: "users#add_to_current"
+  post "/removefromcurrent", to: "users#remove_from_current"
    
 end

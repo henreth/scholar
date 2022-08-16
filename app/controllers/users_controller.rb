@@ -40,6 +40,13 @@ class UsersController < ApplicationController
         end 
     end
 
+    def remove_from_current
+        bookToRemove = params[:id]
+        userCurrent = @current_user.current.filter{|book| book['id'] != bookToRemove}
+        @current_user.update!(current: userCurrent)
+        render json: @current_user
+    end
+
     private
     def set_user
       @user = User.find(params[:id])
