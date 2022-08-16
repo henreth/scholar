@@ -123,6 +123,31 @@
   transition: 1s;
 }
 
+.bookPageCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: powderblue;
+  height: 75%;
+  width: 80%;
+}
+
+.bookPageCardCover {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(183, 176, 230);
+  height: 100%;
+  width: 35%;
+}
+
+.bookPageCardInformation {
+  display: flex;
+  flex-direction: column;
+  background-color: powderblue;
+  height: 100%;
+  width: 65%;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
@@ -150,7 +175,7 @@ body {
   flex-direction: column;
   background-color: rgb(135, 222, 141);
   height: 100%;
-  width: 25%;
+  width: 20%;
   align-items: center;
 }
 
@@ -159,6 +184,7 @@ body {
   flex-direction: column;
   background-color: pink;
   height: 100%;
-  width: 85%;
+  width: 80%;
   align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=index.css.map */

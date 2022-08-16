@@ -23,7 +23,10 @@ export default function BookPage(){
                 Sidebar
             </div>
             <div className="display">
-                Display
+                <div className="bookPageCard">
+                    <div className="bookPageCardCover">Left</div>
+                    <div className="bookPageCardInformation">Right</div>
+                </div>
             </div>
         </div>
     )
