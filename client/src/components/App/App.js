@@ -5,11 +5,14 @@ import { Routes, Route } from 'react-router-dom'
 import Home from '../Home/Home';
 import Header from '../Header/Header';
 import BookPage from '../BookPage/BookPage';
+import SearchPage from '../SearchPage/SearchPage';
 
 export default function App() {
   let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=camus&maxResults=30&printType=books&key=' + key
   let [testData, setTestData] = useState([])
   let [user,setUser] = useState({})
+  let [searchResults,setSearchResults] = useState({})
+
   useEffect(() => {
     axios.get(booksUrl)
       .then(r => setTestData(r.data))
@@ -20,7 +23,7 @@ export default function App() {
   return (
     <div>
       <Header
-        setTestData={setTestData}
+        setSearchResults={setSearchResults}
       />
       <hr></hr>
       <Routes>
@@ -31,6 +34,11 @@ export default function App() {
           />} />
         <Route path='/book/:id' element={
           <BookPage
+          />} />
+        <Route path='/search/:searchTerm' element={
+          <SearchPage
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
           />} />
       </Routes>
     </div>
