@@ -27,6 +27,19 @@ class UsersController < ApplicationController
         head :no_content
     end
 
+    def add_to_current
+        bookToAdd = params[:book]
+        userCurrent = @current_user.current
+        if userCurrent.map{|book| book['id']}.include?(bookToAdd['id'])
+            msg = 'This book is currently in your list'
+            render json: msg, status: :ok
+        else
+        userCurrent << book
+        @current_user.update!(current: userCurrent)
+        render json: @current_user
+        end 
+    end
+
     private
     def set_user
       @user = User.find(params[:id])

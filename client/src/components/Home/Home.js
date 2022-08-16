@@ -17,9 +17,9 @@ export default function Home({testData}){
 
     return (
         <div>
-            {/* <BookContainer 
+            <BookContainer 
                 testData={testData}
-            /> */}
+            />
             <button onClick={handleLogIn}>Log In</button>
             <button onClick={handleShowMe}>Show Me</button>
 
