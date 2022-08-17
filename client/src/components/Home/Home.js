@@ -21,8 +21,9 @@ export default function Home({testData,user}){
 
     return (
         <div>
+            <h1>Currently Reading:</h1>
             <BookContainer 
-                testData={testData}
+                books={currentlyReadingBooks}
             />
             <button onClick={handleLogIn}>Log In</button>
             <button onClick={handleShowMe}>Show Me</button>

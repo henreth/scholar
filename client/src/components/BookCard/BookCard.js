@@ -6,20 +6,21 @@ export default function BookCard({ book }) {
     let navigate = useNavigate()
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
-    let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 40) + '...' : book.volumeInfo.title
+    let bookTitle = book.volumeInfo.title.length > 35 ? book.volumeInfo.title.slice(0, 35) + '...' : book.volumeInfo.title
     let titleClass =  book.volumeInfo.title.length > 25 ? 'bookTitle shrunk' : 'bookTitle'
     let displayTitleClass = displayTitle ? 'bookTitle extended' : titleClass
-
-    // let bookAuthor = book.volumeInfo.authors[0].length > 20 ? book.volumeInfo.authors[0].slice(0,20) +'...' : book.volumeInfo.authors[0]
-    // let authorToDisplay = book.volumeInfo.authors ? bookAuthor : null
-    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.map(author => { 
         let authorClass = displayTitle ? 'bookAuthor hidden' : 'bookAuthor'
+
+    // let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.map(author => { 
         
-        return (<div className={authorClass}>{author}</div>) }
-    ) : null
+    //     return (<div className={authorClass}>{author}</div>) }
+    // ) : null
+
+    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : null
 
 
-    function handleMouseOver() { if (book.volumeInfo.title.length > 20) setDisplayTitle(true) }
+
+    function handleMouseOver() { if (book.volumeInfo.title.length > 35) setDisplayTitle(true) }
     function handleMouseOff() { setDisplayTitle(false) }
 
     function handleCoverClick(){
@@ -33,10 +34,7 @@ export default function BookCard({ book }) {
             </div>
             <div className="bookCardHalf bottom">
                 <div className={displayTitleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
-                {/* {displayTitle ? <div className="bookTitle">{book.volumeInfo.title}</div> : null} */}
-                {/* <div className='bookAuthor'>{authorToDisplay}</div> */}
-                {allAuthors}
-
+                <div class={authorClass}>{allAuthors}</div>
             </div>
         </div>
     )

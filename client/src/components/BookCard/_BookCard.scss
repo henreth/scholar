@@ -36,13 +36,14 @@
     font-weight: 600;
     font-size: 19px;
     transition: .15s;
+    text-align: center;
 
     &.extended {
         font-size: 16px;
         background-color: s.$primary;
         border-radius: 0px 0px s.$radius s.$radius;
         padding: 9px;
-        margin-top: -12px;
+        margin-top: -9px;
         // transition: .25s;
 
     }
@@ -55,7 +56,9 @@
 .bookAuthor {
     font-weight: 100;
     font-size: 13px;
-    color: rgba(s.$text, .65)
+    color: rgba(s.$text, .65);
+    text-align: center;
+
 }
 
 .bookCover {
