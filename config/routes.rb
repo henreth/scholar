@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   resources :users
 
   get "/me", to: "users#show"
