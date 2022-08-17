@@ -47,9 +47,51 @@ export default function BookPage({ setUser }) {
         return clickedStars >= num || hoverStars >= num ? '★' : '☆'
     }
 
-    function handleSubmit(e){
+    function starClass(num) {
+        return clickedStars >= num || hoverStars >= num ? 'star active' : 'star'
+    }
+
+    function handleSubmit(e) {
         e.preventDefault()
     }
+
+
+    let demoReviews = [
+        {
+            'username': 'test',
+            'rating': 5,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        },
+        {
+            'username': 'test-2',
+            'rating': 1,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        },
+        {
+            'username': 'test-3',
+            'rating': 2,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        }
+    ]
+
+    let reviewsToDisplay = demoReviews.map(review => {
+        return (
+            <div className="userReviewCard">
+                <hr></hr>
+                <div className="userReviewId">
+                    <div className="userReviewTitle"> <span>{review.username}</span> - <span>{review.rating} ★</span></div>
+                    <div className="userReviewDate">{review.date}</div>
+                </div>
+                <div className="userReviewText">
+                    {review.text}
+                    {review.text}
+                </div>
+            </div>
+        )
+    })
 
     return (
         <div className="mainContainer">
@@ -69,11 +111,11 @@ export default function BookPage({ setUser }) {
                         <div className="newReviewTitle">
                             <h3>Write a Review: </h3>
                             <div className="stars" onMouseOut={handleHoverStarOff}>
-                                <div onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
-                                <div onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
-                                <div onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
-                                <div onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
-                                <div onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
+                                <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
+                                <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
+                                <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
+                                <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
+                                <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
                             </div>
                         </div>
                         <form className="reviewForm">
@@ -84,6 +126,10 @@ export default function BookPage({ setUser }) {
                             <button onClick={handleSubmit}>Submit</button>
                         </form>
                         <hr></hr>
+                        <h3>All Reviews: </h3>
+                        <div className="userReviews">
+                            {reviewsToDisplay}
+                        </div>
                     </div>
                 </div>
             </div>
