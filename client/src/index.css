@@ -128,6 +128,47 @@
   transition: 1s;
 }
 
+.reviewContainer {
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgb(216, 216, 216);
+}
+
+.reviewInfo {
+  background-color: cornflowerblue;
+  width: 95%;
+  height: 100%;
+}
+.reviewInfo h4 {
+  margin-top: -2%;
+}
+
+.newReviewTitle {
+  display: flex;
+  flex-direction: row;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewInput {
+  width: 75%;
+  height: 100px;
+  text-align: start;
+}
+
 .featuredCard {
   display: flex;
   flex-direction: row;
@@ -138,6 +179,7 @@
   border-radius: 5px;
   color: rgb(216, 216, 216);
   color: black;
+  margin-top: 7.5%;
 }
 
 .featuredCardSide {

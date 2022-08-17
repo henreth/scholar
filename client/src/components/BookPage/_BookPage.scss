@@ -1,1 +1,46 @@
 @use '../../styles' as s;
+
+
+.reviewContainer{
+    background-color: orange;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: s.$text;
+}
+
+.reviewInfo{
+    // padding: 30px;
+    background-color: cornflowerblue;
+    width: 95%;
+    height: 100%;
+
+    h4 {
+        margin-top: -2%;
+    }
+}
+
+.newReviewTitle{
+    display: flex;
+    flex-direction: row;
+}
+
+.stars{
+    display: flex;
+    flex-direction: row;
+}
+
+.reviewForm{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.reviewInput {
+    width: 75%;
+    height: 100px;
+    text-align: start;
+}
