@@ -40,6 +40,7 @@
   font-weight: 600;
   font-size: 19px;
   transition: 0.15s;
+  text-align: center;
 }
 .bookTitle.extended {
   font-size: 16px;
@@ -56,6 +57,7 @@
   font-weight: 100;
   font-size: 13px;
   color: rgba(216, 216, 216, 0.65);
+  text-align: center;
 }
 
 .bookCover {
@@ -180,10 +182,10 @@
 
 .fullDescription {
   position: absolute;
-  margin-left: -1.25%;
+  margin-left: -1.5%;
   margin-top: -3.5%;
   width: 40%;
-  font-size: 18px;
+  font-size: 17px;
   background-color: rgba(128, 128, 128, 0.95);
   border-radius: 5px;
   padding: 20px;
