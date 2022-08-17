@@ -12,9 +12,6 @@ User.create!([
     {username: 'test',
     password:'12345',
     shelves: {
-        "tbr": [],
-        "current": [],
-        "DNF": [],
         "favorites": []
     },
     complete: [],

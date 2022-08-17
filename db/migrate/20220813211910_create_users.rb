@@ -4,11 +4,11 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       enable_extension 'hstore'
       t.string :username
       t.string :password_digest
-      t.hstore :shelves
-      t.hstore :complete, array: true, default: []
-      t.hstore :toberead, array: true, default: []
-      t.hstore :current, array: true, default: []
-      t.hstore :didnotfinish, array: true, default: []
+      t.json :shelves
+      t.json :complete, array: true, default: []
+      t.json :toberead, array: true, default: []
+      t.json :current, array: true, default: []
+      t.json :didnotfinish, array: true, default: []
 
       t.timestamps
     end

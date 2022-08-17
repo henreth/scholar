@@ -1,6 +1,6 @@
 @use '../../styles' as s;
 
-.bookPageCard {
+.featuredCard {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -11,7 +11,7 @@
     color: s.$text;
 }
 
-.bookPageCardSide {
+.featuredCardSide {
     display: flex;
     flex-direction: column;
     background-color: s.$primary-extended;
@@ -22,33 +22,33 @@
     justify-content: flex-start;
 }
 
-.bookPageCardMain{
+.featuredCardMain{
     // background-color: rgb(176, 207, 230);
     height: 100%;
     width: 65%;
 }
 
-.bookPageCardInformation {
+.featuredCardInformation {
     display: flex;
     flex-direction: column;
     // justify-content: flex-start;
     padding: 30px;
 }
 
-.bookPageCardCover{
+.featuredCardCover{
     margin-top: 10%;
-    // height: 40%;
-    width: 90%;
+    height: min(70%, 80vh);
+    width: 80%;
 }
 
-.bookPageTitle{
+.featuredTitle{
     margin-bottom: -2.5%;
 }
 
-.bookPageSubtitle{
+.featuredSubtitle{
     margin-bottom: -1%;
 }
 
-.bookPageAuthors{
+.featuredAuthors{
     margin-bottom: -1%;
 }
