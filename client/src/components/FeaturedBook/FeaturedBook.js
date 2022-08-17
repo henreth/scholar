@@ -28,15 +28,15 @@ export default function FeaturedBook({book}) {
 
 
     return (
-        <div className="bookPageCard">
-            <div className="bookPageCardSide">
-                <img className='bookPageCardCover' src={bookCover} />
+        <div className="featuredCard">
+            <div className="featuredCardSide">
+                <img className='featuredCardCover' src={bookCover} />
             </div>
-            <div className="bookPageCardMain">
-                <div className="bookPageCardInformation">
-                    <h1 className="bookPageTitle">{bookTitle}</h1>
-                    <h4 className="bookPageSubtitle">{bookSubtitle}</h4>
-                    <h3 className="bookPageAuthors">{allAuthors}</h3>
+            <div className="featuredCardMain">
+                <div className="featuredCardInformation">
+                    <h1 className="featuredTitle">{bookTitle}</h1>
+                    <h4 className="featuredSubtitle">{bookSubtitle}</h4>
+                    <h3 className="featuredAuthors">{allAuthors}</h3>
                     <hr></hr>
                     <div>{bookDescriptionToDisplay}</div>
                     <hr></hr>
