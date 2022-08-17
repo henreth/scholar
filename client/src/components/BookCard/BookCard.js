@@ -6,7 +6,7 @@ export default function BookCard({ book }) {
     let navigate = useNavigate()
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
-    let bookTitle = book.volumeInfo.title.length > 25 ? book.volumeInfo.title.slice(0, 40) + '...' : book.volumeInfo.title
+    let bookTitle = book.volumeInfo.title.length > 40 ? book.volumeInfo.title.slice(0, 40) + '...' : book.volumeInfo.title
     let titleClass =  book.volumeInfo.title.length > 25 ? 'bookTitle shrunk' : 'bookTitle'
     let displayTitleClass = displayTitle ? 'bookTitle extended' : titleClass
 
@@ -19,7 +19,7 @@ export default function BookCard({ book }) {
     ) : null
 
 
-    function handleMouseOver() { if (book.volumeInfo.title.length > 20) setDisplayTitle(true) }
+    function handleMouseOver() { if (book.volumeInfo.title.length > 40) setDisplayTitle(true) }
     function handleMouseOff() { setDisplayTitle(false) }
 
     function handleCoverClick(){

@@ -21,7 +21,7 @@ export default function SearchPage({ searchResults, setSearchResults }) {
     return (
         <div>
             <BookContainer
-                testData={searchResults}
+                books={searchResults}
             />
         </div>
     )
