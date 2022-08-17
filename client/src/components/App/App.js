@@ -10,8 +10,8 @@ import SearchPage from '../SearchPage/SearchPage';
 export default function App() {
   let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=camus&maxResults=30&printType=books&key=' + key
   let [testData, setTestData] = useState([])
-  let [user,setUser] = useState({})
-  let [searchResults,setSearchResults] = useState({})
+  let [user, setUser] = useState({})
+  let [searchResults, setSearchResults] = useState({})
 
   useEffect(() => {
     axios.get(booksUrl)

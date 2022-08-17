@@ -10,8 +10,6 @@ export default function BookCard({ book }) {
     let titleClass =  book.volumeInfo.title.length > 25 ? 'bookTitle shrunk' : 'bookTitle'
     let displayTitleClass = displayTitle ? 'bookTitle extended' : titleClass
 
-    // let bookAuthor = book.volumeInfo.authors[0].length > 20 ? book.volumeInfo.authors[0].slice(0,20) +'...' : book.volumeInfo.authors[0]
-    // let authorToDisplay = book.volumeInfo.authors ? bookAuthor : null
     let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.map(author => { 
         let authorClass = displayTitle ? 'bookAuthor hidden' : 'bookAuthor'
         
@@ -33,10 +31,7 @@ export default function BookCard({ book }) {
             </div>
             <div className="bookCardHalf bottom">
                 <div className={displayTitleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
-                {/* {displayTitle ? <div className="bookTitle">{book.volumeInfo.title}</div> : null} */}
-                {/* <div className='bookAuthor'>{authorToDisplay}</div> */}
                 {allAuthors}
-
             </div>
         </div>
     )

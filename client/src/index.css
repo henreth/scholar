@@ -130,11 +130,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: rgba(128, 128, 128, 0.467);
   height: 75%;
   width: 80%;
+  background-color: rgba(128, 128, 128, 0.467);
   border-radius: 5px;
   color: rgb(216, 216, 216);
+  color: black;
 }
 
 .featuredCardSide {
@@ -175,6 +176,22 @@
 
 .featuredAuthors {
   margin-bottom: -1%;
+}
+
+.fullDescription {
+  position: absolute;
+  margin-left: -1.25%;
+  margin-top: -3.5%;
+  width: 40%;
+  font-size: 18px;
+  background-color: rgba(128, 128, 128, 0.95);
+  border-radius: 5px;
+  padding: 20px;
+}
+.fullDescription h3 {
+  padding-top: 0px;
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
 
 body {
