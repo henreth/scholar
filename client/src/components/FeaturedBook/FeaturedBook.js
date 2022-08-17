@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default function FeaturedBook({book}) {
+export default function FeaturedBook({book,setUser}) {
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
     let bookTitle = book.volumeInfo.title
@@ -33,7 +33,9 @@ export default function FeaturedBook({book}) {
             book
         }
         axios.post('/addtocurrent',obj)
-        .then(r=>{console.log(r.data)})
+        .then(r=>{
+            if(r.data==='This book is already in your list.') alert(r.data)
+            else setUser(r.data)})
     }
 
     return (

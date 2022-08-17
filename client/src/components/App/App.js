@@ -34,6 +34,7 @@ export default function App() {
           />} />
         <Route path='/book/:id' element={
           <BookPage
+            setUser={setUser}
           />} />
         <Route path='/search/:searchTerm' element={
           <SearchPage

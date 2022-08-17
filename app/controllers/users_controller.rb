@@ -31,8 +31,8 @@ class UsersController < ApplicationController
         bookToAdd = params[:book]
         userCurrent = @current_user.current
         if userCurrent.map{|book| book['id']}.include?(bookToAdd['id'])
-            msg = 'This book is currently in your list'
-            render json: msg, status: :ok
+            msg = 'This book is already in your list.'
+            render json: msg
         else
         userCurrent << bookToAdd
         @current_user.update!(current: userCurrent)
