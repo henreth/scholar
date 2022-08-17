@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default function FeaturedBook({book}) {
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
@@ -26,6 +28,13 @@ export default function FeaturedBook({book}) {
     let categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(' / ').split(' / ').map(cat=>capitalize(cat)) : ''
     let allCategories =  book.volumeInfo.categories ? categories.filter((cat,idx)=>categories.indexOf(cat) == idx).join(' / ') : ''
 
+    function testPost(){
+        let obj= {
+            book
+        }
+        axios.post('/addtocurrent',obj)
+        .then(r=>{console.log(r.data)})
+    }
 
     return (
         <div className="featuredCard">
@@ -44,6 +53,7 @@ export default function FeaturedBook({book}) {
                     <div><b>Pages:</b> {pageCount}</div>
                     <div><b>Language:</b> {language}</div>
                     <div><b>Categories:</b> {allCategories}</div>
+                    <button onClick={testPost}> add to list</button>
                 </div>
             </div>
         </div>
