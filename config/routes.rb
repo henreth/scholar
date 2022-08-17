@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :reviews
+  resources :reviews, only: [:index,:destroy,:create,:update]
   resources :users
 
   get "/me", to: "users#show"
@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   #User
   post "/addtocurrent", to: "users#add_to_current"
   post "/removefromcurrent", to: "users#remove_from_current"
+
+  #Review
+
+
    
 end

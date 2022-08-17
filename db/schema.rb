@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_08_17_224440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "rating"
+    t.string "date"
+    t.string "text"
+    t.string "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.json "shelves"
+    t.json "complete", default: [], array: true
+    t.json "toberead", default: [], array: true
+    t.json "current", default: [], array: true
+    t.json "didnotfinish", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "reviews", "users"
 end
