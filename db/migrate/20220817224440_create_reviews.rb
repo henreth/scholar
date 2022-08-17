@@ -5,6 +5,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.int :rating
       t.string :date
       t.string :text
+      t.string :book_id
 
       t.timestamps
     end
