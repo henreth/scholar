@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 2022_08_13_211910) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.hstore "shelves"
-    t.hstore "complete", default: [], array: true
-    t.hstore "toberead", default: [], array: true
+    t.json "shelves"
+    t.json "complete", default: [], array: true
+    t.json "toberead", default: [], array: true
     t.json "current", default: [], array: true
-    t.hstore "didnotfinish", default: [], array: true
+    t.json "didnotfinish", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
