@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post "/removefromcurrent", to: "users#remove_from_current"
 
   #Review
-  post "/bookreviews", to: "reviews#find_all_book_reviews"
+  post "/allbookreviews", to: "reviews#find_all_book_reviews"
 
 
    

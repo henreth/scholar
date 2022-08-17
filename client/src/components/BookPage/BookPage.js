@@ -4,19 +4,30 @@ import { useParams } from "react-router-dom"
 import key from '../../apiKey'
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
-export default function BookPage({ setUser }) {
+export default function BookPage({ user, setUser }) {
     let params = useParams()
     let id = params.id
     let [pageData, setPageData] = useState({})
+    let [bookReviews, setBookReviews] = useState([])
 
     let [hoverStars, setHoverStars] = useState(0)
     let [clickedStars, setClickedStars] = useState(0)
 
+    let [reviewText, setReviewText] = useState('')
+
     useEffect(() => {
         // let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
         let url = "https://www.googleapis.com/books/v1/volumes/" + id
-        axios.get(url)
-            .then(r => setPageData(r.data))
+        let bookDataRequest = axios.get(url)
+        let bookReviewUrl = '/allbookreviews'
+        let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
+        axios.all([bookDataRequest, bookReviewRequest])
+            .then(axios.spread((res1, res2) => {
+                setPageData(res1.data)
+                setBookReviews(res2.data)
+            }))
+        // axios.get(url)
+        //     .then(r => setPageData(r.data))
     }, [])
 
     if (!pageData.volumeInfo) return null
@@ -53,6 +64,19 @@ export default function BookPage({ setUser }) {
 
     function handleSubmit(e) {
         e.preventDefault()
+        let date = new Date()
+        let review = {
+            "book_id": id,
+            "user_id": user.id,
+            "rating": clickedStars,
+            "text": reviewText,
+            "date": date.toDateString().slice(4,)
+        }
+        console.log(review)
+    }
+
+    function handleReviewTextChange(e) {
+        setReviewText(e.target.value)
     }
 
 
@@ -77,12 +101,12 @@ export default function BookPage({ setUser }) {
         }
     ]
 
-    let reviewsToDisplay = demoReviews.map(review => {
+    let reviewsToDisplay = bookReviews.map(review => {
         return (
             <div className="userReviewCard">
                 <hr></hr>
                 <div className="userReviewId">
-                    <div className="userReviewTitle"> <span>{review.username}</span> - <span>{review.rating} ★</span></div>
+                    <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating} ★</span></div>
                     <div className="userReviewDate">{review.date}</div>
                 </div>
                 <div className="userReviewText">
@@ -92,6 +116,12 @@ export default function BookPage({ setUser }) {
             </div>
         )
     })
+
+
+    let disableSubmitButton = (clickedStars) && (reviewText)
+
+    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length 
+    let calculateBookRating = bookReviews.length ? ((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length) : avgRating
 
     return (
         <div className="mainContainer">
@@ -105,8 +135,8 @@ export default function BookPage({ setUser }) {
                 />
                 <div className="reviewContainer">
                     <div className="reviewInfo">
-                        <h2>Average Rating: {avgRating} ★</h2>
-                        <h4>Number of ratings: {numRatings}</h4>
+                        <h2>Average Rating: {calculateBookRating} ★</h2>
+                        <h4>Number of ratings: {numRatings + bookReviews.length}</h4>
                         <hr></hr>
                         <div className="newReviewTitle">
                             <h3>Write a Review: </h3>
@@ -122,8 +152,10 @@ export default function BookPage({ setUser }) {
                             <input
                                 type='text'
                                 placeholder="Write your throughts here."
+                                value={reviewText}
+                                onChange={handleReviewTextChange}
                             />
-                            <button onClick={handleSubmit}>Submit</button>
+                            <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
                         </form>
                         <hr></hr>
                         <h3>All Reviews: </h3>
