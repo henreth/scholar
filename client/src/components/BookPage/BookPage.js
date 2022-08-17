@@ -21,6 +21,8 @@ export default function BookPage({ setUser }) {
 
     if (!pageData.volumeInfo) return null
 
+    let avgRating = pageData.volumeInfo.averageRating ? pageData.volumeInfo.averageRating : 0
+    let numRatings = pageData.volumeInfo.ratingsCount ? pageData.volumeInfo.ratingsCount : 0
     //☆★
 
     function handleClickStar(num) {
@@ -61,11 +63,11 @@ export default function BookPage({ setUser }) {
                 />
                 <div className="reviewContainer">
                     <div className="reviewInfo">
-                        <h2>Average Rating: 4.5 ★</h2>
-                        <h4>Number of ratings: 10</h4>
+                        <h2>Average Rating: {avgRating} ★</h2>
+                        <h4>Number of ratings: {numRatings}</h4>
                         <hr></hr>
                         <div className="newReviewTitle">
-                            <label>Write a Review: </label>
+                            <h3>Write a Review: </h3>
                             <div className="stars" onMouseOut={handleHoverStarOff}>
                                 <div onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
                                 <div onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
@@ -77,10 +79,11 @@ export default function BookPage({ setUser }) {
                         <form className="reviewForm">
                             <input
                                 type='text'
-                                className="reviewInput"
+                                placeholder="Write your throughts here."
                             />
                             <button onClick={handleSubmit}>Submit</button>
                         </form>
+                        <hr></hr>
                     </div>
                 </div>
             </div>

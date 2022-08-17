@@ -1,8 +1,9 @@
 @use '../../styles' as s;
 
 
-.reviewContainer{
-    background-color: orange;
+.reviewContainer {
+    background-color: s.$dark;
+    background-color: rgb(49, 38, 104);
     width: 100%;
     height: 100%;
     display: flex;
@@ -12,7 +13,7 @@
     color: s.$text;
 }
 
-.reviewInfo{
+.reviewInfo {
     // padding: 30px;
     background-color: cornflowerblue;
     width: 95%;
@@ -23,24 +24,34 @@
     }
 }
 
-.newReviewTitle{
+.newReviewTitle {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    align-content: center;
 }
 
-.stars{
+.stars {
+    margin-left: 1%;
     display: flex;
     flex-direction: row;
+    font-size: 19px;
+    div{
+        margin-right: 3%;
+    }
 }
 
-.reviewForm{
+.reviewForm {
     display: flex;
     flex-direction: column;
 
-}
+    input{
+        width: 75%;
+        height: 100px;
+        text-align: start;
+    }
 
-.reviewInput {
-    width: 75%;
-    height: 100px;
-    text-align: start;
+    button {
+        width: 15%;
+    }
 }
