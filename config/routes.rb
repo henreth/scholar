@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   #Review
   post "/allbookreviews", to: "reviews#find_all_book_reviews"
-
+  delete "/removereview", to: "reviews#destroy"
 
    
 end

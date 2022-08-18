@@ -118,10 +118,10 @@ export default function BookPage({ user, setUser }) {
 
     let reviewsToDisplay = bookReviews.map(review => {
         return (
-            <div className="userReviewCard">
+            <div className="userReviewCard" key={review.id}>
                 <hr></hr>
                 <div className="userReviewId">
-                    <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating} ★</span></div>
+                    <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating} ★ <button>DELETE‰</button></span></div>
                     <div className="userReviewDate">{review.date}</div>
                 </div>
                 <div className="userReviewText">
