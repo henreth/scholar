@@ -14,10 +14,12 @@ export default function App() {
   let [searchResults, setSearchResults] = useState({})
 
   useEffect(() => {
-    axios.get(booksUrl)
-      .then(r => setTestData(r.data))
-    axios.get('/me')
-      .then(r => setUser(r.data))
+    let meReq = axios.get('/me')
+    axios.all([meReq])
+      .then(axios.spread((res1) => {
+        setUser(res1.data)
+        console.log(res1.data)
+      }))
   }, [])
 
   return (
@@ -29,11 +31,12 @@ export default function App() {
       <Routes>
         <Route path='/*' element={
           <Home
-            testData={testData}
             user={user}
+            setUser={setUser}
           />} />
         <Route path='/book/:id' element={
           <BookPage
+            user={user}
             setUser={setUser}
           />} />
         <Route path='/search/:searchTerm' element={

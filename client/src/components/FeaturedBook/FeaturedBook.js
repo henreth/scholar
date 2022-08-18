@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { useState } from 'react'
 
-export default function FeaturedBook({ book, setUser }) {
+export default function FeaturedBook({ user, book, setUser }) {
+
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
     let bookTitle = book.volumeInfo.title
@@ -39,7 +40,7 @@ export default function FeaturedBook({ book, setUser }) {
     let categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(' / ').split(' / ').map(cat => capitalize(cat)) : ''
     let allCategories = book.volumeInfo.categories ? categories.filter((cat, idx) => categories.indexOf(cat) == idx).join(' / ') : ''
 
-    function testPost() {
+    function addToCurrentlyReading() {
         let obj = {
             book
         }
@@ -50,9 +51,21 @@ export default function FeaturedBook({ book, setUser }) {
             })
     }
 
+    function removeFromCurrentlyReading() {
+        let obj = {
+            "id": book.id
+        }
+        axios.post('/removefromcurrent', obj)
+            .then(r => {
+                setUser(r.data)
+            })
+    }
 
 
 
+
+    // const userCurrentButtons = user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>
+    const displayUserButtons = user.username ? (user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -71,7 +84,7 @@ export default function FeaturedBook({ book, setUser }) {
                     <div><b>Pages:</b> {pageCount}</div>
                     <div><b>Language:</b> {language}</div>
                     <div><b>Categories:</b> {allCategories}</div>
-                    <button onClick={testPost}> add to list</button>
+                    {displayUserButtons}
                 </div>
             </div>
         </div>

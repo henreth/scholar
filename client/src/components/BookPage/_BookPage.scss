@@ -1,1 +1,69 @@
 @use '../../styles' as s;
+
+
+.reviewContainer {
+    background-color: s.$dark;
+    // background-color: rgb(49, 38, 104);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: s.$text;
+}
+
+.reviewInfo {
+    // padding: 30px;
+    background-color: s.$dark;
+    // background-color: cornflowerblue;
+    width: 95%;
+    height: 100%;
+
+    h4 {
+        margin-top: -2%;
+    }
+}
+
+.newReviewTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.stars {
+    margin-left: 1%;
+    display: flex;
+    flex-direction: row;
+    font-size: 19px;
+    div{
+        margin-right: 3%;
+    }
+}
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+
+    input{
+        width: 75%;
+        height: 100px;
+        text-align: start;
+    }
+
+    button {
+        width: 15%;
+    }
+}
+
+
+.active{
+    color: white;
+}
+
+.userReviews{
+    margin-top: -1%;
+    display: flex;
+    flex-direction: column;
+}

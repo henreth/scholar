@@ -2,22 +2,174 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import key from '../../apiKey'
+import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
-export default function BookPage({setUser}) {
+export default function BookPage({ user, setUser }) {
     let params = useParams()
     let id = params.id
     let [pageData, setPageData] = useState({})
+    let [bookReviews, setBookReviews] = useState([])
 
+    let [hoverStars, setHoverStars] = useState(0)
+    let [clickedStars, setClickedStars] = useState(0)
+
+
+    let [clickedEdit, setClickedEdit] = useState(false)
+    let [selectedReview, setSelectedReview] = useState('')
+
+    let [reviewText, setReviewText] = useState('')
+
+    function truncateDecimals(num, digits) {
+        let numS = num.toString(),
+            decPos = numS.indexOf('.'),
+            substrLength = decPos == -1 ? numS.length : 1 + decPos + digits,
+            trimmedResult = numS.substr(0, substrLength),
+            finalResult = isNaN(trimmedResult) ? 0 : trimmedResult;
+
+        return parseFloat(finalResult);
+    }
 
     useEffect(() => {
-        // let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
-        let url = "https://www.googleapis.com/books/v1/volumes/" + id 
-        axios.get(url)
-            .then(r => setPageData(r.data))
+        let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
+        // let url = "https://www.googleapis.com/books/v1/volumes/" + id
+        if (user.username) {
+            let bookDataRequest = axios.get(url)
+            let bookReviewUrl = '/allbookreviews'
+            let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
+            axios.all([bookDataRequest, bookReviewRequest])
+                .then(axios.spread((res1, res2) => {
+                    document.title = res1.data.volumeInfo.title
+                    setPageData(res1.data)
+                    setBookReviews(res2.data)
+                }))
+        } else {
+            axios.get(url)
+                .then(r => setPageData(r.data))
+        }
     }, [])
 
     if (!pageData.volumeInfo) return null
+
+    let avgRating = pageData.volumeInfo.averageRating ? pageData.volumeInfo.averageRating : 0
+    let numRatings = pageData.volumeInfo.ratingsCount ? pageData.volumeInfo.ratingsCount : 0
+    //☆★
+
+    function handleClickStar(num) {
+        if (hoverStars === num && clickedStars) {
+            setClickedStars(0)
+            setHoverStars(num)
+        } else {
+            setClickedStars(num)
+            setHoverStars(num)
+        }
+    }
+
+    function handleHoverStar(num) {
+        setHoverStars(num)
+    }
+
+    function handleHoverStarOff() {
+        setHoverStars(clickedStars)
+    }
+
+    function displayStars(num) {
+        return clickedStars >= num || hoverStars >= num ? '★' : '☆'
+    }
+
+    function starClass(num) {
+        return clickedStars >= num || hoverStars >= num ? 'star active' : 'star'
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        let date = new Date()
+        let review = {
+            "book_id": id,
+            "user_id": user.id,
+            "rating": clickedStars,
+            "text": reviewText,
+            "date": date.toDateString().slice(4,)
+        }
+        axios.post('/reviews', review)
+            .then(r => {
+                let updatedBookReviews = [...bookReviews, r.data].filter(newReview => newReview.id !== selectedReview)
+                setBookReviews(updatedBookReviews)
+            })
+        if (clickedEdit) {
+            axios.post('/removereview', { "id": selectedReview })
+                .then(r => {
+                    // let updatedBookReviews = bookReviews
+                    // setBookReviews(updatedBookReviews)
+                })
+        }
+
+        setClickedStars(0)
+        setHoverStars(0)
+        setReviewText('')
+        setClickedEdit(false)
+        setSelectedReview('')
+    }
+
+    function handleReviewTextChange(e) {
+        setReviewText(e.target.value)
+    }
+
+
+    let demoReviews = [
+        {
+            'username': 'test',
+            'rating': 5,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        },
+        {
+            'username': 'test-2',
+            'rating': 1,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        },
+        {
+            'username': 'test-3',
+            'rating': 2,
+            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
+            'date': 'Jan 10, 2022'
+        }
+    ]
+    let reviewsToDisplay = bookReviews.map(review => {
+        function clickEdit() {
+            if (clickedEdit && review.id === selectedReview) {
+                setClickedStars(0)
+                setReviewText('')
+                setSelectedReview('')
+                setClickedEdit(false)
+            } else {
+                setClickedStars(review.rating)
+                setReviewText(review.text)
+                setSelectedReview(review.id)
+                setClickedEdit(true)
+            }
+        }
+        let madeByUser = review.user.id === user.id
+        let inEditMode = selectedReview === review.id
+        return (
+            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
+        )
+    })
+
+    function cancelEdit(e) {
+        e.preventDefault()
+        setClickedStars(0)
+        setReviewText('')
+        setSelectedReview('')
+        setClickedEdit(false)
+    }
+
+
+    let disableSubmitButton = (clickedStars) && (reviewText)
+
+    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length
+    let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
 
     return (
         <div className="mainContainer">
@@ -25,10 +177,47 @@ export default function BookPage({setUser}) {
                 Sidebar
             </div>
             <div className="display">
-               <FeaturedBook 
-                book={pageData}
-                setUser={setUser}
-               />
+                <FeaturedBook
+                    book={pageData}
+                    user={user}
+                    setUser={setUser}
+                />
+                <div className="reviewContainer">
+                    <div className="reviewInfo">
+                        <h2>Average Rating: {calculateBookRating} ★ ({numRatings + bookReviews.length})</h2>
+                        {/* <h4>Number of ratings: {numRatings + bookReviews.length}</h4> */}
+                        <hr></hr>
+                        {user.username ? <>
+                            <div className="newReviewTitle">
+                                <h3>Write a Review: </h3>
+                                <div className="stars" onMouseOut={handleHoverStarOff}>
+                                    <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
+                                    <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
+                                    <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
+                                    <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
+                                    <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
+                                </div>
+                            </div>
+                            <form className="reviewForm">
+                                <input
+                                    type='text'
+                                    placeholder="Write your throughts here."
+                                    value={reviewText}
+                                    onChange={handleReviewTextChange}
+                                />
+                                <div className="">
+                                    <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
+                                    {clickedEdit ? <button onClick={cancelEdit} >Cancel</button> : null}
+                                </div>
+                            </form>
+                            <hr></hr>
+                        </> : null}
+                        <h3>All Reviews: </h3>
+                        <div className="userReviews">
+                            {bookReviews.length ? reviewsToDisplay : <div>No reviews have been left for this book.</div>}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
