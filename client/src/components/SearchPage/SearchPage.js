@@ -31,7 +31,6 @@ export default function SearchPage({ searchResults, setSearchResults }) {
                         />
                     </form>
                 </div>
-                    {/* <hr></hr> */}
                 <div className="filterRow"> Filters: </div>
             </div>
             <BookContainer
