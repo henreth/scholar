@@ -23,6 +23,7 @@ export default function BookReview({ madeByUser, review, bookReviews, setBookRev
     function handleClickCancel() {
         setClickedDelete(false)
     }
+
     let buttons = clickedDelete ? <>
         <label>Are you sure?</label>
         <button onClick={handleClickCancel}>Cancel</button> <button onClick={handleConfirmDelete}>Confirm</button>
@@ -32,15 +33,13 @@ export default function BookReview({ madeByUser, review, bookReviews, setBookRev
     </> : null
 
     return (
-        <div className="userReviewCard" key={review.id}>
+        <div className="userReviewCard">
             <hr></hr>
             <div className="userReviewId">
-                <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating} ★ {userButtons}</span></div>
+                <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating}</span> ★ {userButtons}</div>
                 <div className="userReviewDate">{review.date}</div>
             </div>
-            <div className="userReviewText">
-                {review.text}
-            </div>
+            <div className="userReviewText"> {review.text} </div>
         </div>
     )
 }

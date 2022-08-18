@@ -4,7 +4,7 @@
 .header{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: center;
     align-items: center;
 }
@@ -15,7 +15,7 @@
 }
 
 .searchBar {
-    justify-self: end;
+    // justify-self: end;
     width: 20px;
     align-self: center;
     margin-top: 2.5%;
@@ -37,7 +37,6 @@
 
     &:focus {
         width: 301px;
-        // margin-left: 35vw;
         transition: 1s;
         background-color: rgba(128, 128, 128, 0.247);
         color: s.$text;

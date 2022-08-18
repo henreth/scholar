@@ -33,6 +33,7 @@ export default function Header({setSearchResults}) {
 
     return (
         <div className='header'>
+            {/* <div>Browse</div> */}
             <div>Clubs</div>
             <div className="headerTitle" onClick={handleHeaderClick}>Untitled Book App</div>
             <form onSubmit={handleSearchSubmit}>
@@ -44,6 +45,7 @@ export default function Header({setSearchResults}) {
                     onChange={handleSearchChange}
                 />
             </form>
+            {/* <div>Signed In</div> */}
         </div>
     )
 }

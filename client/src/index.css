@@ -69,7 +69,7 @@
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-content: center;
   align-items: center;
 }
@@ -80,7 +80,6 @@
 }
 
 .searchBar {
-  justify-self: end;
   width: 20px;
   align-self: center;
   margin-top: 2.5%;
@@ -160,6 +159,7 @@
   display: flex;
   flex-direction: row;
   font-size: 19px;
+  cursor: pointer;
 }
 .stars div {
   margin-right: 3%;
@@ -283,6 +283,7 @@
   flex-direction: row;
   word-wrap: break-word;
 }
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
