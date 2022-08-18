@@ -32,22 +32,16 @@ export default function BookPage({ user, setUser }) {
 
     useEffect(() => {
         let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
-        // let url = "https://www.googleapis.com/books/v1/volumes/" + id
-        if (user.username) {
-            let bookDataRequest = axios.get(url)
-            let bookReviewUrl = '/allbookreviews'
-            let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
-            axios.all([bookDataRequest, bookReviewRequest])
-                .then(axios.spread((res1, res2) => {
-                    document.title = res1.data.volumeInfo.title
-                    setPageData(res1.data)
-                    setBookReviews(res2.data)
-                }))
-        } else {
-            axios.get(url)
-                .then(r => setPageData(r.data))
-        }
-    }, [])
+        let bookDataRequest = axios.get(url)
+        let bookReviewUrl = '/allbookreviews'
+        let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
+        axios.all([bookDataRequest, bookReviewRequest])
+            .then(axios.spread((res1, res2) => {
+                document.title = res1.data.volumeInfo.title
+                setPageData(res1.data)
+                setBookReviews(res2.data)
+            }))
+    }, [user])
 
     if (!pageData.volumeInfo) return null
 
@@ -56,7 +50,7 @@ export default function BookPage({ user, setUser }) {
     //☆★
 
     function handleClickStar(num) {
-        if (hoverStars === num && clickedStars) {
+        if (clickedStars === num) {
             setClickedStars(0)
             setHoverStars(num)
         } else {
@@ -96,13 +90,7 @@ export default function BookPage({ user, setUser }) {
                 let updatedBookReviews = [...bookReviews, r.data].filter(newReview => newReview.id !== selectedReview)
                 setBookReviews(updatedBookReviews)
             })
-        if (clickedEdit) {
-            axios.post('/removereview', { "id": selectedReview })
-                .then(r => {
-                    // let updatedBookReviews = bookReviews
-                    // setBookReviews(updatedBookReviews)
-                })
-        }
+        if (clickedEdit) axios.post('/removereview', { "id": selectedReview })
 
         setClickedStars(0)
         setHoverStars(0)
@@ -136,6 +124,8 @@ export default function BookPage({ user, setUser }) {
             'date': 'Jan 10, 2022'
         }
     ]
+
+
     let reviewsToDisplay = bookReviews.map(review => {
         function clickEdit() {
             if (clickedEdit && review.id === selectedReview) {
@@ -153,7 +143,7 @@ export default function BookPage({ user, setUser }) {
         let madeByUser = review.user.id === user.id
         let inEditMode = selectedReview === review.id
         return (
-            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
+            <BookReview key={review.id} user={user} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
         )
     })
 
@@ -171,6 +161,31 @@ export default function BookPage({ user, setUser }) {
     let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length
     let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
 
+    let bookReviewsToDisplay = bookReviews.length ? reviewsToDisplay : <div>No reviews have been left for this book.</div>
+    const displayReviewForm = user.username ? <>
+        <div className="newReviewTitle">
+            <h3>Write a Review: </h3>
+            <div className="stars" onMouseOut={handleHoverStarOff}>
+                <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
+                <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
+                <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
+                <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
+                <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
+            </div>
+        </div>
+        <form className="reviewForm">
+            <input
+                type='text'
+                placeholder="Write your throughts here."
+                value={reviewText}
+                onChange={handleReviewTextChange} />
+            <div className="">
+                <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
+                {clickedEdit ? <button onClick={cancelEdit}>Cancel</button> : null}
+            </div>
+        </form>
+        <hr></hr>
+    </> : null
     return (
         <div className="mainContainer">
             <div className="sidebar">
@@ -187,34 +202,10 @@ export default function BookPage({ user, setUser }) {
                         <h2>Average Rating: {calculateBookRating} ★ ({numRatings + bookReviews.length})</h2>
                         {/* <h4>Number of ratings: {numRatings + bookReviews.length}</h4> */}
                         <hr></hr>
-                        {user.username ? <>
-                            <div className="newReviewTitle">
-                                <h3>Write a Review: </h3>
-                                <div className="stars" onMouseOut={handleHoverStarOff}>
-                                    <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
-                                    <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
-                                    <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
-                                    <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
-                                    <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
-                                </div>
-                            </div>
-                            <form className="reviewForm">
-                                <input
-                                    type='text'
-                                    placeholder="Write your throughts here."
-                                    value={reviewText}
-                                    onChange={handleReviewTextChange}
-                                />
-                                <div className="">
-                                    <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
-                                    {clickedEdit ? <button onClick={cancelEdit} >Cancel</button> : null}
-                                </div>
-                            </form>
-                            <hr></hr>
-                        </> : null}
+                        {displayReviewForm}
                         <h3>All Reviews: </h3>
                         <div className="userReviews">
-                            {bookReviews.length ? reviewsToDisplay : <div>No reviews have been left for this book.</div>}
+                            {bookReviewsToDisplay}
                         </div>
                     </div>
                 </div>

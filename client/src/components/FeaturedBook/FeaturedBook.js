@@ -65,7 +65,7 @@ export default function FeaturedBook({ user, book, setUser }) {
 
 
     // const userCurrentButtons = user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>
-    const displayUserButtons = user.username ? (user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
+    let displayUserButtons = user.username ? (user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
