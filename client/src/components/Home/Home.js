@@ -1,7 +1,7 @@
 import BookContainer from "../BookContainer/BookContainer";
 import axios from 'axios'
 
-export default function Home({ testData, user }) {
+export default function Home({ user,setUser }) {
     document.title = 'Untitled Book App'
 
     const handleLogIn = () => {
@@ -25,7 +25,10 @@ export default function Home({ testData, user }) {
     )
 
 
-
+    function handleLogOut(){
+        axios.delete('/logout')
+        .then(r=>setUser({}))
+    }
     let currentlyReadingBooks = user.current
 
     return (
@@ -34,6 +37,7 @@ export default function Home({ testData, user }) {
             <BookContainer
                 books={currentlyReadingBooks}
             />
+            <button onClick={handleLogOut}>Log Out</button>
         </div>
     )
 }

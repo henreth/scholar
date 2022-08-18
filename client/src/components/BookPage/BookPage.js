@@ -31,19 +31,22 @@ export default function BookPage({ user, setUser }) {
     }
 
     useEffect(() => {
-        // let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
-        let url = "https://www.googleapis.com/books/v1/volumes/" + id
-        let bookDataRequest = axios.get(url)
-        let bookReviewUrl = '/allbookreviews'
-        let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
-        axios.all([bookDataRequest, bookReviewRequest])
-            .then(axios.spread((res1, res2) => {
-                document.title = res1.data.volumeInfo.title
-                setPageData(res1.data)
-                setBookReviews(res2.data)
-            }))
-        // axios.get(url)
-        //     .then(r => setPageData(r.data))
+        let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
+        // let url = "https://www.googleapis.com/books/v1/volumes/" + id
+        if (user.username) {
+            let bookDataRequest = axios.get(url)
+            let bookReviewUrl = '/allbookreviews'
+            let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
+            axios.all([bookDataRequest, bookReviewRequest])
+                .then(axios.spread((res1, res2) => {
+                    document.title = res1.data.volumeInfo.title
+                    setPageData(res1.data)
+                    setBookReviews(res2.data)
+                }))
+        } else {
+            axios.get(url)
+                .then(r => setPageData(r.data))
+        }
     }, [])
 
     if (!pageData.volumeInfo) return null
@@ -176,6 +179,7 @@ export default function BookPage({ user, setUser }) {
             <div className="display">
                 <FeaturedBook
                     book={pageData}
+                    user={user}
                     setUser={setUser}
                 />
                 <div className="reviewContainer">
@@ -210,7 +214,7 @@ export default function BookPage({ user, setUser }) {
                         </> : null}
                         <h3>All Reviews: </h3>
                         <div className="userReviews">
-                            {reviewsToDisplay}
+                            {bookReviews.length ? reviewsToDisplay : <div>No reviews have been left for this book.</div>}
                         </div>
                     </div>
                 </div>
