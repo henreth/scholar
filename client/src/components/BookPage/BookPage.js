@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import key from '../../apiKey'
+import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
 export default function BookPage({ user, setUser }) {
@@ -12,6 +13,10 @@ export default function BookPage({ user, setUser }) {
 
     let [hoverStars, setHoverStars] = useState(0)
     let [clickedStars, setClickedStars] = useState(0)
+
+
+    let [clickedEdit, setClickedEdit] = useState(false)
+    let [selectedReview, setSelectedReview] = useState('')
 
     let [reviewText, setReviewText] = useState('')
 
@@ -82,12 +87,24 @@ export default function BookPage({ user, setUser }) {
             "text": reviewText,
             "date": date.toDateString().slice(4,)
         }
-        axios.post('/reviews',review)
-        .then(r=>{
-            let updatedBookReviews = [...bookReviews,r.data]
-            console.log(r.data)
-            setBookReviews(updatedBookReviews)
-        })
+        axios.post('/reviews', review)
+            .then(r => {
+                let updatedBookReviews = [...bookReviews, r.data].filter(newReview => newReview.id !== selectedReview)
+                setBookReviews(updatedBookReviews)
+            })
+        if (clickedEdit) {
+            axios.post('/removereview', { "id": selectedReview })
+                .then(r => {
+                    // let updatedBookReviews = bookReviews
+                    // setBookReviews(updatedBookReviews)
+                })
+        }
+
+        setClickedStars(0)
+        setHoverStars(0)
+        setReviewText('')
+        setClickedEdit(false)
+        setSelectedReview('')
     }
 
     function handleReviewTextChange(e) {
@@ -115,28 +132,40 @@ export default function BookPage({ user, setUser }) {
             'date': 'Jan 10, 2022'
         }
     ]
-
     let reviewsToDisplay = bookReviews.map(review => {
+        function clickEdit() {
+            if (clickedEdit && review.id === selectedReview){
+                setClickedStars(0)
+                setReviewText('')
+                setSelectedReview('')
+                setClickedEdit(false)
+            }else {
+                setClickedStars(review.rating)
+                setReviewText(review.text)
+                setSelectedReview(review.id)
+                setClickedEdit(true)
+            }
+        }
+        let madeByUser = review.user.id === user.id
+        let inEditMode = selectedReview === review.id
         return (
-            <div className="userReviewCard" key={review.id}>
-                <hr></hr>
-                <div className="userReviewId">
-                    <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating} ★ <button>DELETE‰</button></span></div>
-                    <div className="userReviewDate">{review.date}</div>
-                </div>
-                <div className="userReviewText">
-                    {review.text}
-                    {review.text}
-                </div>
-            </div>
+            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode}/>
         )
     })
+
+    function cancelEdit(e) {
+        e.preventDefault()
+        setClickedStars(0)
+        setReviewText('')
+        setSelectedReview('')
+        setClickedEdit(false)
+    }
 
 
     let disableSubmitButton = (clickedStars) && (reviewText)
 
-    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length 
-    let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length),2) : avgRating
+    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length
+    let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
 
     return (
         <div className="mainContainer">
@@ -170,7 +199,10 @@ export default function BookPage({ user, setUser }) {
                                 value={reviewText}
                                 onChange={handleReviewTextChange}
                             />
-                            <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
+                            <div className="">
+                                <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
+                                {clickedEdit ? <button onClick={cancelEdit} >Cancel</button> : null}
+                            </div>
                         </form>
                         <hr></hr>
                         <h3>All Reviews: </h3>
