@@ -9,6 +9,7 @@ export default function Home({ user,setUser }) {
             "username": "test",
             "password": "12345"
         })
+        .then(r=>setUser(r.data))
 
     }
 
