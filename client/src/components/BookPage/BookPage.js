@@ -38,6 +38,7 @@ export default function BookPage({ user, setUser }) {
         let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
         axios.all([bookDataRequest, bookReviewRequest])
             .then(axios.spread((res1, res2) => {
+                document.title = res1.data.volumeInfo.title
                 setPageData(res1.data)
                 setBookReviews(res2.data)
             }))
@@ -134,12 +135,12 @@ export default function BookPage({ user, setUser }) {
     ]
     let reviewsToDisplay = bookReviews.map(review => {
         function clickEdit() {
-            if (clickedEdit && review.id === selectedReview){
+            if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
                 setReviewText('')
                 setSelectedReview('')
                 setClickedEdit(false)
-            }else {
+            } else {
                 setClickedStars(review.rating)
                 setReviewText(review.text)
                 setSelectedReview(review.id)
@@ -149,7 +150,7 @@ export default function BookPage({ user, setUser }) {
         let madeByUser = review.user.id === user.id
         let inEditMode = selectedReview === review.id
         return (
-            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode}/>
+            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
         )
     })
 
@@ -179,32 +180,34 @@ export default function BookPage({ user, setUser }) {
                 />
                 <div className="reviewContainer">
                     <div className="reviewInfo">
-                        <h2>Average Rating: {calculateBookRating} ★</h2>
-                        <h4>Number of ratings: {numRatings + bookReviews.length}</h4>
+                        <h2>Average Rating: {calculateBookRating} ★ ({numRatings + bookReviews.length})</h2>
+                        {/* <h4>Number of ratings: {numRatings + bookReviews.length}</h4> */}
                         <hr></hr>
-                        <div className="newReviewTitle">
-                            <h3>Write a Review: </h3>
-                            <div className="stars" onMouseOut={handleHoverStarOff}>
-                                <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
-                                <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
-                                <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
-                                <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
-                                <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
+                        {user.username ? <>
+                            <div className="newReviewTitle">
+                                <h3>Write a Review: </h3>
+                                <div className="stars" onMouseOut={handleHoverStarOff}>
+                                    <div className={starClass(1)} onClick={() => { handleClickStar(1) }} onMouseOver={() => handleHoverStar(1)}>{displayStars(1)}</div>
+                                    <div className={starClass(2)} onClick={() => { handleClickStar(2) }} onMouseOver={() => handleHoverStar(2)}>{displayStars(2)}</div>
+                                    <div className={starClass(3)} onClick={() => { handleClickStar(3) }} onMouseOver={() => handleHoverStar(3)}>{displayStars(3)}</div>
+                                    <div className={starClass(4)} onClick={() => { handleClickStar(4) }} onMouseOver={() => handleHoverStar(4)}>{displayStars(4)}</div>
+                                    <div className={starClass(5)} onClick={() => { handleClickStar(5) }} onMouseOver={() => handleHoverStar(5)}>{displayStars(5)}</div>
+                                </div>
                             </div>
-                        </div>
-                        <form className="reviewForm">
-                            <input
-                                type='text'
-                                placeholder="Write your throughts here."
-                                value={reviewText}
-                                onChange={handleReviewTextChange}
-                            />
-                            <div className="">
-                                <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
-                                {clickedEdit ? <button onClick={cancelEdit} >Cancel</button> : null}
-                            </div>
-                        </form>
-                        <hr></hr>
+                            <form className="reviewForm">
+                                <input
+                                    type='text'
+                                    placeholder="Write your throughts here."
+                                    value={reviewText}
+                                    onChange={handleReviewTextChange}
+                                />
+                                <div className="">
+                                    <button onClick={handleSubmit} disabled={!disableSubmitButton}>Submit</button>
+                                    {clickedEdit ? <button onClick={cancelEdit} >Cancel</button> : null}
+                                </div>
+                            </form>
+                            <hr></hr>
+                        </> : null}
                         <h3>All Reviews: </h3>
                         <div className="userReviews">
                             {reviewsToDisplay}

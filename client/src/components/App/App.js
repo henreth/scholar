@@ -14,10 +14,11 @@ export default function App() {
   let [searchResults, setSearchResults] = useState({})
 
   useEffect(() => {
-    axios.get(booksUrl)
-      .then(r => setTestData(r.data))
-    axios.get('/me')
-      .then(r => setUser(r.data))
+    let meReq = axios.get('/me')
+    axios.all(meReq)
+    .then(axios.spread((res1)=>{
+          setUser(res1.data)
+    }))
   }, [])
 
   return (
