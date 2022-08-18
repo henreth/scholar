@@ -143,7 +143,7 @@ export default function BookPage({ user, setUser }) {
         let madeByUser = review.user.id === user.id
         let inEditMode = selectedReview === review.id
         return (
-            <BookReview key={review.id} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
+            <BookReview key={review.id} user={user} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
         )
     })
 
