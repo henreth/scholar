@@ -15,6 +15,16 @@ export default function BookPage({ user, setUser }) {
 
     let [reviewText, setReviewText] = useState('')
 
+    function truncateDecimals(num, digits) {
+        let numS = num.toString(),
+            decPos = numS.indexOf('.'),
+            substrLength = decPos == -1 ? numS.length : 1 + decPos + digits,
+            trimmedResult = numS.substr(0, substrLength),
+            finalResult = isNaN(trimmedResult) ? 0 : trimmedResult;
+
+        return parseFloat(finalResult);
+    }
+
     useEffect(() => {
         // let url = "https://www.googleapis.com/books/v1/volumes/" + id + '?&key=' + key
         let url = "https://www.googleapis.com/books/v1/volumes/" + id
@@ -72,7 +82,12 @@ export default function BookPage({ user, setUser }) {
             "text": reviewText,
             "date": date.toDateString().slice(4,)
         }
-        console.log(review)
+        axios.post('/reviews',review)
+        .then(r=>{
+            let updatedBookReviews = [...bookReviews,r.data]
+            console.log(r.data)
+            setBookReviews(updatedBookReviews)
+        })
     }
 
     function handleReviewTextChange(e) {
@@ -121,7 +136,7 @@ export default function BookPage({ user, setUser }) {
     let disableSubmitButton = (clickedStars) && (reviewText)
 
     let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length 
-    let calculateBookRating = bookReviews.length ? ((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length) : avgRating
+    let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length),2) : avgRating
 
     return (
         <div className="mainContainer">
