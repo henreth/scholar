@@ -262,6 +262,71 @@
   margin-bottom: -1px;
 }
 
+.bigSearchCard {
+  background-color: rgb(45, 45, 45);
+  padding: 15px;
+  padding-top: 1px;
+}
+
+.searchRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.bigSearch {
+  margin-left: 1%;
+  font-size: 19px;
+  transition: 1s;
+  background-color: rgba(128, 128, 128, 0.15);
+  height: 40px;
+  width: 700px;
+  border: none;
+  border-radius: 5px;
+  color: rgba(216, 216, 216, 0.5);
+  text-align: left;
+  cursor: pointer;
+}
+.bigSearch::-moz-placeholder {
+  color: transparent;
+}
+.bigSearch:-ms-input-placeholder {
+  color: transparent;
+}
+.bigSearch::placeholder {
+  color: transparent;
+}
+.bigSearch:focus {
+  transition: 1s;
+  background-color: rgba(128, 128, 128, 0.247);
+  width: 700px;
+  color: rgb(216, 216, 216);
+  cursor: text;
+  font-size: 19px;
+}
+.bigSearch:focus::-moz-placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  -moz-transition: 1s;
+  transition: 1s;
+  font-size: 19px;
+}
+.bigSearch:focus:-ms-input-placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  -ms-transition: 1s;
+  transition: 1s;
+  font-size: 19px;
+}
+.bigSearch:focus::placeholder {
+  color: rgba(216, 216, 216, 0.5);
+  transition: 1s;
+  font-size: 19px;
+}
+
+.filterRow {
+  margin-top: -5px;
+}
+
 .userReviewCard {
   background-color: rgb(45, 45, 45);
   padding: 10px;
