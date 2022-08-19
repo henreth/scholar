@@ -44,6 +44,11 @@ export default function App() {
             searchResults={searchResults}
             setSearchResults={setSearchResults}
           />} />
+        <Route path='/search/:searchTerm/:authorSearch' element={
+          <SearchPage
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
+          />} />
       </Routes>
     </div>
   );

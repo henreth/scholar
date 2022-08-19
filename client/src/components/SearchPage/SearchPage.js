@@ -6,7 +6,9 @@ import key from "../../apiKey"
 
 export default function SearchPage({ searchResults, setSearchResults }) {
     let params = useParams()
+    console.log("params", params)
     let searchTerm = params.searchTerm
+    let authorSearchTerm = params.authorSearch
 
     let [search, setSearch] = useState(searchTerm)
     const handleSearchChange = (e) => setSearch(e.target.value)
@@ -22,13 +24,13 @@ export default function SearchPage({ searchResults, setSearchResults }) {
 
 
     useEffect(() => {
-        document.title = 'Search Results - ' + searchTerm
+        document.title = 'Search Results - ' + searchTerm + (authorDisplay && authorSearch ? ' - '+authorSearch : '')
         let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
         axios.get(booksUrl)
             .then(r => {
                 setSearchResults(r.data)
             })
-    }, [searchTerm])
+    }, [searchTerm,authorSearchTerm])
 
     if (!searchResults.items) return null
 
@@ -40,24 +42,6 @@ export default function SearchPage({ searchResults, setSearchResults }) {
     function handleClickGenreToggle() {
         setGenreDisplay(!genreDisplay)
         // setGenreSearch('')
-    }
-
-    function handleSearchSubmit(e) {
-        let authorSearchText = authorDisplay && authorSearch ? '+inauthor:' + authorSearch : ''
-        let genreSearchText = genreDisplay && genreSearch ? '+insubject:' + genreSearch : ''
-        let searchUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + search + authorSearchText + genreSearchText + '&maxResults=40&printType=books&key=' + key
-        console.log("searchUrl", searchUrl)
-        e.preventDefault()
-        // axios.get(searchUrl)
-        //     .then(r => {
-        //         if (r.data.items) {
-        //             navigate('/')
-        //             navigate('/search/' + search)
-        //         } else {
-        //             alert('No results found!')
-        //         }
-
-        //     })
     }
 
     let displayAuthorSearchText = authorDisplay ? <input
@@ -72,7 +56,6 @@ export default function SearchPage({ searchResults, setSearchResults }) {
         onChange={handleGenreSearchChange} /> : null;
 
     function handleBigSearchSubmit(e) {
-        console.log('Search away!')
         e.preventDefault()
         let authorSearchText = authorDisplay && authorSearch ? '+inauthor:' + authorSearch : ''
         let genreSearchText = genreDisplay && genreSearch ? '+insubject:' + genreSearch : ''
@@ -81,12 +64,12 @@ export default function SearchPage({ searchResults, setSearchResults }) {
         axios.get(searchUrl)
             .then(r => {
                 if (r.data.items) {
-                    navigate('/')
-                    navigate('/search/' + search)
+                    // navigate('/')
+                    navigate('/search/' + search+'/'+authorSearch)
+                    setSearchResults(r.data)
                 } else {
                     alert('No results found!')
                 }
-
             })
     }
 
