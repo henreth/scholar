@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :reactions, only: [:index,:destroy,:create,:update]
+  resources :reactions, only: [:destroy,:create]
   resources :reviews, only: [:index,:destroy,:create,:update]
   resources :users
 
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   #Reaction
   # post "createreaction", to: "reactions#create"
+  post "removereaction", to: "reactions#remove_reaction"
 
    
 end

@@ -56,8 +56,17 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
     }
 
     function removeSelectReaction(e) {
-        let filteredCounters = counters.filter(reaction => (reaction.emoji !== e) && (reaction.by === user.username))
-        setCounters(filteredCounters)
+        let reactionToDelete = {
+            "user_id": user.id,
+            "review_id": review.id,
+            "emoji": e
+        }
+        axios.post('/removereaction', reactionToDelete)
+            .then(r => {
+                let filteredCounters = counters.filter(reaction => reaction.id !== r.data.id)
+                setCounters(filteredCounters)
+            })
+
     }
 
     let [displayEmojis, setDisplayEmojis] = useState(false)
@@ -65,7 +74,9 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         setDisplayEmojis(!displayEmojis)
     }
 
-    let displayEmojiSelector = displayEmojis ? <GithubSelector onSelect={handleSelectReaction} /> : null;
+    let displayEmojiSelector = displayEmojis ? <div className="emojiSelector">
+        <GithubSelector onSelect={handleSelectReaction}  />
+    </div>: null;
 
     return (
         <div className="userReviewCard">
