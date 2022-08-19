@@ -34,7 +34,7 @@ export default function BookCard({ book }) {
             </div>
             <div className="bookCardHalf bottom">
                 <div className={displayTitleClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOff}>{displayTitle ? book.volumeInfo.title : bookTitle}</div>
-                <div class={authorClass}>{allAuthors}</div>
+                <div className={authorClass}>{allAuthors}</div>
             </div>
         </div>
     )

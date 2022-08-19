@@ -8,9 +8,9 @@ export default function Header({setSearchResults}) {
     const handleSearchChange = (e) => setSearchTerm(e.target.value)
     let navigate = useNavigate()
 
-    let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
-
+    
     function handleSearchSubmit(e) {
+        let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
         e.preventDefault()
         axios.get(booksUrl)
             .then(r => {

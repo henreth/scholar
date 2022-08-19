@@ -324,9 +324,11 @@
 }
 
 .filterRow {
-  margin-top: -5px;
+  margin-top: -15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-
 .userReviewCard {
   background-color: rgb(45, 45, 45);
   padding: 10px;
