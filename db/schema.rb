@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_19_205218) do
+ActiveRecord::Schema.define(version: 2022_08_19_223317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
+
+  create_table "bookclubs", force: :cascade do |t|
+    t.string "name"
+    t.string "books", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "reactions", force: :cascade do |t|
     t.bigint "user_id", null: false

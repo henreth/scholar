@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bookclubs
   resources :reactions, only: [:destroy,:create]
   resources :reviews, only: [:index,:destroy,:create,:update]
   resources :users
