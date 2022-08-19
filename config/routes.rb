@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reactions, only: [:index,:destroy,:create,:update]
   resources :reviews, only: [:index,:destroy,:create,:update]
   resources :users
 
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
   #Review
   post "/allbookreviews", to: "reviews#find_all_book_reviews"
   post "/removereview", to: "reviews#destroy"
+
+  #Reaction
+  # post "createreaction", to: "reactions#create"
 
    
 end

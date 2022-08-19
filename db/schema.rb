@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_224440) do
+ActiveRecord::Schema.define(version: 2022_08_19_205218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
+
+  create_table "reactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "review_id", null: false
+    t.string "emoji"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_reactions_on_review_id"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -39,5 +49,7 @@ ActiveRecord::Schema.define(version: 2022_08_17_224440) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "reactions", "reviews"
+  add_foreign_key "reactions", "users"
   add_foreign_key "reviews", "users"
 end
