@@ -31,24 +31,27 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         {buttons}
     </> : null
 
-    let [counters, setCounters] = useState([])
+    let [counters, setCounters] = useState(review.reactions)
 
-    let reactions = review.reactions
-    // console.log("reactions", reactions)
-    let newCounters = reactions.map(reaction=> {
-        return {"emoji":reaction.emoji,
-        "by":reaction.user}
+    let reactions = counters.map(reaction => {
+        return {
+            "emoji": reaction.emoji,
+            "by": reaction.user.username
+        }
     })
-    console.log("newCounters", newCounters)
+
 
     function handleSelectReaction(e) {
         let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
         if (!includesReact) {
             let count = {
                 emoji: e,
-                by: user.username
+                user_id: user.id,
+                review_id: review.id
             }
-            setCounters([...counters, count])
+            axios.post('/reactions', count)
+                .then(r => setCounters([...counters, r.data]))
+
         }
     }
 
@@ -74,7 +77,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
             <div className="userReviewText"> {review.text} </div>
             <div className="reactionCounter">
                 <h5>Reactions: </h5>
-                <SlackCounter counters={counters} onSelect={removeSelectReaction} onAdd={handleClickAddEmojis} />
+                <SlackCounter counters={reactions} onSelect={removeSelectReaction} onAdd={handleClickAddEmojis} />
             </div>
             {displayEmojiSelector}
         </div>
