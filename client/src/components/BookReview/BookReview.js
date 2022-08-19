@@ -33,6 +33,14 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
     let [counters, setCounters] = useState([])
 
+    let reactions = review.reactions
+    // console.log("reactions", reactions)
+    let newCounters = reactions.map(reaction=> {
+        return {"emoji":reaction.emoji,
+        "by":reaction.user}
+    })
+    console.log("newCounters", newCounters)
+
     function handleSelectReaction(e) {
         let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
         if (!includesReact) {

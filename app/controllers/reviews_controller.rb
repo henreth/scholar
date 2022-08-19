@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
 
     def find_all_book_reviews
         reviews = Review.all.find_all{|rev| rev.book_id == params[:book_id]}
-        render json: reviews
+        render json: reviews, include: ["reactions.user.username","user"]
     end
 
     private
