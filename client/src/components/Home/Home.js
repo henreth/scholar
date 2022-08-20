@@ -30,7 +30,7 @@ export default function Home({ user,setUser }) {
         axios.delete('/logout')
         .then(r=>setUser({}))
     }
-    let currentlyReadingBooks = user.current
+    let currentlyReadingBooks = user.shelves[1].books
 
     return (
         <div>

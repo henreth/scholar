@@ -1,5 +1,4 @@
 class ShelvesController < ApplicationController
-
     def add_book
         bookToAdd = params[:book]
         shelf = shelf.find_by(params[:shelf_id])

@@ -1,12 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 puts 'Removing Previous Data'
 User.destroy_all
+Shelf.destroy_all
 Review.destroy_all
 Reaction.destroy_all
 Bookclub.destroy_all
@@ -18,52 +12,37 @@ User.create!([
     {
         username: 'test',
     password:'12345',
-    complete: [],
-    toberead: [],
-    didnotfinish: [],
-    current: []},
+},
     {
         username: 'demo',
     password:'12345',
-    complete: [],
-    toberead: [],
-    didnotfinish: [],
-    current: []
 },
     {
         username: 'Corey',
     password:'12345',
-    complete: [],
-    toberead: [],
-    didnotfinish: [],
-    current: []
 },
     {
         username: 'Simone',
     password:'12345',
-    complete: [],
-    toberead: [],
-    didnotfinish: [],
-    current: []
 },
 ])
 
 Shelf.create!([
     {
         user_id:1,
-        name:"Favorites"
+        name:"Read"
     },
     {
-        user_id:2,
-        name:"Favorites"
+        user_id:1,
+        name:"Currently Reading"
     },
     {
-        user_id:3,
-        name:"Favorites"
+        user_id:1,
+        name:"To Be Read"
     },
     {
-        user_id:4,
-        name:"Favorites"
+        user_id:1,
+        name:"Did Not Finish"
     },
 ])
 
@@ -169,6 +148,10 @@ Bookclub.create!([
 ])
 
 Clubuser.create!([
+    {
+        user_id:1,
+        bookclub_id:1,
+    },
     {
         user_id:2,
         bookclub_id:1,

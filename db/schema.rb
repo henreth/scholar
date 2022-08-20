@@ -10,10 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_08_20_194127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
 
+  create_table "bookclubs", force: :cascade do |t|
+    t.string "name"
+    t.string "books", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "clubusers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bookclub_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bookclub_id"], name: "index_clubusers_on_bookclub_id"
+    t.index ["user_id"], name: "index_clubusers_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "review_id", null: false
+    t.string "emoji"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_reactions_on_review_id"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "rating"
+    t.string "date"
+    t.string "text"
+    t.string "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.json "books", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shelves_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "clubusers", "bookclubs"
+  add_foreign_key "clubusers", "users"
+  add_foreign_key "reactions", "reviews"
+  add_foreign_key "reactions", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "shelves", "users"
 end
