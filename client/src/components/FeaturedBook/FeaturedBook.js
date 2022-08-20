@@ -62,10 +62,20 @@ export default function FeaturedBook({ user, book, setUser }) {
     }
 
 
+    let userShelves = user.shelves
+    let statusShelves = userShelves.slice(0, 4)
+    let listShelves = userShelves.slice(4,)
 
+    let statusShelvesToDisplay = user.username ? (statusShelves.map(shelf => {
+        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
+    })) : null
+
+    let listShelvesToDisplay = user.username ? (listShelves.map(shelf => {
+        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
+    })) : null
 
     // const userCurrentButtons = user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>
-    let displayUserButtons = user.username ? (user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
+    let displayUserButtons = user.username ? (user.shelves[1].books.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -84,7 +94,21 @@ export default function FeaturedBook({ user, book, setUser }) {
                     <div><b>Pages:</b> {pageCount}</div>
                     <div><b>Language:</b> {language}</div>
                     <div><b>Categories:</b> {allCategories}</div>
-                    {displayUserButtons}
+                    {/* {displayUserButtons} */}
+                    <div className='shelfRow'>
+                        <select>
+                            <option>Status:</option>
+                            {statusShelvesToDisplay}
+                        </select>
+                        <button>Confirm</button>
+                    </div>
+                    <div className='shelfRow'>
+                        <select>
+                            <option>Add to a Shelf:</option>
+                            {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
+                        </select>
+                        <button>Confirm</button>
+                    </div>
                 </div>
             </div>
         </div>

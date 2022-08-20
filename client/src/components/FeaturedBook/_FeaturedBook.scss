@@ -1,6 +1,7 @@
 @use '../../styles' as s;
 
 .featuredCard {
+    transform: scale(1.25);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -9,7 +10,7 @@
     background-color: s.$primary;
     border-radius: s.$radius;
     color: s.$text;
-    color: black;
+    // color: black;
     margin-top: 5%;
     margin-bottom: 5%;
     top: 50%;
@@ -26,7 +27,7 @@
     justify-content: center;
 }
 
-.featuredCardMain{
+.featuredCardMain {
     // background-color: rgb(176, 207, 230);
     height: 100%;
     width: 65%;
@@ -39,31 +40,29 @@
     padding: 30px;
 }
 
-.featuredCardCover{
+.featuredCardCover {
     // margin-top: 10%;
     // height: min(70%, 80vh);
     // width: 80%;
 
-    height:75%;
+    height: 75%;
     border-radius: 5px;
 }
 
-.featuredTitle{
+.featuredTitle {
     margin-bottom: -2.5%;
 }
 
-.featuredSubtitle{
+.featuredSubtitle {
     margin-bottom: -1%;
 }
 
-.featuredAuthors{
+.featuredAuthors {
     margin-bottom: -1%;
 
 }
 
-.hover{
-
-}
+.hover {}
 
 .fullDescription {
     position: absolute;
@@ -71,7 +70,7 @@
     margin-top: -3.5%;
     width: 40%;
     font-size: 17px;
-    background-color: rgba(s.$primary,.95);
+    background-color: rgba(s.$primary, .95);
     border-radius: s.$radius;
     padding: 20px;
 
@@ -79,5 +78,44 @@
         padding-top: 0px;
         margin-top: -1px;
         margin-bottom: -1px;
+    }
+}
+
+
+.shelfRow {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-top: 1%;
+    font-size: 18px;
+
+    select {
+        background-color: s.$dark;
+        color: s.$text;
+        border: none;
+        margin-right: .5%;
+        font-size: 15px;
+        padding: 2.5px;
+        border-radius: calc(s.$radius/1.5);
+        cursor: pointer;
+    }
+
+    button {
+        background-color: s.$dark;
+        color: s.$text;
+        border: none;
+        font-size: 15px;
+        padding: 3.5px 7.5px;
+        border-radius: calc(s.$radius/1.5);
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.05);
+            background-color: s.$dark-alt;
+        }
+
+        &:active {
+            transform: scale(.95);
+        }
     }
 }
