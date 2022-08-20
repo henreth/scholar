@@ -8,6 +8,11 @@
 puts 'Removing Previous Data'
 User.destroy_all
 Review.destroy_all
+Reaction.destroy_all
+Bookclub.destroy_all
+Clubuser.destroy_all
+
+puts 'Creating Test Data'
 
 User.create!([
     {username: 'test',
@@ -78,6 +83,90 @@ Review.create!([
         book_id: 'rWgrDwAAQBAJ'
     },
 
+])
+
+Reaction.create!([
+    {
+        review_id: 1,
+        user_id: 2,
+        emoji: '🎉'
+    },
+    {
+        review_id: 1,
+        user_id: 3,
+        emoji: '🎉'
+    },
+    {
+        review_id: 1,
+        user_id: 4,
+        emoji: '🎉'
+    },
+    {
+        review_id: 2,
+        user_id: 2,
+        emoji: '👍'
+    },
+    {
+        review_id: 2,
+        user_id: 3,
+        emoji: '👍'
+    },
+    {
+        review_id: 2,
+        user_id: 4,
+        emoji: '👍'
+    },
+    {
+        review_id: 3,
+        user_id: 2,
+        emoji: '❤️'
+    },
+    {
+        review_id: 3,
+        user_id: 3,
+        emoji: '❤️'
+    },
+    {
+        review_id: 3,
+        user_id: 4,
+        emoji: '❤️'
+    },
+    {
+        review_id: 4,
+        user_id: 2,
+        emoji: '😄'
+    },
+    {
+        review_id: 4,
+        user_id: 3,
+        emoji: '😄'
+    },
+    {
+        review_id: 4,
+        user_id: 4,
+        emoji: '😄'
+    },
+])
+
+Bookclub.create!([
+    {
+        name:"Test Book Club",
+    }
+])
+
+Clubuser.create!([
+    {
+        user_id:2,
+        bookclub_id:1,
+    },
+    {
+        user_id:4,
+        bookclub_id:1,
+    },
+    {
+        user_id:3,
+        bookclub_id:1,
+    }
 ])
 
 puts 'Completed Seeding Data'
