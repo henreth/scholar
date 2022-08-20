@@ -15,42 +15,56 @@ Clubuser.destroy_all
 puts 'Creating Test Data'
 
 User.create!([
-    {username: 'test',
+    {
+        username: 'test',
     password:'12345',
-    shelves: {
-        "favorites": []
-    },
     complete: [],
     toberead: [],
     didnotfinish: [],
     current: []},
-    {username: 'demo',
+    {
+        username: 'demo',
     password:'12345',
-    shelves: {
-        "favorites": []
-    },
     complete: [],
     toberead: [],
     didnotfinish: [],
-    current: []},
-    {username: 'Corey',
+    current: []
+},
+    {
+        username: 'Corey',
     password:'12345',
-    shelves: {
-        "favorites": []
-    },
     complete: [],
     toberead: [],
     didnotfinish: [],
-    current: []},
-    {username: 'Simone',
+    current: []
+},
+    {
+        username: 'Simone',
     password:'12345',
-    shelves: {
-        "favorites": []
-    },
     complete: [],
     toberead: [],
     didnotfinish: [],
-    current: []},
+    current: []
+},
+])
+
+Shelf.create!([
+    {
+        user_id:1,
+        name:"Favorites"
+    },
+    {
+        user_id:2,
+        name:"Favorites"
+    },
+    {
+        user_id:3,
+        name:"Favorites"
+    },
+    {
+        user_id:4,
+        name:"Favorites"
+    },
 ])
 
 Review.create!([
