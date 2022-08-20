@@ -18,7 +18,34 @@ User.create!([
     complete: [],
     toberead: [],
     didnotfinish: [],
-    current: []}
+    current: []},
+    {username: 'demo',
+    password:'12345',
+    shelves: {
+        "favorites": []
+    },
+    complete: [],
+    toberead: [],
+    didnotfinish: [],
+    current: []},
+    {username: 'Corey',
+    password:'12345',
+    shelves: {
+        "favorites": []
+    },
+    complete: [],
+    toberead: [],
+    didnotfinish: [],
+    current: []},
+    {username: 'Simone',
+    password:'12345',
+    shelves: {
+        "favorites": []
+    },
+    complete: [],
+    toberead: [],
+    didnotfinish: [],
+    current: []},
 ])
 
 Review.create!([
@@ -30,21 +57,21 @@ Review.create!([
         book_id: 'rWgrDwAAQBAJ'
     },
     {
-        user_id: 1,
+        user_id: 2,
         rating: 5,
         text: 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
         date: 'Jan 10, 2022',
         book_id: 'rWgrDwAAQBAJ'
     },
     {
-        user_id: 1,
+        user_id: 3,
         rating: 5,
         text: 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
         date: 'Jan 10, 2022',
         book_id: 'rWgrDwAAQBAJ'
     },
     {
-        user_id: 1,
+        user_id: 4,
         rating: 5,
         text: 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
         date: 'Jan 10, 2022',

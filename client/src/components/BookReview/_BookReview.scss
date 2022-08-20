@@ -2,7 +2,7 @@
 
 
 .userReviewCard {
-    background-color: s.$dark;
+    background-color: s.$dark-alt;
     // background-color: salmon;
     padding: 10px;
     width: 97.5%;
@@ -47,5 +47,6 @@
 }
 
 .emojiSelector{
-    opacity: 75%;
+    opacity: 92.5%;
+    position: absolute;
 }
