@@ -42,17 +42,16 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
 
     function handleSelectReaction(e) {
-        let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
-        if (!includesReact) {
-            let count = {
-                emoji: e,
-                user_id: user.id,
-                review_id: review.id
+            let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
+            if (!includesReact) {
+                let count = {
+                    emoji: e,
+                    user_id: user.id,
+                    review_id: review.id
+                }
+                axios.post('/reactions', count)
+                    .then(r => setCounters([...counters, r.data]))
             }
-            axios.post('/reactions', count)
-                .then(r => setCounters([...counters, r.data]))
-
-        }
     }
 
     function removeSelectReaction(e) {
@@ -71,12 +70,12 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
     let [displayEmojis, setDisplayEmojis] = useState(false)
     function handleClickAddEmojis() {
-        setDisplayEmojis(!displayEmojis)
+        if (review.user.id !== user.id) setDisplayEmojis(!displayEmojis)
     }
 
     let displayEmojiSelector = displayEmojis ? <div className="emojiSelector">
-        <GithubSelector onSelect={handleSelectReaction}  />
-    </div>: null;
+        <GithubSelector onSelect={handleSelectReaction} />
+    </div> : null;
 
     return (
         <div className="userReviewCard">
