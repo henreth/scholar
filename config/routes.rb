@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :clubusers, only: [:create,:destroy]
   resources :bookclubs, only: [:index,:destroy,:create,:update]
   resources :reactions, only: [:destroy,:create]
   resources :reviews, only: [:index,:destroy,:create,:update]
@@ -25,5 +26,8 @@ Rails.application.routes.draw do
   #Bookclub
   post 'addbooktoclub', to: "bookclubs#add_book"
   post 'removebookfromclub', to: "bookclubs#remove_book"
+
+  #Clubuser
+  post 'removeclubuser', to: "clubusers#destroy"
    
 end

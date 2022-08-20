@@ -2,21 +2,18 @@ class BookclubsController < ApplicationController
 
     def index
         @bookclubs = Bookclub.all
-        render json: @bookclubs
+        render json: @bookclubs, include: ["clubusers.user"]
+    end
+
+    def show
+        bookclub = Bookclub.find_by(params[:id])
+        render json: bookclub, include: ["clubusers.user"]
     end
 
     def update
         bookclub = Bookclub.find_by(params[:id])
         bookclub.update!(bookclub_params)
         render json: bookclub
-    end
-
-    def add_user
-
-    end
-
-    def remove_user
-
     end
 
     def add_book
