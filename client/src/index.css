@@ -368,6 +368,10 @@
   margin-right: 1%;
 }
 
+.emojiSelector {
+  opacity: 75%;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;

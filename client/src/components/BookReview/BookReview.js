@@ -31,22 +31,42 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         {buttons}
     </> : null
 
-    let [counters, setCounters] = useState([])
+    let [counters, setCounters] = useState(review.reactions)
+
+    let reactions = counters.map(reaction => {
+        return {
+            "emoji": reaction.emoji,
+            "by": reaction.user.username
+        }
+    })
+
 
     function handleSelectReaction(e) {
         let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
         if (!includesReact) {
             let count = {
                 emoji: e,
-                by: user.username
+                user_id: user.id,
+                review_id: review.id
             }
-            setCounters([...counters, count])
+            axios.post('/reactions', count)
+                .then(r => setCounters([...counters, r.data]))
+
         }
     }
 
     function removeSelectReaction(e) {
-        let filteredCounters = counters.filter(reaction => (reaction.emoji !== e) && (reaction.by === user.username))
-        setCounters(filteredCounters)
+        let reactionToDelete = {
+            "user_id": user.id,
+            "review_id": review.id,
+            "emoji": e
+        }
+        axios.post('/removereaction', reactionToDelete)
+            .then(r => {
+                let filteredCounters = counters.filter(reaction => reaction.id !== r.data.id)
+                setCounters(filteredCounters)
+            })
+
     }
 
     let [displayEmojis, setDisplayEmojis] = useState(false)
@@ -54,7 +74,9 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         setDisplayEmojis(!displayEmojis)
     }
 
-    let displayEmojiSelector = displayEmojis ? <GithubSelector onSelect={handleSelectReaction} /> : null;
+    let displayEmojiSelector = displayEmojis ? <div className="emojiSelector">
+        <GithubSelector onSelect={handleSelectReaction}  />
+    </div>: null;
 
     return (
         <div className="userReviewCard">
@@ -66,7 +88,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
             <div className="userReviewText"> {review.text} </div>
             <div className="reactionCounter">
                 <h5>Reactions: </h5>
-                <SlackCounter counters={counters} onSelect={removeSelectReaction} onAdd={handleClickAddEmojis} />
+                <SlackCounter counters={reactions} onSelect={removeSelectReaction} onAdd={handleClickAddEmojis} />
             </div>
             {displayEmojiSelector}
         </div>
