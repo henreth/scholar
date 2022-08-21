@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_20_041310) do
+ActiveRecord::Schema.define(version: 2022_08_20_194127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -53,14 +53,18 @@ ActiveRecord::Schema.define(version: 2022_08_20_041310) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "shelves", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.json "books", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shelves_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.json "shelves"
-    t.json "complete", default: [], array: true
-    t.json "toberead", default: [], array: true
-    t.json "current", default: [], array: true
-    t.json "didnotfinish", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -70,4 +74,5 @@ ActiveRecord::Schema.define(version: 2022_08_20_041310) do
   add_foreign_key "reactions", "reviews"
   add_foreign_key "reactions", "users"
   add_foreign_key "reviews", "users"
+  add_foreign_key "shelves", "users"
 end
