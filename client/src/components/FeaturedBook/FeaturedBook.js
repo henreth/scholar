@@ -21,7 +21,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
 
     let bookDescription = book.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
 
-    let shortenedDescription = bookDescription.slice(0, 750) + '...'
+    let shortenedDescription = bookDescription.slice(0, 750) + '... (hover to read more)'
 
     let bookDescriptionToDisplay = bookDescription.length > 1000 ? shortenedDescription : bookDescription
 
@@ -45,13 +45,11 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     let allCategories = book.volumeInfo.categories ? categories.filter((cat, idx) => categories.indexOf(cat) == idx).join(' / ') : ''
 
 
+    // to handle changing the status
+    // identify the the non selected status options and make three separate posts requests to remove the book from them 
     function handleStatusSubmit() {
         if (selectedStatus === -1) {
-            // let shelfUpdate = {
-            //     "user_id": user.id,
-            //     "book_id": book.id,
-            // }
-            // axios.post('/clearstatus', shelfUpdate)
+
         } else {
             let shelf = statusShelves[selectedStatus]
             let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
@@ -62,9 +60,9 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                 }
                 axios.post('/removebook', shelfUpdate)
                     .then(r => {
-                        let filteredShelves = userShelves.filter(userShelf => userShelf.id !== shelf.id)
-                        setUserShelves([...filteredShelves, r.data])
-                        console.log(r.data)
+                        let updatedShelves = userShelves
+                        updatedShelves[selectedStatus] = r.data
+                        setUserShelves(updatedShelves)
                     })
             } else {
                 let shelfUpdate = {
@@ -73,9 +71,9 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                 }
                 axios.post('/addbook', shelfUpdate)
                     .then(r => {
-                        let filteredShelves = userShelves.filter(userShelf => userShelf.id !== shelf.id)
-                        setUserShelves([...filteredShelves, r.data])
-                        console.log(r.data)
+                        let updatedShelves = userShelves
+                        updatedShelves[selectedStatus] = r.data
+                        setUserShelves(updatedShelves)
                     })
             }
         }
@@ -93,6 +91,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
     })) : null
 
+    const buttonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -100,37 +99,36 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
             </div>
             <div className="featuredCardMain">
                 <div className="featuredCardInformation">
-                    <h1 className="featuredTitle">{bookTitle}</h1>
-                    <h4 className="featuredSubtitle">{bookSubtitle}</h4>
-                    <h3 className="featuredAuthors">{allAuthors}</h3>
+                    <h1 className="featuredTitle">{bookTitle}<span>  - {allAuthors}</span></h1>
+                    {bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null}
                     <hr></hr>
                     <div onMouseOver={handleOnDescHover} onMouseOut={handleOffDescHover} className=''>{bookDescriptionToDisplay}</div>
                     {displayFullDescription}
                     <hr></hr>
-                    <div><b>Published:</b> {publishDate}</div>
                     <div><b>Pages:</b> {pageCount}</div>
-                    <div><b>Language:</b> {language}</div>
+                    <div><b>Language:</b> {language.toUpperCase()}</div>
+                    <div><b>Published:</b> {publishDate}</div>
                     <div><b>Categories:</b> {allCategories}</div>
                     <hr></hr>
                 </div>
-                    <div className='featuredCardBottom'>
-                        <div className='shelfRow'>
-                            <div>Status: </div>
-                            <select onChange={handleStatusChange}>
-                                <option value={'-1'}>Options:</option>
-                                {statusShelvesToDisplay}
-                            </select>
-                            <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>Confirm</button>
-                        </div>
-                        <div className='shelfRow'>
-                            <div>Add to a Shelf:</div>
-                            <select>
-                                {/* <option>Add to a Shelf:</option> */}
-                                {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
-                            </select>
-                            <button>Confirm</button>
-                        </div>
+                <div className='featuredCardBottom'>
+                    <div className='shelfRow'>
+                        <div>Status: </div>
+                        <select onChange={handleStatusChange}>
+                            <option value={-1}>Options:</option>
+                            {statusShelvesToDisplay}
+                        </select>
+                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{buttonText}</button>
                     </div>
+                    <div className='shelfRow'>
+                        <div>Add to a Shelf:</div>
+                        <select>
+                            {/* <option>Add to a Shelf:</option> */}
+                            {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
+                        </select>
+                        <button>Confirm</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
