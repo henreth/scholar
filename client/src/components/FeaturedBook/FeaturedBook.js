@@ -6,6 +6,17 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     function handleStatusChange(e) {
         setSelectedStatus(e.target.value)
     }
+    let [displayNewShelfForm, setDisplayNewShelfForm] = useState(false)
+    let [selectedShelf, setSelectedShelf] = useState(-1)
+    function handleShelfChange(e) {
+        setDisplayNewShelfForm(false)
+        setSelectedShelf(e.target.value)
+    }
+
+    let [newShelfName, setNewShelfName] = useState('')
+    function handleNewShelfNameChange(e) {
+        setNewShelfName(e.target.value)
+    }
 
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
@@ -48,12 +59,15 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     // to handle changing the status
     // identify the the non selected status options and make three separate posts requests to remove the book from them 
     function handleStatusSubmit() {
-        if (selectedStatus === -1) {
+        if (selectedStatus == -1) {
 
         } else {
             let shelf = statusShelves[selectedStatus]
             let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+            let ids = [0, 1, 2, 3]
             if (inShelf) {
+                ids.splice(selectedStatus, 1)
+                console.log(ids)
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book_id": book.id,
@@ -65,6 +79,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         setUserShelves(updatedShelves)
                     })
             } else {
+
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book": book,
@@ -75,9 +90,79 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[selectedStatus] = r.data
                         setUserShelves(updatedShelves)
                     })
+                ids.splice(selectedStatus, 1)
+                for (let id of ids) {
+                    let otherShelf = statusShelves[id]
+                    let inOtherShelf = otherShelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+                    if (inOtherShelf) {
+                        let shelfUpdate = {
+                            "shelf_id": otherShelf.id,
+                            "book_id": book.id,
+                        }
+                        axios.post('/removebook', shelfUpdate)
+                            .then(r => {
+                                let updatedShelves = userShelves
+                                updatedShelves[id] = r.data
+                                setUserShelves(updatedShelves)
+                                console.log(r.data)
+                            })
+                    }
+                }
             }
         }
 
+    }
+
+    function handleShelfSubmit() {
+        if (selectedShelf == -1) {
+            setDisplayNewShelfForm(true)
+        } else {
+            const shelfIndex = 4 + Number(selectedShelf)
+            let shelf = userShelves[shelfIndex]
+            let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+            if (inShelf) {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book_id": book.id,
+                }
+                axios.post('/removebook', shelfUpdate)
+                    .then(r => {
+                        let updatedShelves = userShelves
+                        updatedShelves[shelfIndex] = r.data
+                        setUserShelves(updatedShelves)
+                    })
+            } else {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book": book,
+                }
+                axios.post('/addbook', shelfUpdate)
+                    .then(r => {
+                        let updatedShelves = userShelves
+                        updatedShelves[shelfIndex] = r.data
+                        setUserShelves(updatedShelves)
+                        console.log(r.data)
+                    })
+            }
+        }
+    }
+
+    function handleAddNewShelfCancel() {
+        setDisplayNewShelfForm(false)
+    }
+
+    function handleAddNewShelfSubmit() {
+        let newShelf = {
+            "name": newShelfName,
+            "user_id": user.id
+        }
+        axios.post('/shelves', newShelf)
+            .then(r => {
+                setUserShelves([...userShelves, r.data])
+                console.log(r.data)
+            })
+        setDisplayNewShelfForm(false)
+        setNewShelfName('')
     }
 
     let statusShelves = userShelves.slice(0, 4)
@@ -87,11 +172,24 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option value={Number(idx)}>✓ Added to {shelf.name}</option> : <option value={Number(idx)}>{shelf.name}</option>
     })) : null
 
-    let listShelvesToDisplay = user.username ? (listShelves.map(shelf => {
-        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
+    let listShelvesToDisplay = user.username ? (listShelves.map((shelf, idx) => {
+        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option value={Number(idx)}>✓ Added to {shelf.name}</option> : <option value={Number(idx)}>{shelf.name}</option>
     })) : null
 
-    const buttonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let statusButtonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let shelfButtonText = selectedShelf == -1 ? 'Confirm' : userShelves[4 + Number(selectedShelf)].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let newShelvesToDisplay = listShelves.length ? listShelvesToDisplay : null
+    let newShelfForm = displayNewShelfForm ? <div className='shelfRow'>
+        <div>Name:</div>
+        <input
+            type='text'
+            value={newShelfName}
+            onChange={handleNewShelfNameChange}
+            placeholder='Enter a Shelf Name' />
+        <button onClick={handleAddNewShelfSubmit}>Submit</button>
+    </div> : null
+    let shelfButton = !displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>
+    let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -100,15 +198,15 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
             <div className="featuredCardMain">
                 <div className="featuredCardInformation">
                     <h1 className="featuredTitle">{bookTitle}<span>  - {allAuthors}</span></h1>
-                    {bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null}
+                    {displayBookSubtitle}
                     <hr></hr>
-                    <div onMouseOver={handleOnDescHover} onMouseOut={handleOffDescHover} className=''>{bookDescriptionToDisplay}</div>
+                    <div onMouseOver={handleOnDescHover} onMouseOut={handleOffDescHover} className='bookDescription'>{bookDescriptionToDisplay}</div>
                     {displayFullDescription}
                     <hr></hr>
-                    <div><b>Pages:</b> {pageCount}</div>
-                    <div><b>Language:</b> {language.toUpperCase()}</div>
-                    <div><b>Published:</b> {publishDate}</div>
-                    <div><b>Categories:</b> {allCategories}</div>
+                    <div className='moreInfo'><b>Pages:</b> {pageCount}</div>
+                    <div className='moreInfo'><b>Language:</b> {language.toUpperCase()}</div>
+                    <div className='moreInfo'><b>Published:</b> {publishDate}</div>
+                    <div className='moreInfo'><b>Categories:</b> {allCategories}</div>
                     <hr></hr>
                 </div>
                 <div className='featuredCardBottom'>
@@ -118,16 +216,17 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                             <option value={-1}>Options:</option>
                             {statusShelvesToDisplay}
                         </select>
-                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{buttonText}</button>
+                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{statusButtonText}</button>
                     </div>
                     <div className='shelfRow'>
                         <div>Add to a Shelf:</div>
-                        <select>
-                            {/* <option>Add to a Shelf:</option> */}
-                            {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
+                        <select onChange={handleShelfChange}>
+                            <option value={-1}>Create a New Shelf</option>
+                            {newShelvesToDisplay}
                         </select>
-                        <button>Confirm</button>
+                        {shelfButton}
                     </div>
+                    {newShelfForm}
                 </div>
             </div>
         </div>

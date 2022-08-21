@@ -73,7 +73,7 @@ class ShelvesController < ApplicationController
     private
 
     def shelf_params
-        params.permit(:id,:name,:books, :user_id)
+        params.permit(:id,:name,:books,:user_id)
     end
 
 end
