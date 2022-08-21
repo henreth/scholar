@@ -1,7 +1,9 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function FeaturedBook({ user, book, setUser, userShelves, setUserShelves }) {
+
+    useEffect(()=>{userShelves.sort((a,b)=>a.id-b.id)},[userShelves])
     let [selectedStatus, setSelectedStatus] = useState(-1)
     function handleStatusChange(e) {
         setSelectedStatus(e.target.value)

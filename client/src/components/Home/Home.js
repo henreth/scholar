@@ -1,7 +1,7 @@
 import BookContainer from "../BookContainer/BookContainer";
 import axios from 'axios'
 
-export default function Home({ user,setUser,userShelves }) {
+export default function Home({ user, setUser, userShelves }) {
     document.title = 'Untitled Book App'
 
     const handleLogIn = () => {
@@ -9,7 +9,7 @@ export default function Home({ user,setUser,userShelves }) {
             "username": "test",
             "password": "12345"
         })
-        .then(r=>setUser(r.data))
+            .then(r => setUser(r.data))
 
     }
 
@@ -26,19 +26,31 @@ export default function Home({ user,setUser,userShelves }) {
     )
 
 
-    function handleLogOut(){
+    function handleLogOut() {
         axios.delete('/logout')
-        .then(r=>setUser({}))
+            .then(r => setUser({}))
     }
-    
+
     let currentlyReadingBooks = userShelves[1].books
+
+    let bookShelvesToDisplay = userShelves.map(shelf => {
+        return (
+            <div>
+                <h1>{shelf.name}:</h1>
+                <BookContainer
+                    books={shelf.books}
+                />
+            </div>
+        )
+    })
 
     return (
         <div>
-            <h1>Currently Reading:</h1>
+            {/* <h1>Currently Reading:</h1>
             <BookContainer
                 books={currentlyReadingBooks}
-            />
+            /> */}
+            {bookShelvesToDisplay}
             <button onClick={handleLogOut}>Log Out</button>
         </div>
     )
