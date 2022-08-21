@@ -24,7 +24,8 @@ export default function SearchPage({ searchResults, setSearchResults }) {
 
     useEffect(() => {
         document.title = 'Search Results - ' + searchTerm + (authorDisplay && authorSearch ? ' - '+authorSearch : '')
-        let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&maxResults=40&printType=books&key=' + key
+        let authorSearchText = authorSearch ? '+inauthor:' + authorSearch : ''
+        let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + authorSearchText + '&maxResults=40&printType=books&key=' + key
         axios.get(booksUrl)
             .then(r => {
                 setSearchResults(r.data)

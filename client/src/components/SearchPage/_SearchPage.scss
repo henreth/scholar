@@ -52,13 +52,28 @@
     }
 
 }
-.filterRow{
+
+.filterRow {
     margin-top: -15px;
     display: flex;
     flex-direction: row;
     align-items: center;
 
+    input[type=radio] {
+        margin-right: .5%;
+    }
 
-    h4 {
+    div {
+        margin-right: .5%;
+    }
+
+    input[type=text] {
+        background-color: s.$dark-alt;
+        border: none;
+        color: s.$text;
+        // margin-right: 1%;
+        font-size: 15px;
+        padding: 2.5px;
+        border-radius: calc(s.$radius/1.5);
     }
 }

@@ -339,6 +339,9 @@
   padding: 2.5px;
   border-radius: 3.3333333333px;
 }
+.shelfRow input:focus {
+  background-color: rgb(45, 45, 45);
+}
 
 .featuredCardBottom {
   background-color: rgb(45, 45, 45);
@@ -414,6 +417,21 @@
   flex-direction: row;
   align-items: center;
 }
+.filterRow input[type=radio] {
+  margin-right: 0.5%;
+}
+.filterRow div {
+  margin-right: 0.5%;
+}
+.filterRow input[type=text] {
+  background-color: rgb(65, 65, 65);
+  border: none;
+  color: rgb(216, 216, 216);
+  font-size: 15px;
+  padding: 2.5px;
+  border-radius: 3.3333333333px;
+}
+
 .userReviewCard {
   background-color: rgb(65, 65, 65);
   padding: 10px;

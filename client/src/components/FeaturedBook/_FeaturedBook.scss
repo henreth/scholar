@@ -69,8 +69,8 @@
 
 }
 
-.bookDescription{
-    color: rgba(s.$text,.80);
+.bookDescription {
+    color: rgba(s.$text, .80);
 }
 
 
@@ -92,7 +92,8 @@
 }
 
 .moreInfo {
-    color: rgba(s.$text,.75);
+    color: rgba(s.$text, .75);
+
     b {
         color: s.$text;
     }
@@ -166,6 +167,9 @@
         padding: 2.5px;
         border-radius: calc(s.$radius/1.5);
 
+        &:focus {
+            background-color: s.$dark;
+        }
     }
 }
 
