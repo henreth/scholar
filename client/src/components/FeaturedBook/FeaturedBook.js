@@ -64,7 +64,10 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         } else {
             let shelf = statusShelves[selectedStatus]
             let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+            let ids = [0,1,2,3]
             if (inShelf) {
+                ids.splice(selectedStatus,1)
+                console.log(ids)
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book_id": book.id,
@@ -76,6 +79,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         setUserShelves(updatedShelves)
                     })
             } else {
+
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book": book,
@@ -86,6 +90,24 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[selectedStatus] = r.data
                         setUserShelves(updatedShelves)
                     })
+                ids.splice(selectedStatus,1)
+                for(let id of ids){
+                    let otherShelf = statusShelves[id]
+                    let inOtherShelf = otherShelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+                    if (inOtherShelf){
+                        let shelfUpdate = {
+                            "shelf_id": otherShelf.id,
+                            "book_id": book.id,
+                        }
+                        axios.post('/removebook', shelfUpdate)
+                            .then(r => {
+                                let updatedShelves = userShelves
+                                updatedShelves[id] = r.data
+                                setUserShelves(updatedShelves)
+                                console.log(r.data)
+                            })
+                    }
+                }
             }
         }
 
