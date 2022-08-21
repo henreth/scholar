@@ -64,9 +64,9 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         } else {
             let shelf = statusShelves[selectedStatus]
             let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
-            let ids = [0,1,2,3]
+            let ids = [0, 1, 2, 3]
             if (inShelf) {
-                ids.splice(selectedStatus,1)
+                ids.splice(selectedStatus, 1)
                 console.log(ids)
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
@@ -90,11 +90,11 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[selectedStatus] = r.data
                         setUserShelves(updatedShelves)
                     })
-                ids.splice(selectedStatus,1)
-                for(let id of ids){
+                ids.splice(selectedStatus, 1)
+                for (let id of ids) {
                     let otherShelf = statusShelves[id]
                     let inOtherShelf = otherShelf.books.map(shelfBook => shelfBook.id).includes(book.id)
-                    if (inOtherShelf){
+                    if (inOtherShelf) {
                         let shelfUpdate = {
                             "shelf_id": otherShelf.id,
                             "book_id": book.id,
@@ -179,6 +179,17 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     let statusButtonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     let shelfButtonText = selectedShelf == -1 ? 'Confirm' : userShelves[4 + Number(selectedShelf)].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     let newShelvesToDisplay = listShelves.length ? listShelvesToDisplay : null
+    let newShelfForm = displayNewShelfForm ? <div className='shelfRow'>
+        <div>Name:</div>
+        <input
+            type='text'
+            value={newShelfName}
+            onChange={handleNewShelfNameChange}
+            placeholder='Enter a Shelf Name' />
+        <button onClick={handleAddNewShelfSubmit}>Submit</button>
+    </div> : null
+    let shelfButton = !displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>
+    let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -187,15 +198,15 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
             <div className="featuredCardMain">
                 <div className="featuredCardInformation">
                     <h1 className="featuredTitle">{bookTitle}<span>  - {allAuthors}</span></h1>
-                    {bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null}
+                    {displayBookSubtitle}
                     <hr></hr>
-                    <div onMouseOver={handleOnDescHover} onMouseOut={handleOffDescHover} className=''>{bookDescriptionToDisplay}</div>
+                    <div onMouseOver={handleOnDescHover} onMouseOut={handleOffDescHover} className='bookDescription'>{bookDescriptionToDisplay}</div>
                     {displayFullDescription}
                     <hr></hr>
-                    <div><b>Pages:</b> {pageCount}</div>
-                    <div><b>Language:</b> {language.toUpperCase()}</div>
-                    <div><b>Published:</b> {publishDate}</div>
-                    <div><b>Categories:</b> {allCategories}</div>
+                    <div className='moreInfo'><b>Pages:</b> {pageCount}</div>
+                    <div className='moreInfo'><b>Language:</b> {language.toUpperCase()}</div>
+                    <div className='moreInfo'><b>Published:</b> {publishDate}</div>
+                    <div className='moreInfo'><b>Categories:</b> {allCategories}</div>
                     <hr></hr>
                 </div>
                 <div className='featuredCardBottom'>
@@ -213,18 +224,9 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                             <option value={-1}>Create a New Shelf</option>
                             {newShelvesToDisplay}
                         </select>
-                        {!displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>}
+                        {shelfButton}
                     </div>
-                    {displayNewShelfForm ? <div className='shelfRow'>
-                        <div>Name:</div>
-                        <input
-                            type='text'
-                            value={newShelfName}
-                            onChange={handleNewShelfNameChange}
-                            placeholder='Enter a Shelf Name'
-                        />
-                        <button onClick={handleAddNewShelfSubmit} >Submit</button>
-                    </div> : null}
+                    {newShelfForm}
                 </div>
             </div>
         </div>

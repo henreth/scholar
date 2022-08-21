@@ -255,6 +255,10 @@
   margin-bottom: -1%;
 }
 
+.bookDescription {
+  color: rgba(216, 216, 216, 0.8);
+}
+
 .fullDescription {
   position: absolute;
   width: 55%;
@@ -267,6 +271,13 @@
   padding-top: 0px;
   margin-top: -1px;
   margin-bottom: -1px;
+}
+
+.moreInfo {
+  color: rgba(216, 216, 216, 0.75);
+}
+.moreInfo b {
+  color: rgb(216, 216, 216);
 }
 
 .shelfRow {

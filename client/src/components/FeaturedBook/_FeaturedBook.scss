@@ -69,7 +69,10 @@
 
 }
 
-.hover {}
+.bookDescription{
+    color: rgba(s.$text,.80);
+}
+
 
 .fullDescription {
     position: absolute;
@@ -88,6 +91,12 @@
     }
 }
 
+.moreInfo {
+    color: rgba(s.$text,.75);
+    b {
+        color: s.$text;
+    }
+}
 
 .shelfRow {
     display: flex;
