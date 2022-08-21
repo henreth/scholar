@@ -17,9 +17,12 @@ Rails.application.routes.draw do
   post "/removefromcurrent", to: "users#remove_from_current"
 
   #Shelf
+  get "/usershelves", to: "shelves#user_shelves"
   post "/addbook", to: "shelves#add_book"
   post "/removebook", to: "shelves#remove_book"
-  post "deleteshelf", to: "shelves#destroy"
+  post "/deleteshelf", to: "shelves#destroy"
+  post "/clearstatus", to: "shelves#clear_status"
+  post "/updatestatus", to: "shelves#update_status"
 
   #Review
   post "/allbookreviews", to: "reviews#find_all_book_reviews"

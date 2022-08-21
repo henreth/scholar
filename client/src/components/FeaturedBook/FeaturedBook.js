@@ -1,7 +1,11 @@
 import axios from 'axios'
 import { useState } from 'react'
 
-export default function FeaturedBook({ user, book, setUser }) {
+export default function FeaturedBook({ user, book, setUser, userShelves, setUserShelves }) {
+    let [selectedStatus, setSelectedStatus] = useState(-1)
+    function handleStatusChange(e) {
+        setSelectedStatus(e.target.value)
+    }
 
     let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
 
@@ -40,42 +44,55 @@ export default function FeaturedBook({ user, book, setUser }) {
     let categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(' / ').split(' / ').map(cat => capitalize(cat)) : ''
     let allCategories = book.volumeInfo.categories ? categories.filter((cat, idx) => categories.indexOf(cat) == idx).join(' / ') : ''
 
-    function addToCurrentlyReading() {
-        let obj = {
-            book
+
+    function handleStatusSubmit() {
+        if (selectedStatus === -1) {
+            // let shelfUpdate = {
+            //     "user_id": user.id,
+            //     "book_id": book.id,
+            // }
+            // axios.post('/clearstatus', shelfUpdate)
+        } else {
+            let shelf = statusShelves[selectedStatus]
+            let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+            if (inShelf) {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book_id": book.id,
+                }
+                axios.post('/removebook', shelfUpdate)
+                    .then(r => {
+                        let filteredShelves = userShelves.filter(userShelf => userShelf.id !== shelf.id)
+                        setUserShelves([...filteredShelves, r.data])
+                        console.log(r.data)
+                    })
+            } else {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book": book,
+                }
+                axios.post('/addbook', shelfUpdate)
+                    .then(r => {
+                        let filteredShelves = userShelves.filter(userShelf => userShelf.id !== shelf.id)
+                        setUserShelves([...filteredShelves, r.data])
+                        console.log(r.data)
+                    })
+            }
         }
-        axios.post('/addtocurrent', obj)
-            .then(r => {
-                if (r.data === 'This book is already in your list.') alert(r.data)
-                else setUser(r.data)
-            })
+
     }
 
-    function removeFromCurrentlyReading() {
-        let obj = {
-            "id": book.id
-        }
-        axios.post('/removefromcurrent', obj)
-            .then(r => {
-                setUser(r.data)
-            })
-    }
-
-
-    let userShelves = user.shelves
     let statusShelves = userShelves.slice(0, 4)
     let listShelves = userShelves.slice(4,)
 
-    let statusShelvesToDisplay = user.username ? (statusShelves.map(shelf => {
-        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
+    let statusShelvesToDisplay = user.username ? (statusShelves.map((shelf, idx) => {
+        return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option value={Number(idx)}>✓ Added to {shelf.name}</option> : <option value={Number(idx)}>{shelf.name}</option>
     })) : null
 
     let listShelvesToDisplay = user.username ? (listShelves.map(shelf => {
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
     })) : null
 
-    // const userCurrentButtons = user.current.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>
-    let displayUserButtons = user.username ? (user.shelves[1].books.map(book => book.id).includes(book.id) ? <button onClick={removeFromCurrentlyReading}> Remove from Currently Reading</button> : <button onClick={addToCurrentlyReading}> Add to Currently Reading</button>) : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -94,22 +111,26 @@ export default function FeaturedBook({ user, book, setUser }) {
                     <div><b>Pages:</b> {pageCount}</div>
                     <div><b>Language:</b> {language}</div>
                     <div><b>Categories:</b> {allCategories}</div>
-                    {/* {displayUserButtons} */}
-                    <div className='shelfRow'>
-                        <select>
-                            <option>Status:</option>
-                            {statusShelvesToDisplay}
-                        </select>
-                        <button>Confirm</button>
-                    </div>
-                    <div className='shelfRow'>
-                        <select>
-                            <option>Add to a Shelf:</option>
-                            {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
-                        </select>
-                        <button>Confirm</button>
-                    </div>
+                    <hr></hr>
                 </div>
+                    <div className='featuredCardBottom'>
+                        <div className='shelfRow'>
+                            <div>Status: </div>
+                            <select onChange={handleStatusChange}>
+                                <option value={'-1'}>Options:</option>
+                                {statusShelvesToDisplay}
+                            </select>
+                            <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>Confirm</button>
+                        </div>
+                        <div className='shelfRow'>
+                            <div>Add to a Shelf:</div>
+                            <select>
+                                {/* <option>Add to a Shelf:</option> */}
+                                {listShelves.length ? listShelvesToDisplay : <option>Create a New Shelf</option>}
+                            </select>
+                            <button>Confirm</button>
+                        </div>
+                    </div>
             </div>
         </div>
     )

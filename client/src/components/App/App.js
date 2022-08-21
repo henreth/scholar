@@ -8,17 +8,19 @@ import BookPage from '../BookPage/BookPage';
 import SearchPage from '../SearchPage/SearchPage';
 
 export default function App() {
-  let booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=camus&maxResults=30&printType=books&key=' + key
-  let [testData, setTestData] = useState([])
   let [user, setUser] = useState({})
+  let [userShelves,setUserShelves] = useState([])
   let [searchResults, setSearchResults] = useState({})
 
   useEffect(() => {
     let meReq = axios.get('/me')
-    axios.all([meReq])
-      .then(axios.spread((res1) => {
+    let shelvesReq = axios.get('/usershelves')
+    axios.all([meReq,shelvesReq])
+      .then(axios.spread((res1,res2) => {
         setUser(res1.data)
-        console.log(res1.data)
+        // console.log(res1.data)
+        setUserShelves(res2.data)
+        console.log(res2)
       }))
   }, [])
 
@@ -33,11 +35,14 @@ export default function App() {
           <Home
             user={user}
             setUser={setUser}
+            userShelves={userShelves}
           />} />
         <Route path='/book/:id' element={
           <BookPage
             user={user}
             setUser={setUser}
+            userShelves={userShelves}
+            setUserShelves={setUserShelves}
           />} />
         <Route path='/search/:searchTerm' element={
           <SearchPage

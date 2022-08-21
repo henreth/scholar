@@ -5,7 +5,7 @@ import key from '../../apiKey'
 import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
-export default function BookPage({ user, setUser }) {
+export default function BookPage({ user, setUser, userShelves, setUserShelves }) {
     let params = useParams()
     let id = params.id
     let [pageData, setPageData] = useState({})
@@ -143,7 +143,16 @@ export default function BookPage({ user, setUser }) {
         let madeByUser = review.user.id === user.id
         let inEditMode = selectedReview === review.id
         return (
-            <BookReview key={review.id} user={user} madeByUser={madeByUser} review={review} bookReviews={bookReviews} setBookReviews={setBookReviews} clickEdit={clickEdit} inEditMode={inEditMode} />
+            <BookReview
+                key={review.id}
+                user={user}
+                madeByUser={madeByUser}
+                review={review}
+                bookReviews={bookReviews}
+                setBookReviews={setBookReviews}
+                clickEdit={clickEdit}
+                inEditMode={inEditMode}
+            />
         )
     })
 
@@ -196,6 +205,8 @@ export default function BookPage({ user, setUser }) {
                     book={pageData}
                     user={user}
                     setUser={setUser}
+                    userShelves={userShelves}
+                    setUserShelves={setUserShelves}
                 />
                 <div className="reviewContainer">
                     <div className="reviewInfo">
