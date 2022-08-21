@@ -45,19 +45,21 @@
 }
 
 .featuredCardCover {
-    // margin-top: 10%;
-    // height: min(70%, 80vh);
-    // width: 80%;
-
     height: 75%;
     border-radius: 5px;
 }
 
 .featuredTitle {
-    margin-bottom: -2.5%;
+    margin-bottom: -1%;
+
+    span{
+        font-size: 23px;
+        font-weight: 300;
+    }
 }
 
 .featuredSubtitle {
+    margin-top: 2%;
     margin-bottom: -1%;
 }
 
@@ -70,9 +72,9 @@
 
 .fullDescription {
     position: absolute;
-    margin-left: -1.5%;
-    margin-top: -3.5%;
-    width: 40%;
+    // margin-left: -5%;
+    // margin-top: -3.5%;
+    width: 55%;
     font-size: 17px;
     background-color: rgba(s.$primary, .95);
     border-radius: s.$radius;
