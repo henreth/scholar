@@ -280,7 +280,6 @@
   font-size: 16px;
   margin-right: 1%;
   font-weight: 600;
-  background-color: rgb(65, 65, 65);
   padding: 2.5px;
   border-radius: 3.3333333333px;
 }
@@ -309,6 +308,16 @@
 }
 .shelfRow button:active {
   transform: scale(0.95);
+}
+.shelfRow button:disabled {
+  opacity: 0.15;
+}
+.shelfRow button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+}
+.shelfRow button:disabled:active {
+  transform: scale(1);
 }
 
 .featuredCardBottom {

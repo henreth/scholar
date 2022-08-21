@@ -6,7 +6,6 @@ import key from "../../apiKey"
 
 export default function SearchPage({ searchResults, setSearchResults }) {
     let params = useParams()
-    console.log("params", params)
     let searchTerm = params.searchTerm
     let authorSearchTerm = params.authorSearch
 

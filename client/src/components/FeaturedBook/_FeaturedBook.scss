@@ -39,7 +39,8 @@
     // justify-content: flex-start;
     padding: 30px;
     padding-bottom: 0px;
-    hr{
+
+    hr {
         width: 5%;
     }
 }
@@ -52,7 +53,7 @@
 .featuredTitle {
     margin-bottom: -1%;
 
-    span{
+    span {
         font-size: 23px;
         font-weight: 300;
     }
@@ -99,7 +100,7 @@
         font-size: 16px;
         margin-right: 1%;
         font-weight: 600;
-        background-color: s.$dark-alt;        
+        // background-color: s.$dark-alt;
         padding: 2.5px;
         border-radius: calc(s.$radius/1.5);
     }
@@ -132,10 +133,22 @@
         &:active {
             transform: scale(.95);
         }
+
+        &:disabled {
+            opacity: (0.15);
+            &:hover {
+                transform: scale(1);
+                cursor: default;
+            }
+    
+            &:active {
+                transform: scale(1);
+            }
+        }
     }
 }
 
-.featuredCardBottom{
+.featuredCardBottom {
     background-color: s.$dark;
     padding: 30px;
     padding-top: 3px;

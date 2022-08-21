@@ -170,7 +170,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
     let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length
     let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
 
-    let bookReviewsToDisplay = bookReviews.length ? reviewsToDisplay : <div>No reviews have been left for this book.</div>
+    let bookReviewsToDisplay = bookReviews.length ? reviewsToDisplay : <div className="userReviewCard">No reviews have been left for this book.</div>
     const displayReviewForm = user.username ? <>
         <div className="newReviewTitle">
             <h3>Write a Review: </h3>

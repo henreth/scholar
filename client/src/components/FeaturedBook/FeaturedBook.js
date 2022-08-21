@@ -91,6 +91,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option>✓ Added to {shelf.name}</option> : <option>{shelf.name}</option>
     })) : null
 
+    const buttonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -114,10 +115,10 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                     <div className='shelfRow'>
                         <div>Status: </div>
                         <select onChange={handleStatusChange}>
-                            <option value={'-1'}>Options:</option>
+                            <option value={-1}>Options:</option>
                             {statusShelvesToDisplay}
                         </select>
-                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>Confirm</button>
+                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{buttonText}</button>
                     </div>
                     <div className='shelfRow'>
                         <div>Add to a Shelf:</div>
