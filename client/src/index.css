@@ -319,6 +319,15 @@
 .shelfRow button:disabled:active {
   transform: scale(1);
 }
+.shelfRow input {
+  background-color: rgb(65, 65, 65);
+  border: none;
+  color: rgb(216, 216, 216);
+  margin-right: 1%;
+  font-size: 15px;
+  padding: 2.5px;
+  border-radius: 3.3333333333px;
+}
 
 .featuredCardBottom {
   background-color: rgb(45, 45, 45);

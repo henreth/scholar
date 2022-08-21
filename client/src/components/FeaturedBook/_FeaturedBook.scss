@@ -136,15 +136,27 @@
 
         &:disabled {
             opacity: (0.15);
+
             &:hover {
                 transform: scale(1);
                 cursor: default;
             }
-    
+
             &:active {
                 transform: scale(1);
             }
         }
+    }
+
+    input {
+        background-color: s.$dark-alt;
+        border: none;
+        color: s.$text;
+        margin-right: 1%;
+        font-size: 15px;
+        padding: 2.5px;
+        border-radius: calc(s.$radius/1.5);
+
     }
 }
 

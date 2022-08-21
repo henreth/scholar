@@ -221,6 +221,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                             type='text'
                             value={newShelfName}
                             onChange={handleNewShelfNameChange}
+                            placeholder='Enter a Shelf Name'
                         />
                         <button onClick={handleAddNewShelfSubmit} >Submit</button>
                     </div> : null}
