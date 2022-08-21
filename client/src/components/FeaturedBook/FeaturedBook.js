@@ -94,6 +94,34 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     function handleShelfSubmit() {
         if (selectedShelf == -1) {
             setDisplayNewShelfForm(true)
+        } else {
+            const shelfIndex = 4 + Number(selectedShelf)
+            let shelf = userShelves[shelfIndex]
+            let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
+            if (inShelf) {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book_id": book.id,
+                }
+                axios.post('/removebook', shelfUpdate)
+                    .then(r => {
+                        let updatedShelves = userShelves
+                        updatedShelves[shelfIndex] = r.data
+                        setUserShelves(updatedShelves)
+                    })
+            } else {
+                let shelfUpdate = {
+                    "shelf_id": shelf.id,
+                    "book": book,
+                }
+                axios.post('/addbook', shelfUpdate)
+                    .then(r => {
+                        let updatedShelves = userShelves
+                        updatedShelves[shelfIndex] = r.data
+                        setUserShelves(updatedShelves)
+                        console.log(r.data)
+                    })
+            }
         }
     }
 
@@ -108,7 +136,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         }
         axios.post('/shelves', newShelf)
             .then(r => {
-                setUserShelves([...userShelves,r.data])
+                setUserShelves([...userShelves, r.data])
                 console.log(r.data)
             })
         setDisplayNewShelfForm(false)
@@ -126,7 +154,8 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option value={Number(idx)}>✓ Added to {shelf.name}</option> : <option value={Number(idx)}>{shelf.name}</option>
     })) : null
 
-    let buttonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let statusButtonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let shelfButtonText = selectedShelf == -1 ? 'Confirm' : userShelves[4 + Number(selectedShelf)].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     let newShelvesToDisplay = listShelves.length ? listShelvesToDisplay : null
     return (
         <div className="featuredCard">
@@ -154,7 +183,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                             <option value={-1}>Options:</option>
                             {statusShelvesToDisplay}
                         </select>
-                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{buttonText}</button>
+                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{statusButtonText}</button>
                     </div>
                     <div className='shelfRow'>
                         <div>Add to a Shelf:</div>
@@ -162,7 +191,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                             <option value={-1}>Create a New Shelf</option>
                             {newShelvesToDisplay}
                         </select>
-                        {!displayNewShelfForm ? <button onClick={handleShelfSubmit}>Confirm</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>}
+                        {!displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>}
                     </div>
                     {displayNewShelfForm ? <div className='shelfRow'>
                         <div>Name:</div>
