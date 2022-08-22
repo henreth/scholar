@@ -18,9 +18,7 @@ export default function App() {
     axios.all([meReq,shelvesReq])
       .then(axios.spread((res1,res2) => {
         setUser(res1.data)
-        // console.log(res1.data)
         setUserShelves(res2.data)
-        console.log(res2)
       }))
   }, [])
 
