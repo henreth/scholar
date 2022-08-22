@@ -31,9 +31,9 @@ export default function Home({ user, setUser, userShelves }) {
             .then(r => setUser({}))
     }
 
-    let currentlyReadingBooks = userShelves[1].books
+    // let currentlyReadingBooks = userShelves[1].books
 
-    let bookShelvesToDisplay = userShelves.map(shelf => {
+    let bookShelvesToDisplay = userShelves.sort((a,b)=>a.id-b.id).map(shelf => {
         return (
             <div>
                 <h1>{shelf.name}:</h1>

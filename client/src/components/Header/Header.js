@@ -35,7 +35,7 @@ export default function Header({setSearchResults}) {
         <div className='header'>
             {/* <div>Browse</div> */}
             <div>Clubs</div>
-            <div className="headerTitle" onClick={handleHeaderClick}>Untitled Book App</div>
+            <div className="headerTitle" onClick={handleHeaderClick}>Scholar</div>
             <form onSubmit={handleSearchSubmit}>
                 <input
                     type='text'
