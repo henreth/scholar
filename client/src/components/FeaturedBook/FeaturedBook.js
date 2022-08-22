@@ -193,6 +193,25 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     </div> : null
     let shelfButton = !displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>
     let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
+    let userShelvesOptions = user.username ? <div className='featuredCardBottom'>
+        <div className='shelfRow'>
+            <div>Status: </div>
+            <select onChange={handleStatusChange}>
+                <option value={-1}>Options:</option>
+                {statusShelvesToDisplay}
+            </select>
+            <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{statusButtonText}</button>
+        </div>
+        <div className='shelfRow'>
+            <div>Add to a Shelf:</div>
+            <select onChange={handleShelfChange}>
+                <option value={-1}>Create a New Shelf</option>
+                {newShelvesToDisplay}
+            </select>
+            {shelfButton}
+        </div>
+        {newShelfForm}
+    </div> : null
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">
@@ -212,25 +231,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                     <div className='moreInfo'><b>Categories:</b> {allCategories}</div>
                     <hr></hr>
                 </div>
-                <div className='featuredCardBottom'>
-                    <div className='shelfRow'>
-                        <div>Status: </div>
-                        <select onChange={handleStatusChange}>
-                            <option value={-1}>Options:</option>
-                            {statusShelvesToDisplay}
-                        </select>
-                        <button onClick={handleStatusSubmit} disabled={selectedStatus == -1}>{statusButtonText}</button>
-                    </div>
-                    <div className='shelfRow'>
-                        <div>Add to a Shelf:</div>
-                        <select onChange={handleShelfChange}>
-                            <option value={-1}>Create a New Shelf</option>
-                            {newShelvesToDisplay}
-                        </select>
-                        {shelfButton}
-                    </div>
-                    {newShelfForm}
-                </div>
+                {userShelvesOptions}
             </div>
         </div>
     )

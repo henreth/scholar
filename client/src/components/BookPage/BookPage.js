@@ -5,6 +5,9 @@ import key from '../../apiKey'
 import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
 
+
+// ! CREATE WAY TO SORT REVIEWS BY DATE/RATING
+
 export default function BookPage({ user, setUser, userShelves, setUserShelves }) {
     let params = useParams()
     let id = params.id
@@ -13,7 +16,6 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
 
     let [hoverStars, setHoverStars] = useState(0)
     let [clickedStars, setClickedStars] = useState(0)
-
 
     let [clickedEdit, setClickedEdit] = useState(false)
     let [selectedReview, setSelectedReview] = useState('')
@@ -103,30 +105,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         setReviewText(e.target.value)
     }
 
-
-    let demoReviews = [
-        {
-            'username': 'test',
-            'rating': 5,
-            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
-            'date': 'Jan 10, 2022'
-        },
-        {
-            'username': 'test-2',
-            'rating': 1,
-            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
-            'date': 'Jan 10, 2022'
-        },
-        {
-            'username': 'test-3',
-            'rating': 2,
-            'text': 'Prudence profonde coupoles prennent roc pas precieux pourquoi. Ennemies massacre triomphe les cavernes des six toi. Je or devant blason palais et epouse sa atroce. Se on rendre ah sortit annees jusque jambes voyage. Chantant traverse soutenir net campagne sur remettre. Demeurons cet six art toutefois resterait les. Firmament sortaient net echauffer aux reprendre preferait eux.',
-            'date': 'Jan 10, 2022'
-        }
-    ]
-
-
-    let reviewsToDisplay = bookReviews.map(review => {
+    let reviewsToDisplay = bookReviews.sort((b,a)=>b.id-a.id).map(review => {
         function clickEdit() {
             if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
@@ -171,7 +150,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
     let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
 
     let bookReviewsToDisplay = bookReviews.length ? reviewsToDisplay : <div className="userReviewCard">No reviews have been left for this book.</div>
-    const displayReviewForm = user.username ? <>
+    let displayReviewForm = user.username ? <>
         <div className="newReviewTitle">
             <h3>Write a Review: </h3>
             <div className="stars" onMouseOut={handleHoverStarOff}>
