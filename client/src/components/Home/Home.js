@@ -46,10 +46,6 @@ export default function Home({ user, setUser, userShelves }) {
 
     return (
         <div>
-            {/* <h1>Currently Reading:</h1>
-            <BookContainer
-                books={currentlyReadingBooks}
-            /> */}
             {bookShelvesToDisplay}
             <button onClick={handleLogOut}>Log Out</button>
         </div>
