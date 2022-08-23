@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 
 export default function FeaturedBook({ user, book, setUser, userShelves, setUserShelves }) {
 
-    useEffect(()=>{userShelves.sort((a,b)=>a.id-b.id)},[userShelves])
-    
+    useEffect(() => { userShelves.sort((a, b) => a.id - b.id) }, [userShelves])
+
     let [selectedStatus, setSelectedStatus] = useState(-1)
     function handleStatusChange(e) {
         setSelectedStatus(e.target.value)
@@ -21,19 +21,21 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         setNewShelfName(e.target.value)
     }
 
-    let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''
+    let bookCover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://www.lesprecepteurs.fr/wp-content/uploads/2017/03/no-image-found.jpg'
 
     let bookTitle = book.volumeInfo.title
     let bookSubtitle = book.volumeInfo.subtitle
+    let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
 
-    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : null
+
+    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.slice(0, 3).join(', ') : null
 
     let [descrHover, setDescrHover] = useState(false)
 
     function handleOnDescHover() { setDescrHover(true) }
     function handleOffDescHover() { setDescrHover(false) }
 
-    let bookDescription = book.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
+    let bookDescription = book.volumeInfo.description ? book.volumeInfo.description.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '') : 'No description provided'
 
     let shortenedDescription = bookDescription.slice(0, 750) + '... (hover to read more)'
 
@@ -70,7 +72,6 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
             let ids = [0, 1, 2, 3]
             if (inShelf) {
                 ids.splice(selectedStatus, 1)
-                console.log(ids)
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book_id": book.id,
@@ -192,7 +193,6 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         <button onClick={handleAddNewShelfSubmit}>Submit</button>
     </div> : null
     let shelfButton = !displayNewShelfForm ? <button onClick={handleShelfSubmit}>{shelfButtonText}</button> : <button onClick={handleAddNewShelfCancel}>Cancel</button>
-    let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
     let userShelvesOptions = user.username ? <div className='featuredCardBottom'>
         <div className='shelfRow'>
             <div>Status: </div>
@@ -212,6 +212,8 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         </div>
         {newShelfForm}
     </div> : null
+
+
     return (
         <div className="featuredCard">
             <div className="featuredCardSide">

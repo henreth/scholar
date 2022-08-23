@@ -303,11 +303,13 @@
   padding-bottom: 0px;
 }
 .featuredCardInformation hr {
-  width: 5%;
+  width: 50%;
+  visibility: hidden;
 }
 
 .featuredCardCover {
-  height: 75%;
+  height: 340px;
+  width: 250px;
   border-radius: 5px;
 }
 

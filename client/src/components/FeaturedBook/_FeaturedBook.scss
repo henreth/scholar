@@ -41,13 +41,21 @@
     padding-bottom: 0px;
 
     hr {
-        width: 5%;
+        width: 50%;
+        visibility: hidden;
     }
 }
 
 .featuredCardCover {
-    height: 75%;
+    // height: 75%;
+    height: 340px;
+    width: 250px;
     border-radius: 5px;
+
+    // &.replacement{
+    //     height: 75%;
+    //     width: 55%;
+    // }
 }
 
 .featuredTitle {
