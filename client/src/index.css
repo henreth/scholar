@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   margin-left: 5%;
   margin-right: 5%;
+  background-color: rgb(15, 15, 15);
 }
 
 .bookCard {
@@ -203,7 +204,6 @@
 }
 .reviewContainer {
   background-color: rgb(45, 45, 45);
-  background-color: rgb(49, 38, 104);
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -217,7 +217,6 @@
 
 .reviewInfo {
   background-color: rgb(45, 45, 45);
-  background-color: cornflowerblue;
   width: 95%;
   height: 100%;
 }

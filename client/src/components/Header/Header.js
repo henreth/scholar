@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header({ user, setUser }) {
     let [showProfileMenu, setShowProfileMenu] = useState(false)
-    const profileClick = () => setShowProfileMenu(true)
+    const profileClick = () => setShowProfileMenu(!showProfileMenu)
+    const handleMenuHover = () => setShowProfileMenu(true)
     let [searchTerm, setSearchTerm] = useState('')
     const handleSearchChange = (e) => setSearchTerm(e.target.value)
     let navigate = useNavigate()
@@ -52,7 +53,7 @@ export default function Header({ user, setUser }) {
     }
 
     let displayProfileMenu = showProfileMenu ? (
-        <div className='profile-menu' onMouseOver={profileClick} onMouseOut={handleMouseOut}>
+        <div className='profile-menu' onMouseOver={handleMenuHover} onMouseOut={handleMouseOut}>
             <div className='menu-option'>🌄 Demo User</div>
             <div className='menu-option'>{user.username}</div>
             <div className='menu-option option'>Settings</div>
