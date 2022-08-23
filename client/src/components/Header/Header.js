@@ -49,13 +49,15 @@ export default function Header({ user, setUser }) {
         axios.delete('/logout')
             .then(r => {
                 setShowProfileMenu(false)
-                setUser({})})
+                setUser({})
+                alert('You are now logged out.')
+            })
     }
 
     function handleMouseOut() {
         setTimeout(() => {
             setShowProfileMenu(false)
-        }, 10*1000)
+        }, 10 * 1000)
     }
 
     let displayProfileMenu = showProfileMenu ? (
@@ -76,7 +78,7 @@ export default function Header({ user, setUser }) {
                     <div className="option" onClick={handleBrowseClick}>Browse</div>
                     <div className="option" onClick={handleBookClubClick}>Clubs</div>
                 </div>
-                    <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
+                <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                 <div className="group end">
                     <form onSubmit={handleSearchSubmit}>
                         <input

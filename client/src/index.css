@@ -160,6 +160,7 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
+  margin-right: -2.5%;
 }
 
 .profile-menu {
@@ -170,8 +171,8 @@
   left: 89%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
-  -webkit-animation: dropDown 0.5s ease-in-out forwards;
-          animation: dropDown 0.5s ease-in-out forwards;
+  -webkit-animation: dropDown 0.45s ease-in-out forwards;
+          animation: dropDown 0.45s ease-in-out forwards;
   transform-origin: top center;
   color: rgb(216, 216, 216);
   border: 1px solid rgb(216, 216, 216);
@@ -187,19 +188,21 @@
 
 @-webkit-keyframes dropDown {
   0% {
-    transform: scaleY(0);
+    opacity: 0;
+    background-color: transparent;
   }
   100% {
-    transform: scaleY(1);
+    opacity: 1;
   }
 }
 
 @keyframes dropDown {
   0% {
-    transform: scaleY(0);
+    opacity: 0;
+    background-color: transparent;
   }
   100% {
-    transform: scaleY(1);
+    opacity: 1;
   }
 }
 .reviewContainer {

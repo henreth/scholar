@@ -16,7 +16,7 @@ export default function BookCard({ book }) {
     //     return (<div className={authorClass}>{author}</div>) }
     // ) : null
 
-    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.slice(0,3).join(', ') + ', more': null
+    let allAuthors = book.volumeInfo.authors ? (book.volumeInfo.authors.length > 3 ? book.volumeInfo.authors.slice(0, 3).join(', ') + ', more' : book.volumeInfo.authors.join(', ')) : null
 
 
 

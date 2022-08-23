@@ -28,7 +28,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     let displayBookSubtitle = bookSubtitle ? <h4 className="featuredSubtitle">{bookSubtitle}</h4> : null
 
 
-    let allAuthors = book.volumeInfo.authors ? book.volumeInfo.authors.slice(0, 3).join(', ') : null
+    let allAuthors = book.volumeInfo.authors ? (book.volumeInfo.authors.length > 3 ? book.volumeInfo.authors.slice(0, 3).join(', ') : book.volumeInfo.authors.join(', ')) : null
 
     let [descrHover, setDescrHover] = useState(false)
 
@@ -62,7 +62,6 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
 
 
     // to handle changing the status
-    // identify the the non selected status options and make three separate posts requests to remove the book from them 
     function handleStatusSubmit() {
         if (selectedStatus == -1) {
 
@@ -71,7 +70,6 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
             let inShelf = shelf.books.map(shelfBook => shelfBook.id).includes(book.id)
             let ids = [0, 1, 2, 3]
             if (inShelf) {
-                ids.splice(selectedStatus, 1)
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book_id": book.id,
@@ -82,8 +80,8 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[selectedStatus] = r.data
                         setUserShelves(updatedShelves)
                     })
+                alert('This book has been removed from your ' + shelf.name + ' shelf.')
             } else {
-
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
                     "book": book,
@@ -94,6 +92,8 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[selectedStatus] = r.data
                         setUserShelves(updatedShelves)
                     })
+                alert('This book has been added to your ' + shelf.name + ' shelf.')
+
                 ids.splice(selectedStatus, 1)
                 for (let id of ids) {
                     let otherShelf = statusShelves[id]
@@ -108,7 +108,6 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                                 let updatedShelves = userShelves
                                 updatedShelves[id] = r.data
                                 setUserShelves(updatedShelves)
-                                console.log(r.data)
                             })
                     }
                 }
@@ -135,6 +134,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         updatedShelves[shelfIndex] = r.data
                         setUserShelves(updatedShelves)
                     })
+                alert('This book has been removed from your ' + shelf.name + ' shelf.')
             } else {
                 let shelfUpdate = {
                     "shelf_id": shelf.id,
@@ -145,8 +145,9 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
                         let updatedShelves = userShelves
                         updatedShelves[shelfIndex] = r.data
                         setUserShelves(updatedShelves)
-                        console.log(r.data)
                     })
+                alert('This book has been added to your ' + shelf.name + ' shelf.')
+
             }
         }
     }
@@ -163,10 +164,10 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         axios.post('/shelves', newShelf)
             .then(r => {
                 setUserShelves([...userShelves, r.data])
-                console.log(r.data)
             })
         setDisplayNewShelfForm(false)
         setNewShelfName('')
+        alert('Your ' + newShelf.name + ' shelf has been created!')
     }
 
     let statusShelves = userShelves.slice(0, 4)
@@ -180,7 +181,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
         return shelf.books.map(shelfBook => shelfBook.id).includes(book.id) ? <option value={Number(idx)}>✓ Added to {shelf.name}</option> : <option value={Number(idx)}>{shelf.name}</option>
     })) : null
 
-    let statusButtonText = selectedStatus == -1 ? 'Add' : userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
+    let statusButtonText = selectedStatus == -1 ? 'Add' : (userShelves[selectedStatus].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add')
     let shelfButtonText = selectedShelf == -1 ? 'Confirm' : userShelves[4 + Number(selectedShelf)].books.map(shelfBook => shelfBook.id).includes(book.id) ? 'Remove' : 'Add'
     let newShelvesToDisplay = listShelves.length ? listShelvesToDisplay : null
     let newShelfForm = displayNewShelfForm ? <div className='shelfRow'>

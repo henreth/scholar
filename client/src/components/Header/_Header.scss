@@ -84,6 +84,7 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
+  margin-right: -2.5%;
 }
 
 .profile-menu {
@@ -95,7 +96,7 @@
   left: 89%;
   background-color: rgba(s.$dark-alt, 0.95);
   z-index: 1;
-  animation: dropDown 0.5s ease-in-out forwards;
+  animation: dropDown 0.45s ease-in-out forwards;
   transform-origin: top center;
   color: s.$text;
   border: 1px solid s.$text;
@@ -111,10 +112,15 @@
 
 @keyframes dropDown {
   0% {
-    transform: scaleY(0);
+    // transform: scaleY(0);
+    opacity: 0;
+    background-color: transparent;
   }
 
   100% {
-    transform: scaleY(1);
+    // transform: scaleY(1);
+    opacity: 1;
   }
 }
+
+
