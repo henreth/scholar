@@ -6,7 +6,7 @@ export default function Home({ user, setUser, userShelves }) {
 
     const handleLogIn = () => {
         axios.post('/login', {
-            "username": "test",
+            "username": "demouser",
             "password": "12345"
         })
             .then(r => setUser(r.data))
@@ -25,7 +25,7 @@ export default function Home({ user, setUser, userShelves }) {
     )
 
 
-    let bookShelvesToDisplay = userShelves.sort((a,b)=>a.id-b.id).map(shelf => {
+    let bookShelvesToDisplay = userShelves.sort((a, b) => a.id - b.id).map(shelf => {
         return (
             <div>
                 <h1>{shelf.name}:</h1>

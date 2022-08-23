@@ -10,7 +10,7 @@ puts 'Creating Test Data'
 
 User.create!([
     {
-        username: 'test',
+        username: 'demouser',
         first_name: 'Demo',
         last_name: 'User',
         password:'12345',
