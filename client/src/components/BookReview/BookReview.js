@@ -2,21 +2,24 @@ import { useState } from "react"
 import axios from "axios"
 import { SlackCounter, GithubSelector } from '@charkour/react-reactions';
 
-export default function BookReview({ user, madeByUser, review, bookReviews, setBookReviews, clickEdit, inEditMode }) {
+export default function BookReview({ user, madeByUser, review, bookReviews, setBookReviews, handleClickEdit, inEditMode }) {
+    let [counters, setCounters] = useState(review.reactions)
     let [clickedDelete, setClickedDelete] = useState(false)
+    let [displayEmojis, setDisplayEmojis] = useState(false)
 
     function handleConfirmDelete() {
-        let obj = { "id": review.id }
-        axios.post('/removereview', obj)
+        let reviewToDelete = { "id": review.id }
+        axios.post('/removereview', reviewToDelete)
             .then(r => {
                 let updatedBookReviews = bookReviews.filter(newReview => newReview.id !== review.id)
                 setBookReviews(updatedBookReviews)
             })
+        alert('Review deleted!')
         setClickedDelete(false)
     }
 
     function handleDeleteClick() {
-        setClickedDelete(true)
+        setClickedDelete(!clickedDelete)
     }
 
     function handleClickCancel() {
@@ -25,13 +28,15 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
     let buttons = clickedDelete ? <>
         <label>Are you sure?</label>
-        <button onClick={handleClickCancel}>Cancel</button> <button onClick={handleConfirmDelete}>Confirm</button>
-    </> : <><button onClick={clickEdit}>{inEditMode ? 'Stop Editing' : 'Edit'}</button> <button onClick={handleDeleteClick}>Delete</button></>
-    let userButtons = madeByUser ? <>
-        {buttons}
-    </> : null
+        <button onClick={handleClickCancel}>Cancel</button>
+        <button onClick={handleConfirmDelete}>Confirm</button>
+    </> : <>
+        <button onClick={handleClickEdit}>{inEditMode ? 'Stop Editing' : 'Edit'}</button>
+        {inEditMode ? null : <button onClick={handleDeleteClick}>Delete</button>}
+    </>
 
-    let [counters, setCounters] = useState(review.reactions)
+    let userButtons = madeByUser ? buttons : null
+
 
     let reactions = counters.map(reaction => {
         return {
@@ -42,23 +47,23 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
 
     function handleSelectReaction(e) {
-            let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
-            if (!includesReact) {
-                let count = {
-                    emoji: e,
-                    user_id: user.id,
-                    review_id: review.id
-                }
-                axios.post('/reactions', count)
-                    .then(r => setCounters([...counters, r.data]))
+        let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
+        if (!includesReact) {
+            let count = {
+                emoji: e,
+                user_id: user.id,
+                review_id: review.id
             }
+            axios.post('/reactions', count)
+                .then(r => setCounters([...counters, r.data]))
+        }
     }
 
-    function removeSelectReaction(e) {
+    function handleRemoveReaction(e) {
         let reactionToDelete = {
-            "user_id": user.id,
-            "review_id": review.id,
-            "emoji": e
+            emoji: e,
+            user_id: user.id,
+            review_id: review.id
         }
         axios.post('/removereaction', reactionToDelete)
             .then(r => {
@@ -68,12 +73,17 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
     }
 
-    let [displayEmojis, setDisplayEmojis] = useState(false)
+    function handleMouseOut() {
+        setTimeout(() => {
+            displayEmojis(false)
+        },50*1000)
+    }
+
     function handleClickAddEmojis() {
         if (review.user.id !== user.id) setDisplayEmojis(!displayEmojis)
     }
 
-    let displayEmojiSelector = displayEmojis ? <div className="emojiSelector">
+    let displayEmojiSelector = displayEmojis ? <div className="emojiSelector" onMouseOut={handleMouseOut}>
         <GithubSelector onSelect={handleSelectReaction} />
     </div> : null;
 
@@ -87,7 +97,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
             <div className="userReviewText"> {review.text} </div>
             <div className="reactionCounter">
                 <h5>Reactions: </h5>
-                <SlackCounter counters={reactions} onSelect={removeSelectReaction} onAdd={handleClickAddEmojis} />
+                <SlackCounter counters={reactions} onSelect={handleRemoveReaction} onAdd={handleClickAddEmojis} />
             </div>
             {displayEmojiSelector}
         </div>

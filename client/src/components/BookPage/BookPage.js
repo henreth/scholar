@@ -104,9 +104,9 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
     function handleReviewTextChange(e) {
         setReviewText(e.target.value)
     }
-
-    let reviewsToDisplay = bookReviews.sort((b,a)=>b.id-a.id).map(review => {
-        function clickEdit() {
+    // bookReviews.sort((a,b)=>b.id-a.id)
+    let reviewsToDisplay = bookReviews.sort((a,b)=>b.id-a.id).map(review => {
+        function handleClickEdit() {
             if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
                 setReviewText('')
@@ -129,7 +129,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
                 review={review}
                 bookReviews={bookReviews}
                 setBookReviews={setBookReviews}
-                clickEdit={clickEdit}
+                handleClickEdit={handleClickEdit}
                 inEditMode={inEditMode}
             />
         )
@@ -146,8 +146,9 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
 
     let disableSubmitButton = (clickedStars) && (reviewText)
 
-    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length
+    let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length //average rating of book reviews in the backend
     let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
+    let totalNumBookReviews = numRatings + bookReviews.length
 
     let bookReviewsToDisplay = bookReviews.length ? reviewsToDisplay : <div className="userReviewCard">No reviews have been left for this book.</div>
     let displayReviewForm = user.username ? <>
@@ -189,7 +190,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
                 />
                 <div className="reviewContainer">
                     <div className="reviewInfo">
-                        <h2>Average Rating: {calculateBookRating} ★ ({numRatings + bookReviews.length})</h2>
+                        <h2>Average Rating: {calculateBookRating} ★ ({totalNumBookReviews})</h2>
                         {/* <h4>Number of ratings: {numRatings + bookReviews.length}</h4> */}
                         <hr></hr>
                         {displayReviewForm}
