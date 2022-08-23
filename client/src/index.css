@@ -167,7 +167,7 @@
   position: absolute;
   text-align: right;
   top: 7.5%;
-  left: 90%;
+  left: 89%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.5s ease-in-out forwards;

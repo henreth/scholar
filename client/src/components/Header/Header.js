@@ -72,11 +72,11 @@ export default function Header({ user, setUser }) {
             <div className='header'>
                 {/* <div>Browse</div> */}
                 <div className="group">
-                    <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                     <div className="option" onClick={handleAboutClick}>About</div>
                     <div className="option" onClick={handleBrowseClick}>Browse</div>
                     <div className="option" onClick={handleBookClubClick}>Clubs</div>
                 </div>
+                    <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                 <div className="group end">
                     <form onSubmit={handleSearchSubmit}>
                         <input
@@ -87,7 +87,8 @@ export default function Header({ user, setUser }) {
                             onChange={handleSearchChange}
                         />
                     </form>
-                    {user.username ? <div className='profile' onClick={profileClick}>⬜️ ▾</div> : null}
+                    {user.username ? <div className='profile' onClick={profileClick}>⬜️ </div> : null}
+                    {user.username ? <div className='profile' onClick={profileClick}>▾ </div> : null}
                 </div>
                 {displayProfileMenu}
             </div>
