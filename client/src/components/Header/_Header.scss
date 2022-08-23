@@ -1,53 +1,120 @@
-@use '../../styles' as s;
+@use "../../styles" as s;
 
+.header-container {
+  // position: fixed;
+  width: 100%;
+  // background-color: black;
+  z-index: 100;
+}
 
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+.option {
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+.group {
+  width: 23.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  //   background-color: red;
+
+  &.end {
+    margin-right: 2.5%;
+    justify-content: flex-end;
+  }
 }
 
 .headerTitle {
-    font-size: 40px;
-    cursor: pointer;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 .searchBar {
-    width: 20px;
-    align-self: center;
-    margin-top: 2.5%;
-    font-size: 19px;
-    transition: 1s;
-    background-color: rgba(128, 128, 128, 0.247);
-    background: url('./images/search.png') left no-repeat;
-    align-self: center;
-    height: 42px;
-    border: none;
+  width: 20px;
+  align-self: center;
+  margin-top: 2.5%;
+  font-size: 19px;
+  transition: 1s;
+  background-color: rgba(128, 128, 128, 0.247);
+  background: url("./images/search.png") left no-repeat;
+  align-self: center;
+  height: 42px;
+  border: none;
+  color: transparent;
+  border-radius: s.$radius;
+  text-align: right;
+  cursor: pointer;
+
+  &::placeholder {
     color: transparent;
-    border-radius: s.$radius;
-    text-align: right;
-    cursor: pointer;
+  }
+
+  &:focus {
+    width: 301px;
+    height: 35px;
+    transition: 1s;
+    background-color: rgba(128, 128, 128, 0.15);
+    color: s.$text;
+    cursor: text;
+
+    font-size: 19px;
 
     &::placeholder {
-        color: transparent;
+      color: rgba(s.$text, 0.5);
+      transition: 1s;
+      font-size: 19px;
     }
+  }
+}
 
-    &:focus {
-        width: 301px;
-        height: 35px;
-        transition: 1s;
-        background-color: rgba(128, 128, 128, 0.15);
-        color: s.$text;
-        cursor: text;
+.profile {
+  cursor: pointer;
+  margin-left: 5%;
+}
 
-        font-size: 19px;
+.profile-menu {
+  // border-radius: s.$radius;
+  border-radius: 2px;
+  position: absolute;
+  text-align: right;
+  top: 7.5%;
+  left: 90%;
+  background-color: rgba(s.$dark-alt, 0.95);
+  z-index: 1;
+  animation: dropDown 0.5s ease-in-out forwards;
+  transform-origin: top center;
+  color: s.$text;
+  border: 1px solid s.$text;
+}
 
-        &::placeholder {
-            color: rgba(s.$text, 0.5);
-            transition: 1s;
-            font-size: 19px;
-        }
-    }
+.menu-option {
+  padding: 15px;
+  padding-right: 10px;
+  padding-left: 25px;
+  font-size: 17px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes dropDown {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
 }

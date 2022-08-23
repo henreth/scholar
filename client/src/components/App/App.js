@@ -25,7 +25,8 @@ export default function App() {
   return (
     <div>
       <Header
-        setSearchResults={setSearchResults}
+        user={user}
+        setUser={setUser}
       />
       <hr></hr>
       <Routes>

@@ -96,14 +96,14 @@ export default function SearchPage({ searchResults, setSearchResults }) {
                 <div className="filterRow">
                     <h4>Filters: </h4>
                     <input
-                        type='radio'
+                        type='checkbox'
                         checked={authorDisplay}
                         onClick={handleClickAuthorToggle}
                     />
                     <div>Author: </div>
                     {displayAuthorSearchText}
                     <input
-                        type='radio'
+                        type='checkbox'
                         checked={genreDisplay}
                         onClick={handleClickGenreToggle}
                     />
