@@ -21,17 +21,9 @@ export default function Home({ user, setUser, userShelves }) {
     if (!user.username) return (
         <>
             <button onClick={handleLogIn}>Log In</button>
-            <button onClick={handleShowMe}>Show Me</button>
         </>
     )
 
-
-    function handleLogOut() {
-        axios.delete('/logout')
-            .then(r => setUser({}))
-    }
-
-    // let currentlyReadingBooks = userShelves[1].books
 
     let bookShelvesToDisplay = userShelves.sort((a,b)=>a.id-b.id).map(shelf => {
         return (
@@ -47,7 +39,6 @@ export default function Home({ user, setUser, userShelves }) {
     return (
         <div>
             {bookShelvesToDisplay}
-            <button onClick={handleLogOut}>Log Out</button>
         </div>
     )
 }

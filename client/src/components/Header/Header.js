@@ -27,23 +27,29 @@ export default function Header({ user, setUser }) {
 
     function handleHeaderClick() {
         navigate('/')
+        setShowProfileMenu(false)
     }
 
     function handleAboutClick() {
         navigate('/about')
+        setShowProfileMenu(false)
     }
 
     function handleBrowseClick() {
         navigate('/browse')
+        setShowProfileMenu(false)
     }
 
     function handleBookClubClick() {
         navigate('/bookclubs')
+        setShowProfileMenu(false)
     }
 
     function handleLogOut() {
         axios.delete('/logout')
-            .then(r => setUser({}))
+            .then(r => {
+                setShowProfileMenu(false)
+                setUser({})})
     }
 
     function handleMouseOut() {
@@ -54,7 +60,7 @@ export default function Header({ user, setUser }) {
 
     let displayProfileMenu = showProfileMenu ? (
         <div className='profile-menu' onMouseOver={handleMenuHover} onMouseOut={handleMouseOut}>
-            <div className='menu-option'>🌄 Demo User</div>
+            <div className='menu-option'>🌄 {user.first_name} {user.last_name}</div>
             <div className='menu-option'>{user.username}</div>
             <div className='menu-option option'>Settings</div>
             <div className='menu-option option' onClick={handleLogOut}>Log Out</div>
@@ -81,7 +87,7 @@ export default function Header({ user, setUser }) {
                             onChange={handleSearchChange}
                         />
                     </form>
-                    <div className='profile' onClick={profileClick}>⬜️ ▾</div>
+                    {user.username ? <div className='profile' onClick={profileClick}>⬜️ ▾</div> : null}
                 </div>
                 {displayProfileMenu}
             </div>
