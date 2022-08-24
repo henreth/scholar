@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 
 export default function SideBarBookClub({ club, book, setUser }) {
-    let inClub = club.books.length ? club.books.map(shelfBook => shelfBook.id).includes(book.id) : false
+    let inClub = club.books.length ? club.books.map(clubBook => clubBook.id).includes(book.id) : false
 
     let [clickedDropDown, setClickedDropDown] = useState(false)
 
