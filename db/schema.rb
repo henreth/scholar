@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2022_08_20_194127) do
 
   create_table "bookclubs", force: :cascade do |t|
     t.string "name"
-    t.string "books", default: [], array: true
+    t.json "books", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
