@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import key from '../../apiKey'
 import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
+import SideBarBookClub from "../SideBarBookClub/SideBarBookClub"
 
 
 // ! CREATE WAY TO SORT REVIEWS BY DATE/RATING
@@ -182,18 +183,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
 
     let bookClubsToDisplay = bookClubs.map(club => {
         return (
-            <div className="clubCard">
-                <div className="clubrow">
-                    <div className="clubname">{club.name}</div>
-                    <div className='dropdown'>▾</div>
-                </div>
-                <div className="clubOption">
-                    <div>Visit Club Page</div>
-                </div>
-                <div className="clubOption">
-                    <div>Add to Reading List</div>
-                </div>
-            </div>
+            <SideBarBookClub club={club} key={club.id}/>
         )
     })
 
