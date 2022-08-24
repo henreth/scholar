@@ -79,9 +79,17 @@
   align-content: center;
   align-items: center;
 }
+.header img {
+  transform: scale(0.65);
+}
+.header img:hover {
+  cursor: pointer;
+  filter: grayscale(0.75);
+}
 
 .option {
   cursor: pointer;
+  margin-right: 10%;
 }
 .option:hover {
   color: white;
@@ -91,7 +99,6 @@
   width: 23.5%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-content: center;
   align-items: center;
 }
@@ -103,6 +110,7 @@
 .headerTitle {
   font-size: 40px;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .searchBar {
@@ -554,6 +562,49 @@
   position: absolute;
 }
 
+.clubrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgb(216, 216, 216);
+  font-size: 18px;
+}
+.clubrow div {
+  margin-right: 1.5%;
+}
+.clubrow .clubname:hover {
+  color: white;
+  cursor: pointer;
+}
+.clubrow .dropdown {
+  font-size: 23.5px;
+}
+.clubrow .dropdown:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.clubOption {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgb(216, 216, 216);
+  font-size: 15px;
+  margin-left: 10%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+.clubOption div {
+  margin-right: 1.5%;
+}
+.clubOption div:hover {
+  color: white;
+  cursor: pointer;
+}
+.clubOption button {
+  border: none;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;
@@ -594,17 +645,20 @@ body {
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  align-items: center;
   height: 745px;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: rgb(135, 222, 141);
-  height: 100%;
+  background-color: rgb(67, 174, 219);
+  background-color: rgba(128, 128, 128, 0.467);
+  height: auto;
   width: 20%;
   align-items: center;
+}
+.sidebar h2 {
+  color: rgb(216, 216, 216);
 }
 
 .display {

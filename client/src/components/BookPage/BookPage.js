@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import key from '../../apiKey'
 import BookReview from "../BookReview/BookReview"
 import FeaturedBook from "../FeaturedBook/FeaturedBook"
+import SideBarBookClub from "../SideBarBookClub/SideBarBookClub"
 
 
 // ! CREATE WAY TO SORT REVIEWS BY DATE/RATING
@@ -21,6 +22,8 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
     let [selectedReview, setSelectedReview] = useState('')
 
     let [reviewText, setReviewText] = useState('')
+
+    let bookClubs = user.clubusers ? user.clubusers.map(clubuser => clubuser.bookclub) : []
 
     function truncateDecimals(num, digits) {
         let numS = num.toString(),
@@ -105,7 +108,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         setReviewText(e.target.value)
     }
     // bookReviews.sort((a,b)=>b.id-a.id)
-    let reviewsToDisplay = bookReviews.sort((a,b)=>b.id-a.id).map(review => {
+    let reviewsToDisplay = bookReviews.sort((a, b) => b.id - a.id).map(review => {
         function handleClickEdit() {
             if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
@@ -175,10 +178,24 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         </form>
         <hr></hr>
     </> : null
+
+
+
+    let bookClubsToDisplay = bookClubs.map(club => {
+        return (
+            <SideBarBookClub club={club} key={club.id} setUser={setUser} book={pageData}/>
+        )
+    })
+
+
     return (
         <div className="mainContainer">
             <div className="sidebar">
-                Sidebar
+                <div className="sideBarInfo">
+                    <h2>{user.first_name}'s Book Clubs:</h2>
+                    {bookClubsToDisplay}
+                    <hr></hr>
+                </div>
             </div>
             <div className="display">
                 <FeaturedBook

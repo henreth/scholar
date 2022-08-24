@@ -1,76 +1,82 @@
-@use './components/App/App';
-@use './components/Home/Home';
-@use './components/BookContainer/BookContainer';
-@use './components/BookCard/BookCard';
-@use './components/Header/Header';
-@use './components/BookPage/BookPage';
-@use './components/FeaturedBook/FeaturedBook';
-@use './components/SearchPage/SearchPage';
-@use './components/BookReview/BookReview';
+@use "./components/App/App";
+@use "./components/Home/Home";
+@use "./components/BookContainer/BookContainer";
+@use "./components/BookCard/BookCard";
+@use "./components/Header/Header";
+@use "./components/BookPage/BookPage";
+@use "./components/FeaturedBook/FeaturedBook";
+@use "./components/SearchPage/SearchPage";
+@use "./components/BookReview/BookReview";
+@use "./components/SideBarBookClub/SideBarBookClub";
 
-@use './styles' as s;
+@use "./styles" as s;
 
-body{
-    background-color: rgb(23, 23, 23);
-    font-family: 'Hind', sans-serif;
-    color: s.$text;
+body {
+  background-color: rgb(23, 23, 23);
+  font-family: "Hind", sans-serif;
+  color: s.$text;
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: s.$primary;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(s.$text,0.9);
-    border-radius: s.$radius;
-    transition: .5s;
-    &:hover{
-        background-color: rgba(s.$text,0.75);
-        transition: .5s;
-    }
-
-    &:active{
-        background-color: rgba(s.$text,0.5);
-    }
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: s.$primary;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(s.$text, 0.9);
+  border-radius: s.$radius;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(s.$text, 0.75);
+    transition: 0.5s;
   }
 
-.hidden{
-    display: hidden;
-    color: transparent;
+  &:active {
+    background-color: rgba(s.$text, 0.5);
+  }
 }
 
-.mainContainer{
-    // background-color: skyblue;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    height: 745px;
+.hidden {
+  display: hidden;
+  color: transparent;
+}
+
+.mainContainer {
+  // background-color: skyblue;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  // align-items: center;
+  height: 745px;
 }
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(135, 222, 141);
-    height: 100%;
-    width: 20%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(67, 174, 219);
+  background-color: s.$primary;
+  height: auto;
+  width: 20%;
+  align-items: center;
+
+  h2 {
+    color: s.$text;
+  }
 }
 
 .display {
-    display: flex;
-    flex-direction: column;
-    // background-color: pink;
-    height: 100%;
-    width: 80%;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  // background-color: pink;
+  height: 100%;
+  width: 80%;
+  align-items: center;
+  justify-content: flex-start;
 
-    div {
-        // color: s.$text;
-    }
+  div {
+    // color: s.$text;
+  }
 }
