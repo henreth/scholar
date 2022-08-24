@@ -22,6 +22,8 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
 
     let [reviewText, setReviewText] = useState('')
 
+    let bookClubs = user.clubusers ? user.clubusers.map(clubuser => clubuser.bookclub) : []
+
     function truncateDecimals(num, digits) {
         let numS = num.toString(),
             decPos = numS.indexOf('.'),
@@ -105,7 +107,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         setReviewText(e.target.value)
     }
     // bookReviews.sort((a,b)=>b.id-a.id)
-    let reviewsToDisplay = bookReviews.sort((a,b)=>b.id-a.id).map(review => {
+    let reviewsToDisplay = bookReviews.sort((a, b) => b.id - a.id).map(review => {
         function handleClickEdit() {
             if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
@@ -175,10 +177,35 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         </form>
         <hr></hr>
     </> : null
+
+
+
+    let bookClubsToDisplay = bookClubs.map(club => {
+        return (
+            <div className="clubCard">
+                <div className="clubrow">
+                    <div className="clubname">{club.name}</div>
+                    <div className='dropdown'>▾</div>
+                </div>
+                <div className="clubOption">
+                    <div>Visit Club Page</div>
+                </div>
+                <div className="clubOption">
+                    <div>Add to Reading List</div>
+                </div>
+            </div>
+        )
+    })
+
+
     return (
         <div className="mainContainer">
             <div className="sidebar">
-                Sidebar
+                <div className="sideBarInfo">
+                    <h2>{user.first_name}'s Book Clubs:</h2>
+                    {bookClubsToDisplay}
+                    <hr></hr>
+                </div>
             </div>
             <div className="display">
                 <FeaturedBook

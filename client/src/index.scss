@@ -55,10 +55,14 @@ body{
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: rgb(135, 222, 141);
+    background-color: rgb(67, 174, 219);
     height: 100%;
     width: 20%;
     align-items: center;
+
+    h2{
+        color: s.$text;
+    }
 }
 
 .display {

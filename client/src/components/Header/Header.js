@@ -2,6 +2,7 @@ import { useState } from "react"
 import key from "../../apiKey"
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import book from '../../images/book.png';
 
 export default function Header({ user, setUser }) {
     let [showProfileMenu, setShowProfileMenu] = useState(false)
@@ -74,11 +75,12 @@ export default function Header({ user, setUser }) {
             <div className='header'>
                 {/* <div>Browse</div> */}
                 <div className="group">
+                    <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                     <div className="option" onClick={handleAboutClick}>About</div>
                     <div className="option" onClick={handleBrowseClick}>Browse</div>
-                    <div className="option" onClick={handleBookClubClick}>Clubs</div>
+                    <div className="option" onClick={handleBookClubClick}>Community</div>
                 </div>
-                <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
+                <img src={book} onClick={handleHeaderClick} />
                 <div className="group end">
                     <form onSubmit={handleSearchSubmit}>
                         <input
