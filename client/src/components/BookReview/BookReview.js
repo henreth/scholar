@@ -76,7 +76,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
     function handleMouseOut() {
         setTimeout(() => {
             displayEmojis(false)
-        },50*1000)
+        }, 50 * 1000)
     }
 
     function handleClickAddEmojis() {
@@ -93,7 +93,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         <div className="userReviewCard">
             <hr></hr>
             <div className="userReviewId">
-                <div className="userReviewTitle"> <img src={review.user.profile_picture} className='reviewprofilepic'/> <span>{review.user.username}</span> <div>-</div> <span>{'★'.repeat(review.rating)}</span> {userButtons}</div>
+                <div className="userReviewTitle"> <img src={review.user.profile_picture} className='reviewprofilepic' /> <span>{review.user.username}</span> <div>-</div> <span>{'★'.repeat(review.rating)}</span> {userButtons}</div>
                 <div className="userReviewDate">{review.date}</div>
             </div>
             <div className="userReviewText"> {review.text} </div>
