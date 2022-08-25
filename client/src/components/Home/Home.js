@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useState } from 'react';
+import Auth from '../Auth/Auth';
 import HomeShelfContainer from "../HomeShelfContainer/HomeShelfContainer";
 
-export default function Home({ user, setUser, userShelves }) {
+export default function Home({ user, setUser, userShelves,setUserShelves, setBookClubs }) {
     document.title = 'Scholar'
 
     const handleLogIn = () => {
@@ -16,7 +17,7 @@ export default function Home({ user, setUser, userShelves }) {
 
     if (!user.username) return (
         <>
-            <button onClick={handleLogIn}>Log In</button>
+            <Auth setUser={setUser} setUserShelves={setUserShelves} setBookClubs={setBookClubs}/>
         </>
     )
 

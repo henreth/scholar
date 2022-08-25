@@ -30,6 +30,7 @@ export default function App() {
       <Header
         user={user}
         setUser={setUser}
+        setUserShelves={setUserShelves}
       />
       <hr></hr>
       <Routes>
@@ -38,6 +39,7 @@ export default function App() {
             user={user}
             setUser={setUser}
             userShelves={userShelves}
+            setUserShelves={setUserShelves}
           />} />
         <Route path='/book/:id' element={
           <BookPage

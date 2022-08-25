@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import book from '../../images/book.png';
 
-export default function Header({ user, setUser }) {
+export default function Header({ user, setUser,setUserShelves }) {
     let [showProfileMenu, setShowProfileMenu] = useState(false)
     const profileClick = () => setShowProfileMenu(!showProfileMenu)
     const handleMenuHover = () => setShowProfileMenu(true)
@@ -51,6 +51,7 @@ export default function Header({ user, setUser }) {
             .then(r => {
                 setShowProfileMenu(false)
                 setUser({})
+                setUserShelves([])
                 alert('You are now logged out.')
             })
     }
