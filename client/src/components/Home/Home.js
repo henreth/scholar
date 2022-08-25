@@ -29,11 +29,11 @@ export default function Home({ user, setUser, userShelves }) {
         return (
             <div className="homeshelfcontainer">
                 <h1>{shelf.name}:</h1>
-                <div className="homeshelfrow"> 
-                <BookContainer
-                    books={shelf.books}
+                <div className="homeshelfrow">
+                    <BookContainer
+                        books={shelf.books}
                     />
-                    </div>
+                </div>
             </div>
         )
     })

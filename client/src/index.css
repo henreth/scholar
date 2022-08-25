@@ -6,10 +6,15 @@
 }
 
 .homeshelfrow {
+  display: flex;
+  justify-content: flex-start;
   transform: scale(0.9);
 }
 .homeshelfrow h1 {
   transform: scale(1);
+}
+.homeshelfrow .bookContainer {
+  justify-content: flex-start;
 }
 
 .homeshelfcontainer {
@@ -18,6 +23,7 @@
 }
 .homeshelfcontainer h1 {
   background-color: rgb(15, 15, 15);
+  margin-bottom: -1%;
 }
 
 .bookContainer {
@@ -28,6 +34,7 @@
   margin-left: 5%;
   margin-right: 5%;
   background-color: black;
+  width: 100%;
 }
 
 .bookCard {
