@@ -2,7 +2,7 @@ import BookContainer from "../BookContainer/BookContainer";
 import axios from 'axios'
 
 export default function Home({ user, setUser, userShelves }) {
-    document.title = 'Untitled Book App'
+    document.title = 'Scholar'
 
     const handleLogIn = () => {
         axios.post('/login', {

@@ -27,7 +27,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
     }
 
     let buttons = clickedDelete ? <>
-        <label>Are you sure?</label>
+        <label className="reviewbuttonlabel">Are you sure?</label>
         <button onClick={handleClickCancel}>Cancel</button>
         <button onClick={handleConfirmDelete}>Confirm</button>
     </> : <>
@@ -93,7 +93,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         <div className="userReviewCard">
             <hr></hr>
             <div className="userReviewId">
-                <div className="userReviewTitle"> <span>{review.user.username}</span> - <span>{review.rating}</span> ★ {userButtons}</div>
+                <div className="userReviewTitle"> <img src={review.user.profile_picture} className='reviewprofilepic'/> <span>{review.user.username}</span> <div>-</div> <span>{'★'.repeat(review.rating)}</span> {userButtons}</div>
                 <div className="userReviewDate">{review.date}</div>
             </div>
             <div className="userReviewText"> {review.text} </div>

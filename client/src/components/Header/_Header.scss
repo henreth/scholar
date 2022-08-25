@@ -3,7 +3,7 @@
 .header-container {
   // position: fixed;
   width: 100%;
-  // background-color: black;
+  background-color: black;
   z-index: 100;
 }
 
@@ -118,8 +118,8 @@
   border-radius: 2px;
   position: absolute;
   text-align: right;
-  top: 7.5%;
-  left: 90%;
+  top: 8.5%;
+  left: 89%;
   background-color: rgba(s.$dark-alt, 0.95);
   z-index: 1;
   animation: dropDown 0.45s ease-in-out forwards;

@@ -42,7 +42,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         let bookReviewRequest = axios.post(bookReviewUrl, { "book_id": id })
         axios.all([bookDataRequest, bookReviewRequest])
             .then(axios.spread((res1, res2) => {
-                document.title = res1.data.volumeInfo.title
+                document.title = 'Scholar - ' + res1.data.volumeInfo.title
                 setPageData(res1.data)
                 setBookReviews(res2.data)
             }))
