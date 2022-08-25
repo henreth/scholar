@@ -38,11 +38,11 @@ User.create!([
 Shelf.create!([
     {
         user_id:1,
-        name:"Read"
+        name:"Currently Reading"
     },
     {
         user_id:1,
-        name:"Currently Reading"
+        name:"Read"
     },
     {
         user_id:1,

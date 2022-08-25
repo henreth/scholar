@@ -17,11 +17,11 @@ class UsersController < ApplicationController
     Shelf.create!([
       {
         user_id: user.id,
-        name: "Read",
+        name: "Currently Reading",
       },
       {
         user_id: user.id,
-        name: "Currently Reading",
+        name: "Read",
       },
       {
         user_id: user.id,

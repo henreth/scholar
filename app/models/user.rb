@@ -8,6 +8,5 @@ class User < ApplicationRecord
     validates :username, presence: true, uniqueness: true, length: {minimum: 4}, allow_blank: false
     validates :first_name, presence: true, allow_blank: false
     validates :last_name, presence: true, allow_blank: false
-    validates :profile_picture, allow_blank: false
 
 end
