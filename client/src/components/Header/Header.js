@@ -70,12 +70,12 @@ export default function Header({ user, setUser }) {
         </div>
     ) : null
 
-    let dropDownTriangle = showProfileMenu ? '▾' : '▴'
+    let dropDownTriangle = showProfileMenu ? '▼' : '▲'
+
     let userProfileButton = user.username ? <>
         <img className='profile pic' onClick={profileClick} src={user.profile_picture} />
         <div className='profile drop' onClick={profileClick}>{dropDownTriangle}</div>
-    </>
-        : null;
+    </> : null;
 
     return (
         <div className="header-container">

@@ -1,0 +1,32 @@
+@use "../../styles" as s;
+
+.homeshelfrow {
+  display: flex;
+  justify-content: flex-start;
+  transform: scale(0.9);
+  h1 {
+    transform: scale(1);
+  }
+
+  .bookContainer {
+    justify-content: flex-start;
+  }
+}
+
+.homeshelfcontainer {
+  background-color: rgb(0, 0, 0);
+  border-radius: s.$radius;
+  h1 {
+    background-color: s.$bg;
+    margin-bottom: -1%;
+    transition: .5s;
+    &:hover {
+        cursor: pointer;
+        color: white;
+      }
+
+    span{
+        font-size: 20px;
+    }
+  }
+}

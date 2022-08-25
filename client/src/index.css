@@ -5,27 +5,6 @@
   height: 87.5vh;
 }
 
-.homeshelfrow {
-  display: flex;
-  justify-content: flex-start;
-  transform: scale(0.9);
-}
-.homeshelfrow h1 {
-  transform: scale(1);
-}
-.homeshelfrow .bookContainer {
-  justify-content: flex-start;
-}
-
-.homeshelfcontainer {
-  background-color: black;
-  border-radius: 5px;
-}
-.homeshelfcontainer h1 {
-  background-color: rgb(15, 15, 15);
-  margin-bottom: -1%;
-}
-
 .bookContainer {
   display: flex;
   flex-direction: row;
@@ -214,7 +193,7 @@
   border-color: black;
 }
 .profile.drop {
-  font-size: 21px;
+  font-size: 12px;
 }
 
 .profile-menu {
@@ -703,6 +682,35 @@
 }
 .clubOption button {
   border: none;
+}
+
+.homeshelfrow {
+  display: flex;
+  justify-content: flex-start;
+  transform: scale(0.9);
+}
+.homeshelfrow h1 {
+  transform: scale(1);
+}
+.homeshelfrow .bookContainer {
+  justify-content: flex-start;
+}
+
+.homeshelfcontainer {
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+}
+.homeshelfcontainer h1 {
+  background-color: rgb(15, 15, 15);
+  margin-bottom: -1%;
+  transition: 0.5s;
+}
+.homeshelfcontainer h1:hover {
+  cursor: pointer;
+  color: white;
+}
+.homeshelfcontainer h1 span {
+  font-size: 20px;
 }
 
 body {

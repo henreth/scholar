@@ -19,7 +19,7 @@ export default function SideBarBookClub({ club, book, setUser }) {
         </div>
     </div>
 
-    let dropDownTriangle = clickedDropDown ? '▾' : '▴'
+    let dropDownTriangle = clickedDropDown ? '▼' : '▲'
 
     function handleSubmit() {
         if (inClub) {
