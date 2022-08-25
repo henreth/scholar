@@ -27,17 +27,19 @@ export default function Home({ user, setUser, userShelves }) {
 
     let bookShelvesToDisplay = userShelves.sort((a, b) => a.id - b.id).map(shelf => {
         return (
-            <div>
+            <div className="homeshelfcontainer">
                 <h1>{shelf.name}:</h1>
+                <div className="homeshelfrow"> 
                 <BookContainer
                     books={shelf.books}
-                />
+                    />
+                    </div>
             </div>
         )
     })
 
     return (
-        <div>
+        <div className="homeContainer">
             {bookShelvesToDisplay}
         </div>
     )

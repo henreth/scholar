@@ -1,3 +1,25 @@
+.homeContainer {
+  padding: 35px;
+  padding-top: 0px;
+  background-color: rgb(15, 15, 15);
+  height: 87.5vh;
+}
+
+.homeshelfrow {
+  transform: scale(0.9);
+}
+.homeshelfrow h1 {
+  transform: scale(1);
+}
+
+.homeshelfcontainer {
+  background-color: black;
+  border-radius: 5px;
+}
+.homeshelfcontainer h1 {
+  background-color: rgb(15, 15, 15);
+}
+
 .bookContainer {
   display: flex;
   flex-direction: row;
@@ -5,7 +27,7 @@
   flex-wrap: wrap;
   margin-left: 5%;
   margin-right: 5%;
-  background-color: rgb(15, 15, 15);
+  background-color: black;
 }
 
 .bookCard {
@@ -572,6 +594,30 @@
   margin-bottom: 2px;
   margin-right: 1%;
 }
+.reactionCounter span:nth-of-type(1) {
+  font-size: 13px !important;
+  margin-top: -5% !important;
+}
+.reactionCounter div:nth-child(2) span:nth-of-type(1) {
+  visibility: hidden;
+  position: relative;
+}
+.reactionCounter div:nth-child(2) span:nth-of-type(1):after {
+  color: rgb(65, 65, 65);
+  font-size: 20px;
+  position: absolute;
+  top: -30%;
+  left: 0%;
+  visibility: visible;
+  content: "+" !important;
+}
+.reactionCounter.madebyuser {
+  cursor: default !important;
+}
+.reactionCounter.madebyuser div:nth-child(2) {
+  cursor: default !important;
+  opacity: 0 !important;
+}
 
 .emojiSelector {
   opacity: 92.5%;
@@ -669,7 +715,7 @@ body {
   flex-direction: column;
   background-color: rgb(67, 174, 219);
   background-color: rgba(128, 128, 128, 0.467);
-  height: auto;
+  height: 100vh;
   width: 20%;
   align-items: center;
 }
