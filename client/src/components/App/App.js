@@ -11,14 +11,17 @@ export default function App() {
   let [user, setUser] = useState({})
   let [userShelves,setUserShelves] = useState([])
   let [searchResults, setSearchResults] = useState({})
+  let [bookClubs,setBookClubs] = useState([])
 
   useEffect(() => {
     let meReq = axios.get('/me')
     let shelvesReq = axios.get('/usershelves')
-    axios.all([meReq,shelvesReq])
-      .then(axios.spread((res1,res2) => {
+    let bookClubsReq = axios.get('/bookclubs')
+    axios.all([meReq,shelvesReq,bookClubsReq])
+      .then(axios.spread((res1,res2,res3) => {
         setUser(res1.data)
         setUserShelves(res2.data)
+        setBookClubs(res3.data)
       }))
   }, [])
 

@@ -1,3 +1,25 @@
+.homeContainer {
+  padding: 35px;
+  padding-top: 0px;
+  background-color: rgb(15, 15, 15);
+  height: 87.5vh;
+}
+
+.homeshelfrow {
+  transform: scale(0.9);
+}
+.homeshelfrow h1 {
+  transform: scale(1);
+}
+
+.homeshelfcontainer {
+  background-color: black;
+  border-radius: 5px;
+}
+.homeshelfcontainer h1 {
+  background-color: rgb(15, 15, 15);
+}
+
 .bookContainer {
   display: flex;
   flex-direction: row;
@@ -5,7 +27,7 @@
   flex-wrap: wrap;
   margin-left: 5%;
   margin-right: 5%;
-  background-color: rgb(15, 15, 15);
+  background-color: black;
 }
 
 .bookCard {
@@ -79,12 +101,14 @@
   align-content: center;
   align-items: center;
 }
-.header img {
+
+.logo {
   transform: scale(0.65);
+  transition: 0.25s;
 }
-.header img:hover {
+.logo:hover {
   cursor: pointer;
-  filter: grayscale(0.75);
+  filter: invert(0.65);
 }
 
 .option {
@@ -168,7 +192,21 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
-  margin-right: -4.5%;
+  margin-right: -3.5%;
+  transition: 0.25s;
+}
+.profile.pic {
+  filter: invert(90%);
+  height: 35px;
+  border-radius: 7.5px;
+  border: 2px solid rgb(63, 63, 63);
+}
+.profile.pic:hover {
+  filter: invert(100%);
+  border-color: black;
+}
+.profile.drop {
+  font-size: 21px;
 }
 
 .profile-menu {
@@ -176,7 +214,7 @@
   position: absolute;
   text-align: right;
   top: 7.5%;
-  left: 89%;
+  left: 90%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.45s ease-in-out forwards;
@@ -556,6 +594,30 @@
   margin-bottom: 2px;
   margin-right: 1%;
 }
+.reactionCounter span:nth-of-type(1) {
+  font-size: 13px !important;
+  margin-top: -5% !important;
+}
+.reactionCounter div:nth-child(2) span:nth-of-type(1) {
+  visibility: hidden;
+  position: relative;
+}
+.reactionCounter div:nth-child(2) span:nth-of-type(1):after {
+  color: rgb(65, 65, 65);
+  font-size: 20px;
+  position: absolute;
+  top: -30%;
+  left: 0%;
+  visibility: visible;
+  content: "+" !important;
+}
+.reactionCounter.madebyuser {
+  cursor: default !important;
+}
+.reactionCounter.madebyuser div:nth-child(2) {
+  cursor: default !important;
+  opacity: 0 !important;
+}
 
 .emojiSelector {
   opacity: 92.5%;
@@ -653,7 +715,7 @@ body {
   flex-direction: column;
   background-color: rgb(67, 174, 219);
   background-color: rgba(128, 128, 128, 0.467);
-  height: auto;
+  height: 100vh;
   width: 20%;
   align-items: center;
 }

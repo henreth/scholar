@@ -63,24 +63,30 @@ export default function Header({ user, setUser }) {
 
     let displayProfileMenu = showProfileMenu ? (
         <div className='profile-menu' onMouseOver={handleMenuHover} onMouseOut={handleMouseOut}>
-            <div className='menu-option'>🌄 {user.first_name} {user.last_name}</div>
+            <div className='menu-option'>⬜️ {user.first_name} {user.last_name}</div>
             <div className='menu-option'>{user.username}</div>
             <div className='menu-option option'>Settings</div>
             <div className='menu-option option' onClick={handleLogOut}>Log Out</div>
         </div>
     ) : null
 
+    let dropDownTriangle = showProfileMenu ? '▾' : '▴'
+    let userProfileButton = user.username ? <>
+        <img className='profile pic' onClick={profileClick} src={user.profile_picture} />
+        <div className='profile drop' onClick={profileClick}>{dropDownTriangle}</div>
+    </>
+        : null;
+
     return (
         <div className="header-container">
             <div className='header'>
-                {/* <div>Browse</div> */}
                 <div className="group">
                     <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                     <div className="option" onClick={handleAboutClick}>About</div>
                     <div className="option" onClick={handleBrowseClick}>Browse</div>
                     <div className="option" onClick={handleBookClubClick}>Community</div>
                 </div>
-                <img src={book} onClick={handleHeaderClick} />
+                <img className='logo' src={book} onClick={handleHeaderClick} />
                 <div className="group end">
                     <form onSubmit={handleSearchSubmit}>
                         <input
@@ -91,8 +97,7 @@ export default function Header({ user, setUser }) {
                             onChange={handleSearchChange}
                         />
                     </form>
-                    {user.username ? <div className='profile' onClick={profileClick}>⬜️ </div> : null}
-                    {user.username ? <div className='profile' onClick={profileClick}>▾ </div> : null}
+                    {userProfileButton}
                 </div>
                 {displayProfileMenu}
             </div>

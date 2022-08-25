@@ -87,6 +87,8 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         <GithubSelector onSelect={handleSelectReaction} />
     </div> : null;
 
+    let counterClass = madeByUser ? "reactionCounter madebyuser" : "reactionCounter"
+
     return (
         <div className="userReviewCard">
             <hr></hr>
@@ -95,7 +97,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
                 <div className="userReviewDate">{review.date}</div>
             </div>
             <div className="userReviewText"> {review.text} </div>
-            <div className="reactionCounter">
+            <div className={counterClass}>
                 <h5>Reactions: </h5>
                 <SlackCounter counters={reactions} onSelect={handleRemoveReaction} onAdd={handleClickAddEmojis} />
             </div>
