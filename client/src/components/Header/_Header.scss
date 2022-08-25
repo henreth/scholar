@@ -13,26 +13,25 @@
   justify-content: space-between;
   align-content: center;
   align-items: center;
+}
 
-  img {
-    transform: scale(.65);
-
-    &:hover{
-      cursor: pointer;
-      filter: grayscale(.75);
-    }
-
+.logo {
+  transform: scale(0.65);
+  transition: 0.25s;
+  &:hover {
+    cursor: pointer;
+    filter: invert(0.65);
   }
 }
 
 .option {
-    cursor: pointer;
-    margin-right: 10%;
+  cursor: pointer;
+  margin-right: 10%;
 
-    &:hover {
-      color: white;
-    }
+  &:hover {
+    color: white;
   }
+}
 
 .group {
   width: 23.5%;
@@ -96,7 +95,22 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
-  margin-right: -4.5%;
+  margin-right: -3.5%;
+  transition: .25s;
+  &.pic {
+    filter: invert(90%);
+    height: 35px;
+    border-radius: calc(s.$radius * 1.5);
+    border: 2px solid rgb(63, 63, 63);
+    &:hover{
+      filter: invert(100%);
+      border-color: black;
+    }
+  }
+
+  &.drop{
+    font-size: 21px;
+  }
 }
 
 .profile-menu {
@@ -105,7 +119,7 @@
   position: absolute;
   text-align: right;
   top: 7.5%;
-  left: 89%;
+  left: 90%;
   background-color: rgba(s.$dark-alt, 0.95);
   z-index: 1;
   animation: dropDown 0.45s ease-in-out forwards;
@@ -134,5 +148,3 @@
     opacity: 1;
   }
 }
-
-

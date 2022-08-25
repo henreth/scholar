@@ -79,12 +79,14 @@
   align-content: center;
   align-items: center;
 }
-.header img {
+
+.logo {
   transform: scale(0.65);
+  transition: 0.25s;
 }
-.header img:hover {
+.logo:hover {
   cursor: pointer;
-  filter: grayscale(0.75);
+  filter: invert(0.65);
 }
 
 .option {
@@ -168,7 +170,21 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
-  margin-right: -4.5%;
+  margin-right: -3.5%;
+  transition: 0.25s;
+}
+.profile.pic {
+  filter: invert(90%);
+  height: 35px;
+  border-radius: 7.5px;
+  border: 2px solid rgb(63, 63, 63);
+}
+.profile.pic:hover {
+  filter: invert(100%);
+  border-color: black;
+}
+.profile.drop {
+  font-size: 21px;
 }
 
 .profile-menu {
@@ -176,7 +192,7 @@
   position: absolute;
   text-align: right;
   top: 7.5%;
-  left: 89%;
+  left: 90%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.45s ease-in-out forwards;
