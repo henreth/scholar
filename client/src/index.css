@@ -91,6 +91,7 @@
 
 .header-container {
   width: 100%;
+  background-color: black;
   z-index: 100;
 }
 
@@ -213,8 +214,8 @@
   border-radius: 2px;
   position: absolute;
   text-align: right;
-  top: 7.5%;
-  left: 90%;
+  top: 8.5%;
+  left: 89%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.45s ease-in-out forwards;
