@@ -48,7 +48,7 @@ class BookclubsController < ApplicationController
     private
 
     def bookclub_params
-        params.permit(:id,:name,:books)
+        params.permit(:id,:name,:books, :description, :host)
     end
 
 end

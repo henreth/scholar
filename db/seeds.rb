@@ -152,6 +152,13 @@ Reaction.create!([
 Bookclub.create!([
     {
         name:"Test Book Club",
+        host: {
+            username: 'demouser',
+            first_name: 'Demo',
+            last_name: 'User',
+            password:'12345',
+        },
+        description: 'A book club for everything you may or may not read!'
     }
 ])
 

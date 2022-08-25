@@ -77,6 +77,7 @@ class UsersController < ApplicationController
       :username,
       :first_name,
       :last_name,
+      :profile_picture,
       :password,
       :password_confirmation,
     )
