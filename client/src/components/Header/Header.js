@@ -46,6 +46,11 @@ export default function Header({ user, setUser,setUserShelves }) {
         setShowProfileMenu(false)
     }
 
+    function handleClickProfile() {
+        navigate('/profile/'+user.username)
+        setShowProfileMenu(false)
+    }
+
     function handleLogOut() {
         axios.delete('/logout')
             .then(r => {
@@ -64,8 +69,8 @@ export default function Header({ user, setUser,setUserShelves }) {
 
     let displayProfileMenu = showProfileMenu ? (
         <div className='profile-menu' onMouseOver={handleMenuHover} onMouseOut={handleMouseOut}>
-            <div className='menu-option'>⬜️ {user.first_name} {user.last_name}</div>
-            <div className='menu-option'>{user.username}</div>
+            <div className='menu-option'>⬜️ {user.username}</div>
+            <div className='menu-option option' onClick={handleClickProfile}>Profile</div>
             <div className='menu-option option'>Settings</div>
             <div className='menu-option option' onClick={handleLogOut}>Log Out</div>
         </div>

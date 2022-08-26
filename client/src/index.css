@@ -579,8 +579,19 @@
   margin-left: -4px;
 }
 
+.reviewuser {
+  cursor: pointer;
+}
+.reviewuser:hover {
+  color: rgb(216, 216, 216);
+}
+
 .userReviewDate {
   font-size: 15px;
+  cursor: pointer;
+}
+.userReviewDate:hover {
+  color: white;
 }
 
 .userReviewText {
@@ -1016,6 +1027,88 @@
 }
 .demo:hover {
   background-color: rgb(27, 27, 27);
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: rgb(40, 40, 40);
+  height: 85vh;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+.profileCardTop {
+  background-color: rgba(128, 128, 128, 0.467);
+  border-radius: 5px;
+  height: 60%;
+}
+
+.profileCardBottom {
+  background-color: rgba(128, 128, 128, 0.467);
+  border-radius: 5px;
+  height: 40%;
+}
+.profileCardBottom .reviewContainer {
+  height: inherit;
+}
+
+.profilecardtitle {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.profilecardsubtitle {
+  margin-left: 5%;
+}
+
+.south {
+  background-color: black;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 0.5%;
+  padding-bottom: 1%;
+}
+
+.profileDisplayAllShelves {
+  margin-top: -1.5%;
+  display: flex;
+  flex-direction: row;
+}
+
+.profileShelfBookCard {
+  margin-right: 2.5%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(65, 65, 65);
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.profileShelfBookCardTitle {
+  font-weight: 550;
+  border-bottom: 1px solid;
+  margin-bottom: 2.5%;
+}
+
+.profileShelfBookToDisplay .bookCard {
+  height: 180.5px;
+  width: 125px;
+}
+.profileShelfBookToDisplay .bookCard .bookCover {
+  height: 100px;
+}
+
+.profilepage {
+  height: 150%;
+  overflow-y: scroll;
 }
 
 body {
