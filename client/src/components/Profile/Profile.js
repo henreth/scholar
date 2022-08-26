@@ -33,9 +33,8 @@ export default function Profile({ user, setUser }) {
             }))
     }, [username])
 
-    let reviewsToDisplay = profileReviews.slice(0, 5).sort((a, b) => b.id - a.id).map(review => {
-        function doNothing() {
-        }
+    let reviewsToDisplay = profileReviews.sort((a, b) => b.id - a.id).slice(0, 5).map(review => {
+        function doNothing() {}
         let madeByUser = review.user.id === user.id
         let onProfile = true
         return (
@@ -84,7 +83,7 @@ export default function Profile({ user, setUser }) {
                         <img src={profileUser.profile_picture} />
                         <h1>{profileUser.first_name} {profileUser.last_name} ({profileUser.username})</h1>
                     </div>
-                    <div className="profilecardsubtitle"> a Scholar User since: {profileDateMSG}</div>
+                    <div className="profilecardsubtitle"> a Scholar since: {profileDateMSG}</div>
                 </div>
                 <hr></hr>
                 <div className="south">
@@ -107,7 +106,6 @@ export default function Profile({ user, setUser }) {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     )
