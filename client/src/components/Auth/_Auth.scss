@@ -3,12 +3,19 @@
 * {
   box-sizing: border-box;
 }
+.authContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 .signin-modal {
+  margin-top: 45%;
   position: absolute;
   transition: all 0.15s;
-  top: 25%;
-  left: 25%;
+  // top: 25%;
+  // left: 25%;
   animation: 0.3s fadeInAnimation ease-in-out;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
