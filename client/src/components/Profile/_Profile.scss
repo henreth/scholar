@@ -16,12 +16,12 @@
 .profileCardTop {
   background-color: s.$primary;
   border-radius: s.$radius;
-  height: 60%;
+  height: 63.5%;
 }
 .profileCardBottom {
   background-color: s.$primary;
   border-radius: s.$radius;
-  height: 40%;
+  height: 36.5%;
 
   .reviewContainer{
     height: inherit;
@@ -51,9 +51,11 @@
 }
 
 .profileDisplayAllShelves {
-  margin-top: -1.5%;
+//   margin-top: -1.5%;
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+  margin-bottom: 1%;
 }
 .profileShelfBookCard {
   margin-right: 2.5%;

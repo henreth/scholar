@@ -34,7 +34,7 @@ export default function Profile({ user, setUser }) {
     }, [username])
 
     let reviewsToDisplay = profileReviews.sort((a, b) => b.id - a.id).slice(0, 5).map(review => {
-        function doNothing() {}
+        function doNothing() { }
         let madeByUser = review.user.id === user.id
         let onProfile = true
         return (
@@ -60,16 +60,27 @@ export default function Profile({ user, setUser }) {
     let totalNumBookReviews = profileReviews.length
     let calculateBookRating = truncateDecimals(profileReviews.reduce((tot, rev) => tot + rev.rating, 0) / totalNumBookReviews, 2)
 
-    let displayShelves = profileShelves.slice(0,4).map(shelf => {
+    let displayShelves = profileShelves.map(shelf => {
         return (
             <div className="profileShelfBookCard">
                 <div className="profileShelfBookCardTitle">{shelf.name}</div>
                 <div>Books: {shelf.books.length}</div>
                 {shelf.books.length ? <div className="profileShelfBookToDisplay">
                     <BookCard
-                        book={shelf.books[shelf.books.length-1]}
+                        book={shelf.books[shelf.books.length - 1]}
                     />
-                </div> : null}
+                </div> : <div className="profileShelfBookToDisplay">
+                    <div className="bookCard">
+                        <div className="bookCardHalf top">
+                            <img className='bookCover' src='https://www.lesprecepteurs.fr/wp-content/uploads/2017/03/no-image-found.jpg'
+                                alt='noPhoto' onClick={() => { }} />
+                        </div>
+                        <div className="bookCardHalf bottom">
+                            {/* <div className='bookTitle' onMouseOver={()=>{}} onMouseOut={()=>{}}></div> */}
+                            <div className='bookAuthor'>There are no Books in This Shelf</div>
+                        </div>
+                    </div>
+                </div>}
             </div>
         )
     })
