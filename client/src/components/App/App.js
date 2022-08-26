@@ -6,6 +6,7 @@ import Home from '../Home/Home';
 import Header from '../Header/Header';
 import BookPage from '../BookPage/BookPage';
 import SearchPage from '../SearchPage/SearchPage';
+import Profile from '../Profile/Profile';
 
 export default function App() {
   let [user, setUser] = useState({})
@@ -40,6 +41,11 @@ export default function App() {
             setUser={setUser}
             userShelves={userShelves}
             setUserShelves={setUserShelves}
+          />} />
+        <Route path='/profile/:username' element={
+          <Profile
+            user={user}
+            setUser={setUser}
           />} />
         <Route path='/book/:id' element={
           <BookPage

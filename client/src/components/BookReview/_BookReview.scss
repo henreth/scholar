@@ -40,6 +40,21 @@
     margin-left: -4px;
   }
 }
+.reviewuser{
+  cursor: pointer;
+  &:hover{
+    color: s.$text;
+  }
+}
+
+.userReviewBookID {
+  font-size: 15px;
+  cursor: pointer;
+
+  &:hover{
+    color: white;
+  }
+}
 
 .userReviewDate {
   font-size: 15px;

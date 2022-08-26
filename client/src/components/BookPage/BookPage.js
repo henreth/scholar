@@ -84,6 +84,8 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         e.preventDefault()
         let date = new Date()
         let review = {
+            "book_author": pageData.volumeInfo.authors.length ? pageData.volumeInfo.authors[0] : '',
+            "book_name":pageData.volumeInfo.title,
             "book_id": id,
             "user_id": user.id,
             "rating": clickedStars,
@@ -124,6 +126,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
         }
         let madeByUser = review.user.id === user.id
         let inEditMode = selectedReview === review.id
+        let onProfile = false
         return (
             <BookReview
                 key={review.id}
@@ -134,6 +137,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
                 setBookReviews={setBookReviews}
                 handleClickEdit={handleClickEdit}
                 inEditMode={inEditMode}
+                onProfile={onProfile}
             />
         )
     })

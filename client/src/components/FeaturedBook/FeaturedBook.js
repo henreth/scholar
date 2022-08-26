@@ -47,7 +47,7 @@ export default function FeaturedBook({ user, book, setUser, userShelves, setUser
     </div> : null
 
 
-    let publishDate = new Date(book.volumeInfo.publishedDate).toDateString()
+    let publishDate = new Date(book.volumeInfo.publishedDate).toDateString().slice(4,)
 
     let language = book.volumeInfo.language
     let pageCount = book.volumeInfo.pageCount

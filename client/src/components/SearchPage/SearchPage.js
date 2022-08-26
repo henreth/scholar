@@ -64,7 +64,6 @@ export default function SearchPage({ searchResults, setSearchResults }) {
         let authorSearchText = authorDisplay && authorSearch ? '+inauthor:' + authorSearch : ''
         let genreSearchText = genreDisplay && genreSearch ? '+insubject:' + genreSearch : ''
         let searchUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + search + authorSearchText + genreSearchText + '&maxResults=40&printType=books&key=' + key
-        console.log("searchUrl", searchUrl)
         axios.get(searchUrl)
             .then(r => {
                 if (r.data.items) {
