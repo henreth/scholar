@@ -1105,7 +1105,9 @@
 .profileShelfBookToDisplay .bookCard .bookCover {
   height: 100px;
 }
-
+.profileShelfBookToDisplay .bookCard .bookTitle {
+  font-size: smaller;
+}
 .profilepage {
   height: 150%;
   overflow-y: scroll;
