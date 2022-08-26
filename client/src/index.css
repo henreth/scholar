@@ -1074,6 +1074,9 @@
   padding-top: 0.5%;
   padding-bottom: 1%;
 }
+.south h3 {
+  border-bottom: 2px solid grey;
+}
 
 .profileDisplayAllShelves {
   margin-top: -1.5%;
