@@ -185,11 +185,11 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
 
 
 
-    let bookClubsToDisplay = bookClubs.map(club => {
+    let bookClubsToDisplay = bookClubs.length ? bookClubs.map(club => {
         return (
             <SideBarBookClub club={club} key={club.id} setUser={setUser} book={pageData}/>
         )
-    })
+    }) : null
 
 
     return (

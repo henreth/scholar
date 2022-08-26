@@ -1038,8 +1038,8 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
   background-color: rgb(40, 40, 40);
   height: 850px;
   padding: 50px;
@@ -1047,15 +1047,16 @@
 }
 
 .profileCardTop {
+  width: 100%;
   background-color: rgba(128, 128, 128, 0.467);
   border-radius: 5px;
-  height: 63.5%;
+  height: 60%;
 }
 
 .profileCardBottom {
   background-color: rgba(128, 128, 128, 0.467);
   border-radius: 5px;
-  height: 36.5%;
+  height: 40%;
 }
 .profileCardBottom .reviewContainer {
   height: inherit;
@@ -1066,9 +1067,13 @@
   flex-direction: row;
   align-items: flex-end;
 }
+.profilecardtitle img {
+  height: 80px;
+}
 
 .profilecardsubtitle {
-  margin-left: 5%;
+  margin-left: 10%;
+  margin-top: -2.75%;
 }
 
 .south {
@@ -1087,6 +1092,9 @@
   flex-direction: row;
   overflow-x: scroll;
   margin-bottom: 1%;
+}
+.profileDisplayAllShelves::-webkit-scrollbar {
+  height: 5px;
 }
 
 .profileShelfBookCard {
