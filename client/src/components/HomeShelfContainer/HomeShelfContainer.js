@@ -2,7 +2,7 @@ import { useState } from "react";
 import BookContainer from "../BookContainer/BookContainer";
 
 export default function HomeShelfContainer({ shelf }) {
-    let [clickedTitle, setClickedTitle] = useState(false)
+    let [clickedTitle, setClickedTitle] = useState(true)
     function handleClickShelfName() {
         setClickedTitle(!clickedTitle)
     }

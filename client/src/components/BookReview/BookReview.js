@@ -7,15 +7,6 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
     let [counters, setCounters] = useState(review.reactions)
     let [clickedDelete, setClickedDelete] = useState(false)
     let [displayEmojis, setDisplayEmojis] = useState(false)
-    let [hoverDate,setHoverDate] = useState(false)
-
-    function handleMouseOverDate(){
-        setHoverDate(true)
-    }
-
-    function handleMouseOutDate(){
-        setHoverDate(false)
-    }
 
     let navigate = useNavigate()
 
@@ -107,9 +98,6 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         navigate('/profile/'+review.user.username)
     }
 
-
-    let displayDateBook = hoverDate && onProfile ? review.book_name + ' - ' + review.book_author: review.date 
-
     let displayBookTitle = onProfile ? review.book_name + ' - ' + review.book_author : ''
 
     function handleClickBookTitle(){
@@ -120,7 +108,8 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
             <hr></hr>
             <div className="userReviewId">
                 <div className="userReviewTitle"> <img src={review.user.profile_picture} className='reviewprofilepic' /> <span className='reviewuser' onClick={handleClickProfile}>{review.user.username}</span> <div>-</div> <span>{'★'.repeat(review.rating)}</span> {userButtons}</div>
-                <div className="userReviewDate" onMouseOver={handleMouseOverDate} onMouseOut={handleMouseOutDate} onClick={handleClickBookTitle}>{displayDateBook}</div>
+                <div className="userReviewBookID" onClick={handleClickBookTitle}>{displayBookTitle}</div>
+                <div className="userReviewDate">{review.date}</div>
             </div>
             <div className="userReviewText"> {review.text} </div>
             <div className={counterClass}>

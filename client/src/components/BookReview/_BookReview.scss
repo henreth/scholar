@@ -47,13 +47,17 @@
   }
 }
 
-.userReviewDate {
+.userReviewBookID {
   font-size: 15px;
   cursor: pointer;
 
   &:hover{
     color: white;
   }
+}
+
+.userReviewDate {
+  font-size: 15px;
 }
 
 .userReviewText {

@@ -68,7 +68,7 @@ export default function Profile({ user, setUser }) {
                 <div>Books: {shelf.books.length}</div>
                 {shelf.books.length ? <div className="profileShelfBookToDisplay">
                     <BookCard
-                        book={shelf.books[0]}
+                        book={shelf.books[shelf.books.length-1]}
                     />
                 </div> : null}
             </div>

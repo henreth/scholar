@@ -586,12 +586,16 @@
   color: rgb(216, 216, 216);
 }
 
-.userReviewDate {
+.userReviewBookID {
   font-size: 15px;
   cursor: pointer;
 }
-.userReviewDate:hover {
+.userReviewBookID:hover {
   color: white;
+}
+
+.userReviewDate {
+  font-size: 15px;
 }
 
 .userReviewText {
@@ -1106,7 +1110,7 @@
   width: 125px;
 }
 .profileShelfBookToDisplay .bookCard .bookCover {
-  height: 100px;
+  height: 110px;
 }
 .profileShelfBookToDisplay .bookCard .bookTitle {
   font-size: smaller;
