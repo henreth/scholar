@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import key from '../../apiKey'
 import BookReview from "../BookReview/BookReview"
-import FeaturedBook from "../FeaturedBook/FeaturedBook"
-import SideBarBookClub from "../SideBarBookClub/SideBarBookClub"
+import FeaturedBook from "../FeaturedBook"
+import SideBarBookClub from "../SideBarBookClub"
 
 
 // ! CREATE WAY TO SORT REVIEWS BY DATE/RATING

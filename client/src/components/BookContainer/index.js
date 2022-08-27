@@ -1,4 +1,4 @@
-import BookCard from "../BookCard/BookCard"
+import BookCard from "../BookCard"
 
 export default function BookContainer({ books }) {
     if (books.items) {

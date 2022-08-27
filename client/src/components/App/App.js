@@ -2,11 +2,11 @@ import key from '../../apiKey';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from '../Home/Home';
-import Header from '../Header/Header';
-import BookPage from '../BookPage/BookPage';
-import SearchPage from '../SearchPage/SearchPage';
-import Profile from '../Profile/Profile';
+import Home from '../Home';
+import Header from '../Header';
+import BookPage from '../BookPage';
+import SearchPage from '../SearchPage';
+import Profile from '../Profile';
 
 export default function App() {
   let [user, setUser] = useState({})
