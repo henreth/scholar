@@ -1,190 +1,189 @@
-@use '../../styles' as s;
+@use "../../styles" as s;
 
 .featuredCard {
-    transform: scale(1.15);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    height: 775px;
-    width: 900px;
-    background-color: s.$primary;
-    border-radius: s.$radius;
-    color: s.$text;
-    // color: black;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    top: 50%;
+  transform: scale(1.15);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 775px;
+  width: 900px;
+  background-color: s.$primary;
+  border-radius: s.$radius;
+  color: s.$text;
+  // color: black;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  top: 50%;
 }
 
 .featuredCardSide {
-    display: flex;
-    flex-direction: column;
-    background-color: s.$primary-extended;
-    border-radius: s.$radius 0px 0px s.$radius;
-    height: 100%;
-    width: 35%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: s.$primary-extended;
+  border-radius: s.$radius 0px 0px s.$radius;
+  height: 100%;
+  width: 35%;
+  align-items: center;
+  justify-content: center;
 }
 
 .featuredCardMain {
-    // background-color: rgb(176, 207, 230);
-    height: 100%;
-    width: 65%;
+  // background-color: rgb(176, 207, 230);
+  height: 100%;
+  width: 65%;
 }
 
 .featuredCardInformation {
-    display: flex;
-    flex-direction: column;
-    // justify-content: flex-start;
-    padding: 30px;
-    padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  // justify-content: flex-start;
+  padding: 30px;
+  padding-bottom: 0px;
 
-    hr {
-        width: 50%;
-        visibility: hidden;
-    }
+  hr {
+    width: 50%;
+    visibility: hidden;
+  }
 }
 
 .featuredCardCover {
-    // height: 75%;
-    height: 340px;
-    width: 250px;
-    border-radius: 5px;
+  // height: 75%;
+  height: 340px;
+  width: 250px;
+  border-radius: 5px;
 
-    // &.replacement{
-    //     height: 75%;
-    //     width: 55%;
-    // }
+  // &.replacement{
+  //     height: 75%;
+  //     width: 55%;
+  // }
 }
 
 .featuredTitle {
-    margin-bottom: -1%;
+  margin-bottom: -1%;
 
-    span {
-        font-size: 23px;
-        font-weight: 300;
-    }
+  span {
+    font-size: 23px;
+    font-weight: 300;
+  }
 }
 
 .featuredSubtitle {
-    margin-top: 2%;
-    margin-bottom: -1%;
+  margin-top: 2%;
+  margin-bottom: -1%;
 }
 
 .featuredAuthors {
-    margin-bottom: -1%;
-
+  margin-bottom: -1%;
 }
 
 .bookDescription {
-    color: rgba(s.$text, .80);
+  color: rgba(s.$text, 0.8);
 }
 
-
 .fullDescription {
-    position: absolute;
-    // margin-left: -5%;
-    // margin-top: -3.5%;
-    width: 55%;
-    font-size: 17px;
-    background-color: rgba(s.$primary, .95);
-    border-radius: s.$radius;
-    padding: 20px;
+  position: absolute;
+  // margin-left: -5%;
+  // margin-top: -3.5%;
+  width: 55%;
+  font-size: 17px;
+  background-color: rgba(s.$primary, 0.95);
+  border-radius: s.$radius;
+  padding: 20px;
 
-    h3 {
-        padding-top: 0px;
-        margin-top: -1px;
-        margin-bottom: -1px;
-    }
+  h3 {
+    padding-top: 0px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
 }
 
 .moreInfo {
-    color: rgba(s.$text, .75);
+  color: rgba(s.$text, 0.75);
 
-    b {
-        color: s.$text;
-    }
+  b {
+    color: s.$text;
+  }
 }
 
 .shelfRow {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    margin-top: 1%;
-    font-size: 18px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin-top: 1%;
+  font-size: 18px;
 
-    div {
-        font-size: 16px;
-        margin-right: 1%;
-        font-weight: 600;
-        // background-color: s.$dark-alt;
-        padding: 2.5px;
-        border-radius: calc(s.$radius/1.5);
+  div {
+    font-size: 16px;
+    margin-right: 1%;
+    font-weight: 600;
+    // background-color: s.$dark-alt;
+    padding: 2.5px;
+    border-radius: calc(s.$radius/1.5);
+  }
+
+  select {
+    background-color: s.$dark-alt;
+    color: s.$text;
+    border: none;
+    margin-right: 0.5%;
+    font-size: 15px;
+    padding: 2.5px;
+    border-radius: calc(s.$radius/1.5);
+    cursor: pointer;
+  }
+
+  button {
+    background-color: s.$dark-alt;
+    color: s.$text;
+    border: none;
+    font-size: 15px;
+    padding: 3.5px 7.5px;
+    border-radius: calc(s.$radius/1.5);
+    cursor: pointer;
+    transition: 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: s.$dark-alt;
     }
 
-    select {
-        background-color: s.$dark-alt;
-        color: s.$text;
-        border: none;
-        margin-right: .5%;
-        font-size: 15px;
-        padding: 2.5px;
-        border-radius: calc(s.$radius/1.5);
-        cursor: pointer;
+    &:active {
+      transform: scale(0.95);
     }
 
-    button {
-        background-color: s.$dark-alt;
-        color: s.$text;
-        border: none;
-        font-size: 15px;
-        padding: 3.5px 7.5px;
-        border-radius: calc(s.$radius/1.5);
-        cursor: pointer;
+    &:disabled {
+      opacity: (0.15);
 
-        &:hover {
-            transform: scale(1.05);
-            background-color: s.$dark-alt;
-        }
+      &:hover {
+        transform: scale(1);
+        cursor: default;
+      }
 
-        &:active {
-            transform: scale(.95);
-        }
-
-        &:disabled {
-            opacity: (0.15);
-
-            &:hover {
-                transform: scale(1);
-                cursor: default;
-            }
-
-            &:active {
-                transform: scale(1);
-            }
-        }
+      &:active {
+        transform: scale(1);
+      }
     }
+  }
 
-    input {
-        background-color: s.$dark-alt;
-        border: none;
-        color: s.$text;
-        margin-right: 1%;
-        font-size: 15px;
-        padding: 2.5px;
-        border-radius: calc(s.$radius/1.5);
+  input {
+    background-color: s.$dark-alt;
+    border: none;
+    color: s.$text;
+    margin-right: 1%;
+    font-size: 15px;
+    padding: 2.5px;
+    border-radius: calc(s.$radius/1.5);
 
-        &:focus {
-            background-color: s.$dark;
-        }
+    &:focus {
+      background-color: s.$dark;
     }
+  }
 }
 
 .featuredCardBottom {
-    background-color: s.$dark;
-    padding: 30px;
-    padding-top: 3px;
-    // margin-top: -px;
-    border-radius: 0px 0px s.$radius 0px;
+  background-color: s.$dark;
+  padding: 30px;
+  padding-top: 3px;
+  // margin-top: -px;
+  border-radius: 0px 0px s.$radius 0px;
 }

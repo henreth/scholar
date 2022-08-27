@@ -297,7 +297,34 @@
   text-align: start;
 }
 .reviewForm button {
+  margin-top: 0.25%;
   width: 15%;
+  background-color: rgb(65, 65, 65);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.reviewForm button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.reviewForm button:active {
+  transform: scale(0.95);
+}
+.reviewForm button:disabled {
+  opacity: 0.35;
+}
+.reviewForm button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.reviewForm button:disabled:active {
+  transform: scale(1);
 }
 
 .active {
@@ -432,6 +459,7 @@
   padding: 3.5px 7.5px;
   border-radius: 3.3333333333px;
   cursor: pointer;
+  transition: 0.25s;
 }
 .shelfRow button:hover {
   transform: scale(1.05);
@@ -586,6 +614,33 @@
 }
 .userReviewTitle div {
   margin-left: -4px;
+}
+.userReviewTitle button {
+  background-color: rgb(45, 45, 45);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.userReviewTitle button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.userReviewTitle button:active {
+  transform: scale(0.95);
+}
+.userReviewTitle button:disabled {
+  opacity: 0.15;
+}
+.userReviewTitle button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+}
+.userReviewTitle button:disabled:active {
+  transform: scale(1);
 }
 
 .reviewuser {
@@ -1082,6 +1137,36 @@
   border: 2px solid rgb(216, 216, 216);
   border-radius: 5px;
   max-width: 80px;
+}
+.profilecardtitle button {
+  margin-top: 0.25%;
+  width: 15%;
+  background-color: rgb(65, 65, 65);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.profilecardtitle button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.profilecardtitle button:active {
+  transform: scale(0.95);
+}
+.profilecardtitle button:disabled {
+  opacity: 0.35;
+}
+.profilecardtitle button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.profilecardtitle button:disabled:active {
+  transform: scale(1);
 }
 
 .profilecardsubtitle {

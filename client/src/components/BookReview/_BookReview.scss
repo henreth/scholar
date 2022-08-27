@@ -39,6 +39,39 @@
   div {
     margin-left: -4px;
   }
+  button {
+    background-color: s.$dark;
+    color: s.$text;
+    border: none;
+    font-size: 15px;
+    padding: 3.5px 7.5px;
+    border-radius: calc(s.$radius/1.5);
+    cursor: pointer;
+    transition: 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: s.$primary;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: (0.15);
+
+      &:hover {
+        transform: scale(1);
+        cursor: default;
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+
 }
 .reviewuser{
   cursor: pointer;
