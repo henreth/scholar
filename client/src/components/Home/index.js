@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react';
-import Auth from '../Auth/Auth';
-import HomeShelfContainer from "../HomeShelfContainer/HomeShelfContainer";
+import Auth from '../Auth';
+import HomeShelfContainer from "../HomeShelfContainer";
 
 export default function Home({ user, setUser, userShelves,setUserShelves, setBookClubs }) {
     document.title = 'Scholar'

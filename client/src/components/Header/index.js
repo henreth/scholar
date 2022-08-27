@@ -78,10 +78,10 @@ export default function Header({ user, setUser,setUserShelves }) {
 
     let dropDownTriangle = showProfileMenu ? '▼' : '▲'
 
-    let userProfileButton = user.username ? <>
-        <img className='profile pic' onClick={profileClick} src={user.profile_picture} />
-        <div className='profile drop' onClick={profileClick}>{dropDownTriangle}</div>
-    </> : null;
+    let userProfileButton = user.username ? <div className="profileMenuButton" onClick={profileClick}>
+        <img className='profile pic'  src={user.profile_picture} />
+        <div className='profile drop' >{dropDownTriangle}</div>
+    </div> : null;
 
     return (
         <div className="header-container">

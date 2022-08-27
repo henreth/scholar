@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BookContainer from "../BookContainer/BookContainer";
+import BookContainer from "../BookContainer";
 
 export default function HomeShelfContainer({ shelf }) {
     let [clickedTitle, setClickedTitle] = useState(true)

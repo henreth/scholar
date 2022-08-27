@@ -5,8 +5,8 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
   background-color: rgb(40, 40, 40);
   height: 850px;
   padding: 50px;
@@ -14,16 +14,17 @@
 }
 
 .profileCardTop {
+  width: 100%;
   background-color: s.$primary;
-  border-radius: s.$radius;
-  height: 63.5%;
+  border-radius: s.$radius s.$radius 0px 0px;
+  height: 60%;
 }
 .profileCardBottom {
   background-color: s.$primary;
   border-radius: s.$radius;
-  height: 36.5%;
+  height: 40%;
 
-  .reviewContainer{
+  .reviewContainer {
     height: inherit;
   }
 }
@@ -32,10 +33,20 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+
+  img {
+    height: 80px;
+    margin: 10px 10px 0px 10px;
+    border: 2px solid s.$text;
+    border-radius: s.$radius;
+    max-width: 80px;
+  }
 }
 
 .profilecardsubtitle {
-  margin-left: 5%;
+  margin-left: 100px;
+  margin-top: -20px;
+  color: rgba(s.$text, 0.85);
 }
 
 .south {
@@ -43,20 +54,26 @@
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 0.5%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
 
-  h3{
+  h3 {
     border-bottom: 2px solid grey;
   }
 }
 
 .profileDisplayAllShelves {
-//   margin-top: -1.5%;
+  //   margin-top: -1.5%;
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
   margin-bottom: 1%;
+
+  &::-webkit-scrollbar {
+    // display: none;
+    height: 5px;
+  }
 }
+
 .profileShelfBookCard {
   margin-right: 2.5%;
   display: flex;
@@ -83,15 +100,61 @@
       height: 110px;
     }
 
-    .bookTitle{
-        font-size: smaller;
+    .bookTitle {
+      font-size: smaller;
     }
 
-    .bookAuthor{}
+    .bookAuthor {
+    }
   }
 }
 
-.profilepage{
-    height: 150%;
-    overflow-y: scroll;
+.profilepage {
+  height: 150%;
+  overflow-y: scroll;
+}
+
+.inputCard{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.inputRow{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.inputColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input[type=url],
+  input[type="text"] {
+    background-color: s.$dark-alt;
+    border: none;
+    color: s.$text;
+    margin-right: 10px;
+    font-size: 23px;
+    padding: 2.5px;
+    border-radius: calc(s.$radius/1.5);
+    width:150px;
+
+  }
+
+  input[type=url]{
+    width:750px;
+  }
+
+  &.url{
+    align-items: flex-start;
+    div{
+      margin-left: 35px;
+    }
+  }
+}
+
+.userInfoInput {
 }

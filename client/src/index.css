@@ -179,21 +179,30 @@
 .profile {
   cursor: pointer;
   margin-left: 5%;
-  margin-right: -3.5%;
   transition: 0.25s;
 }
 .profile.pic {
-  filter: invert(90%);
   height: 35px;
   border-radius: 7.5px;
   border: 2px solid rgb(63, 63, 63);
 }
 .profile.pic:hover {
-  filter: invert(100%);
-  border-color: black;
+  border-color: white;
 }
 .profile.drop {
   font-size: 12px;
+}
+
+.profileMenuButton {
+  cursor: pointer;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profileMenuButton:hover {
+  border-color: white !important;
+  color: white;
 }
 
 .profile-menu {
@@ -201,7 +210,7 @@
   position: absolute;
   text-align: right;
   top: 8.5%;
-  left: 85%;
+  left: 90%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.45s ease-in-out forwards;
@@ -649,7 +658,7 @@
 .reviewprofilepic {
   height: 25px;
   border-radius: 7.5px;
-  filter: invert(0.75);
+  border: 2px solid;
 }
 
 .reviewbuttonlabel {
@@ -1038,8 +1047,8 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
   background-color: rgb(40, 40, 40);
   height: 850px;
   padding: 50px;
@@ -1047,15 +1056,16 @@
 }
 
 .profileCardTop {
+  width: 100%;
   background-color: rgba(128, 128, 128, 0.467);
-  border-radius: 5px;
-  height: 63.5%;
+  border-radius: 5px 5px 0px 0px;
+  height: 60%;
 }
 
 .profileCardBottom {
   background-color: rgba(128, 128, 128, 0.467);
   border-radius: 5px;
-  height: 36.5%;
+  height: 40%;
 }
 .profileCardBottom .reviewContainer {
   height: inherit;
@@ -1066,9 +1076,18 @@
   flex-direction: row;
   align-items: flex-end;
 }
+.profilecardtitle img {
+  height: 80px;
+  margin: 10px 10px 0px 10px;
+  border: 2px solid rgb(216, 216, 216);
+  border-radius: 5px;
+  max-width: 80px;
+}
 
 .profilecardsubtitle {
-  margin-left: 5%;
+  margin-left: 100px;
+  margin-top: -20px;
+  color: rgba(216, 216, 216, 0.85);
 }
 
 .south {
@@ -1076,7 +1095,7 @@
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 0.5%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
 }
 .south h3 {
   border-bottom: 2px solid grey;
@@ -1087,6 +1106,9 @@
   flex-direction: row;
   overflow-x: scroll;
   margin-bottom: 1%;
+}
+.profileDisplayAllShelves::-webkit-scrollbar {
+  height: 5px;
 }
 
 .profileShelfBookCard {
@@ -1119,6 +1141,44 @@
 .profilepage {
   height: 150%;
   overflow-y: scroll;
+}
+
+.inputCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.inputRow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.inputColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.inputColumn input[type=url],
+.inputColumn input[type=text] {
+  background-color: rgb(65, 65, 65);
+  border: none;
+  color: rgb(216, 216, 216);
+  margin-right: 10px;
+  font-size: 23px;
+  padding: 2.5px;
+  border-radius: 3.3333333333px;
+  width: 150px;
+}
+.inputColumn input[type=url] {
+  width: 750px;
+}
+.inputColumn.url {
+  align-items: flex-start;
+}
+.inputColumn.url div {
+  margin-left: 35px;
 }
 
 body {
