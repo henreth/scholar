@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :shelves, only: [:create,:destroy]
   resources :reviews, only: [:index,:destroy,:create,:update]
   resources :reactions, only: [:destroy,:create]
-  resources :bookclubs, only: [:index,:destroy,:create,:update]
+  resources :bookclubs, only: [:index,:show,:destroy,:create,:update]
   resources :clubusers, only: [:create,:destroy]
 
   #Authentication

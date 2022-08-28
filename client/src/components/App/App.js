@@ -8,6 +8,7 @@ import BookPage from '../BookPage';
 import SearchPage from '../SearchPage';
 import Profile from '../Profile';
 import Community from '../Community';
+import BookClub from '../BookClub';
 
 export default function App() {
   let [user, setUser] = useState({})
@@ -57,6 +58,13 @@ export default function App() {
           />} />
         <Route path='/community' element={
           <Community
+            user={user}
+            setUser={setUser}
+            bookClubs={bookClubs}
+            setBookClubs={setBookClubs}
+          />} />
+        <Route path='/bookclub/:id' element={
+          <BookClub
             user={user}
             setUser={setUser}
             bookClubs={bookClubs}
