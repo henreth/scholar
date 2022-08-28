@@ -1349,7 +1349,6 @@
 .communityDisplay {
   display: flex;
   flex-direction: column;
-  background-color: pink;
   height: 130%;
   width: 80%;
   align-items: center;
@@ -1359,6 +1358,7 @@
   height: 80%;
   width: 100%;
   background-color: maroon;
+  background-color: rgb(15, 15, 15);
   padding: 30px;
   padding-top: 10px;
   color: rgb(216, 216, 216);
@@ -1366,6 +1366,7 @@
 
 .clubsContainer {
   background-color: skyblue;
+  background-color: rgb(45, 45, 45);
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -1381,22 +1382,50 @@
   padding: 30px;
   padding-bottom: 10px;
   background-color: rgb(128, 180, 128);
-  height: 350px;
-  width: 250px;
+  background: rgba(128, 128, 128, 0.467);
+  height: 375px;
+  width: 275px;
   border-radius: 7.5px;
   margin-bottom: 30px;
 }
 .bookClubCard h2 {
   margin-bottom: 0px;
+  color: white;
+}
+.bookClubCard span {
+  color: white;
 }
 .bookClubCard hr {
   width: 100%;
 }
 .bookClubCard img {
+  height: 90px;
+  width: 90px;
+  border: 3px solid;
+  border-radius: 100px;
+  padding: 3px;
+}
+.bookClubCard.addNew img {
   height: 100px;
   width: 100px;
-  border: 3px solid;
-  border-radius: 15px;
+  border: 0px solid;
+  filter: invert(100%);
+}
+.bookClubCard.addNew input[type=url],
+.bookClubCard.addNew input[type=text] {
+  background-color: rgb(65, 65, 65);
+  border: none;
+  color: rgb(216, 216, 216);
+  margin-right: 10px;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 3.3333333333px;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 5%;
+}
+.bookClubCard.addNew input[type=url] {
+  width: 225px;
 }
 
 .clubCardBottom {
@@ -1416,6 +1445,7 @@
   cursor: pointer;
   margin-right: 0.5%;
   transition: 0.25s;
+  margin-bottom: 2.5%;
 }
 .clubCardBottom button:hover {
   transform: scale(1.05);
@@ -1440,11 +1470,14 @@
   display: flex;
   flex-direction: column;
   background-color: rgb(241, 116, 158);
+  background-color: rgb(45, 45, 45);
   padding: 5%;
-  justify-content: flex-start;
+  justify-content: center;
   align-content: center;
   border-radius: 5px;
-  margin-bottom: 15%;
+  margin-bottom: 60px;
+  align-items: center;
+  text-align: center;
 }
 
 body {
