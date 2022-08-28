@@ -52,7 +52,7 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
 
 
     function handleSelectReaction(e) {
-        let includesReact = counters.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
+        let includesReact = reactions.map(reaction => (reaction.emoji === e) && (reaction.by === user.username)).includes(true)
         if (!includesReact) {
             let count = {
                 emoji: e,
@@ -92,7 +92,19 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         <GithubSelector onSelect={handleSelectReaction} />
     </div> : null;
 
-    let counterClass = madeByUser ? "reactionCounter madebyuser" : "reactionCounter"
+    let reactionsTypeCount = new Set(reactions.map(reaction=>reaction.emoji)).size
+    // console.log(reactionsTypeCount)
+    let numbers = {
+        '0':'zero',
+        '1':'one',
+        '2':'two',
+        '3':'three',
+        '4':'four',
+        '5':'five',
+        '6':'six'
+    }
+    let counterClass = (madeByUser ? "reactionCounter madebyuser" : "reactionCounter") + ' ' + numbers[reactionsTypeCount]
+    console.log("counterClass", counterClass)
 
     function handleClickProfile() {
         navigate('/profile/' + review.user.username)

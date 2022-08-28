@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import BookReview from "../BookReview/BookReview"
+import BookReview from "../BookReview"
 import BookCard from "../BookCard"
 
 export default function Profile({ user, setUser }) {

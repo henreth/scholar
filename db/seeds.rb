@@ -431,6 +431,15 @@ Review.create!([
     book_name: "Sartre",
     book_author: "Mathilde Ramadier",
   },
+  {
+    user_id: 4,
+    rating: 3,
+    text: "Meh.",
+    date: "June 10, 2022",
+    book_id: "rWgrDwAAQBAJ",
+    book_name: "Sartre",
+    book_author: "Mathilde Ramadier",
+  },
 
 ])
 
