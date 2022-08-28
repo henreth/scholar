@@ -1148,6 +1148,7 @@
   padding: 3.5px 7.5px;
   border-radius: 3.3333333333px;
   cursor: pointer;
+  margin-right: 0.5%;
   transition: 0.25s;
 }
 .profilecardtitle button:hover {
