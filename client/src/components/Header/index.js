@@ -41,8 +41,8 @@ export default function Header({ user, setUser,setUserShelves }) {
         setShowProfileMenu(false)
     }
 
-    function handleBookClubClick() {
-        navigate('/bookclubs')
+    function handleCommunityClick() {
+        navigate('/community')
         setShowProfileMenu(false)
     }
 
@@ -71,7 +71,6 @@ export default function Header({ user, setUser,setUserShelves }) {
         <div className='profile-menu' onMouseOver={handleMenuHover} onMouseOut={handleMouseOut}>
             <div className='menu-option'>⬜️ {user.username}</div>
             <div className='menu-option option' onClick={handleClickProfile}>Profile</div>
-            <div className='menu-option option'>Settings</div>
             <div className='menu-option option' onClick={handleLogOut}>Log Out</div>
         </div>
     ) : null
@@ -90,7 +89,7 @@ export default function Header({ user, setUser,setUserShelves }) {
                     <div className="headerTitle option" onClick={handleHeaderClick}>Scholar</div>
                     <div className="option" onClick={handleAboutClick}>About</div>
                     <div className="option" onClick={handleBrowseClick}>Browse</div>
-                    <div className="option" onClick={handleBookClubClick}>Community</div>
+                    <div className="option" onClick={handleCommunityClick}>Community</div>
                 </div>
                 <img className='logo' src={book} onClick={handleHeaderClick} />
                 <div className="group end">

@@ -1,5 +1,20 @@
-export default function Community(){
+import SideBar from "../Sidebar";
+
+export default function Community({user,setUser}){
+
     return (
-        <div></div>
+        <div className="mainContainer">
+            <SideBar
+                user={user}
+                setUser={setUser}
+                pageData={{}}
+                page ={'community'}
+            />
+            <div className="display"> 
+
+
+            </div>
+
+        </div>
     )
 }
