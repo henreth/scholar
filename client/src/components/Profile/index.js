@@ -49,7 +49,7 @@ export default function Profile({ user, setUser }) {
                 setProfileUser(res1.data)
                 setProfileReviews(res2.data)
                 setProfileShelves(res3.data)
-
+                console.log(res3.data)
                 setNewUsername(res1.data.username)
                 setFirstName(res1.data.first_name)
                 setLastName(res1.data.last_name)
@@ -100,7 +100,6 @@ export default function Profile({ user, setUser }) {
                                 alt='noPhoto' onClick={() => { }} />
                         </div>
                         <div className="bookCardHalf bottom">
-                            {/* <div className='bookTitle' onMouseOver={()=>{}} onMouseOut={()=>{}}></div> */}
                             <div className='bookAuthor'>There are no Books in This Shelf</div>
                         </div>
                     </div>
@@ -173,8 +172,6 @@ export default function Profile({ user, setUser }) {
         } else {
             updatedDetails['profile_picture'] = image
         }
-
-        console.log(updatedDetails)
 
         axios.patch('/users/' + user.id, updatedDetails)
           .then(r => {
