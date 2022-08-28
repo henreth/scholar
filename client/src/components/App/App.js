@@ -59,6 +59,8 @@ export default function App() {
           <Community
             user={user}
             setUser={setUser}
+            bookClubs={bookClubs}
+            setBookClubs={setBookClubs}
           />} />
         <Route path='/search/:searchTerm' element={
           <SearchPage
