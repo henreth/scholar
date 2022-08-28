@@ -1346,6 +1346,107 @@
   margin-left: 35px;
 }
 
+.communityDisplay {
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  height: 130%;
+  width: 80%;
+  align-items: center;
+  justify-content: flex-start;
+}
+.commContainer {
+  height: 80%;
+  width: 100%;
+  background-color: maroon;
+  padding: 30px;
+  padding-top: 10px;
+  color: rgb(216, 216, 216);
+}
+
+.clubsContainer {
+  background-color: skyblue;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px;
+}
+
+.bookClubCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  padding-bottom: 10px;
+  background-color: rgb(128, 180, 128);
+  height: 350px;
+  width: 250px;
+  border-radius: 7.5px;
+  margin-bottom: 30px;
+}
+.bookClubCard h2 {
+  margin-bottom: 0px;
+}
+.bookClubCard hr {
+  width: 100%;
+}
+.bookClubCard img {
+  height: 100px;
+  width: 100px;
+  border: 3px solid;
+  border-radius: 15px;
+}
+
+.clubCardBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.clubCardBottom button {
+  width: 50%;
+  background-color: rgb(65, 65, 65);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  margin-right: 0.5%;
+  transition: 0.25s;
+}
+.clubCardBottom button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.clubCardBottom button:active {
+  transform: scale(0.95);
+}
+.clubCardBottom button:disabled {
+  opacity: 0.35;
+}
+.clubCardBottom button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.clubCardBottom button:disabled:active {
+  transform: scale(1);
+}
+
+.clubDescription {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(241, 116, 158);
+  padding: 5%;
+  justify-content: flex-start;
+  align-content: center;
+  border-radius: 5px;
+  margin-bottom: 15%;
+}
+
 body {
   background-color: rgb(23, 23, 23);
   font-family: "Hind", sans-serif;

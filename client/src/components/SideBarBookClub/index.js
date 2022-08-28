@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 
-export default function SideBarBookClub({ club, book, setUser }) {
+export default function SideBarBookClub({ club, setUser, book, page }) {
     let inClub = club.books.length ? club.books.map(clubBook => clubBook.id).includes(book.id) : false
 
     let [clickedDropDown, setClickedDropDown] = useState(false)
@@ -15,9 +15,10 @@ export default function SideBarBookClub({ club, book, setUser }) {
             <div>Visit Club Page</div>
         </div>
         <div className="clubOption">
-            <div onClick={handleSubmit}>{inClub ? 'Remove from' :'Add to'} Reading List</div>
+            {page === 'bookpage' && <div onClick={handleSubmit}>{inClub ? 'Remove from' : 'Add to'} Reading List</div>}
         </div>
     </div>
+
 
     let dropDownTriangle = clickedDropDown ? '▼' : '▲'
 
@@ -28,7 +29,7 @@ export default function SideBarBookClub({ club, book, setUser }) {
                 "book_id": book.id,
             }
             axios.post('/removebookfromclub', clubUpdate)
-                .then(r => { 
+                .then(r => {
                     setUser(r.data)
                 })
             alert('This book has been removed from ' + club.name + '\s reading list.')
@@ -51,7 +52,6 @@ export default function SideBarBookClub({ club, book, setUser }) {
                 <div className="clubname">{club.name}</div>
                 <div className='dropdown'>{dropDownTriangle}</div>
             </div>
-
             {showOptions}
         </div>
     )

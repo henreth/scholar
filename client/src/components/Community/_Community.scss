@@ -1,0 +1,35 @@
+@use "../../styles" as s;
+
+.communityDisplay {
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  height: 130%;
+  width: 80%;
+  align-items: center;
+  justify-content: flex-start;
+
+  div {
+    // color: s.$text;
+  }
+}
+
+.commContainer {
+  height: 80%;
+  width: 100%;
+  // background-color: s.$bg;
+  background-color: maroon;
+  padding: 30px;
+  padding-top: 10px;
+  color: s.$text;
+}
+
+.clubsContainer {
+  background-color: skyblue;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px;
+}

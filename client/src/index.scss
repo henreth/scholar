@@ -11,6 +11,9 @@
 @use "./components/HomeShelfContainer/HomeShelfContainer";
 @use "./components/Auth/Auth";
 @use "./components/Profile/Profile";
+@use "./components/Community/Community";
+@use "./components/BookClubCard/BookClubCard";
+@use "./components/BookClub/BookClub";
 
 @use "./styles" as s;
 
