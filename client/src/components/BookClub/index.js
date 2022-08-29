@@ -14,18 +14,6 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
     const [image, setImage] = useState(bookClub.image ? bookClub.image : '')
     const [newDescription, setNewDescription] = useState(bookClub.description ? bookClub.description : '')
 
-    function handleConfirmDelete() {
-        let bookClubToDelete = { "id": id }
-        axios.post('/removebookclub', bookClubToDelete)
-            .then(r => {
-                let updatedBookClubs = bookClubs.filter(clubs => clubs.id !== id)
-                setBookClubs(updatedBookClubs)
-                alert(bookClub + ' has been deleted!')
-                setClickedDelete(false)
-                navigate('/community')
-            })
-    }
-
     function handleDeleteClick() {
         setClickedDelete(!clickedDelete)
     }
@@ -192,6 +180,21 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
     let bookClubButtons = inClub ? buttonOptions : <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>
 
     let displayBookClubButtons = user.username ? bookClubButtons : null
+
+    function handleConfirmDelete() {
+        let bookClubToDelete = { "id": id }
+        axios.post('/removebookclub', bookClubToDelete)
+            .then(r => {
+                let updatedBookClubs = bookClubs.filter(club => club.id != Number(id))
+                let clubUserId = userBookClubs.find(clubUser => clubUser.bookclub.id == id).id
+                let updatedUserBookClubs = userBookClubs.filter(clubs => clubs.id !== clubUserId)
+                setBookClubs(updatedBookClubs)
+                setUserBookClubs(updatedUserBookClubs)
+                alert(bookClub.name + ' has been deleted!')
+                setClickedDelete(false)
+                navigate('/community')
+            })
+    }
     return (
         <div className='profileContainer'>
             <div className="profileCardTop">

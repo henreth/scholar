@@ -389,7 +389,9 @@ Shelf.create!([
   {
     user_id: 1,
     name: "Did Not Finish",
-    books: [],
+    books: [
+      
+    ],
   },
 ])
 

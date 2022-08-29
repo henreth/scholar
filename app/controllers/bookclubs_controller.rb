@@ -55,7 +55,7 @@ class BookclubsController < ApplicationController
   end
 
   def destroy
-    bookclub = Bookclub.find_by(params[:id])
+    bookclub = Bookclub.find(params[:id])
     bookclub.destroy
     render json: bookclub
   end
