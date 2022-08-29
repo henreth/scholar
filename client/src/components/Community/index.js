@@ -5,8 +5,8 @@ import SideBar from "../Sidebar";
 
 export default function Community({ user, setUser, bookClubs, setBookClubs, userBookClubs, setUserBookClubs }) {
     document.title = 'Scholar - Book Clubs'
-    let [search,setSearch] = useState('')
-    function handleSearchChange(e){
+    let [search, setSearch] = useState('')
+    function handleSearchChange(e) {
         setSearch(e.target.value)
     }
     let [clickedCreate, setClickedCreate] = useState(false)
@@ -17,7 +17,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
     let [newName, setNewName] = useState('')
     let [newDescription, setNewDescription] = useState('')
 
-    let bookClubsToDisplay = bookClubs.filter(club=>club.name.toLowerCase().includes(search.toLowerCase())).map(club => {
+    let bookClubsToDisplay = bookClubs.filter(club => club.name.toLowerCase().includes(search.toLowerCase())).map(club => {
 
         return (
             <BookClubCard
@@ -32,33 +32,32 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
         if (newName) { newBookClub['name'] = newName }
         if (newImage) { newBookClub['image'] = newName }
         if (newDescription) { newBookClub['description'] = newDescription }
-        if (newBookClub.name && newBookClub.description) {
-            axios.post('/bookclubs', newBookClub)
-                .then(r => {
-                    setBookClubs([...bookClubs, r.data])
-                    // console.log(r.data)
-                    let newClubUser = {
-                        id: r.data.clubusers[0].id,
-                        user: user,
-                        bookclub: r.data
-                    }
-                    console.log(newClubUser)
-                    setUserBookClubs([...userBookClubs, newClubUser])
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        console.log(error.response.data.errors);
-                        let msg = '';
-                        error.response.data.errors.map(error => { msg += error + '\n' })
-                        alert(msg)
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log('Error', error.message);
-                    }
-                });
-        }
-
+        axios.post('/bookclubs', newBookClub)
+            .then(r => {
+                setBookClubs([...bookClubs, r.data])
+                let newClubUser = {
+                    id: r.data.clubusers[0].id,
+                    user: user,
+                    bookclub: r.data
+                }
+                setUserBookClubs([...userBookClubs, newClubUser])
+                setClickedCreate(false)
+                setNewImage('')
+                setNewName('')
+                setNewDescription('')
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    console.log(error.response.data.errors);
+                    let msg = '';
+                    error.response.data.errors.map(error => { msg += error + '\n' })
+                    alert(msg)
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+            });
     }
 
     return (
