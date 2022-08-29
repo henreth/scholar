@@ -3469,7 +3469,7 @@ for bookclub in Bookclub.all
 end
 
 emojis = ["🎉", "👍", "❤️", "😄"]
-for user in User.all
+for user in User.all[1..User.all.length]
   Clubuser.create!([
     {
       user_id: user.id,
