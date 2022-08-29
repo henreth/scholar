@@ -104,7 +104,6 @@ export default function BookReview({ user, madeByUser, review, bookReviews, setB
         '6':'six'
     }
     let counterClass = (madeByUser ? "reactionCounter madebyuser" : "reactionCounter") + ' ' + numbers[reactionsTypeCount]
-    console.log("counterClass", counterClass)
 
     function handleClickProfile() {
         navigate('/profile/' + review.user.username)
