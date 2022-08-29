@@ -128,7 +128,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
             navigate('/profile/' + user.username)
         }
         return (
-            <div className="profileShelfBookCard">
+            <div className="profileShelfBookCard bookClubUser">
                 <img src={user.profile_picture} />
                 <div className="profileShelfBookCardTitle clubUserCard" onClick={handleClickProfile}>{user.username}</div>
                 <div className="profileShelfBookCardSubTitle" >{user.first_name} {user.last_name}</div>
@@ -198,7 +198,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
     }
     
     return (
-        <div className='profileContainer'>
+        <div className='profileContainer bookClubContainer'>
             <div className="profileCardTop">
                 <div className="north">
                     <div className="profilecardtitle">
@@ -222,7 +222,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
                     </div>
                 </div>
             </div >
-            <div className="profileCardBottom">
+            <div className="profileCardBottom clubCardBottom">
                 <div className="bookClubcontainer">
                     <h1>Reading List:</h1>
                     {booksToDisplay}
