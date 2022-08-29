@@ -13,18 +13,21 @@ import BookClub from '../BookClub';
 export default function App() {
   let [user, setUser] = useState({})
   let [userShelves,setUserShelves] = useState([])
+  let [userBookClubs,setUserBookClubs] = useState([])
   let [searchResults, setSearchResults] = useState({})
   let [bookClubs,setBookClubs] = useState([])
 
   useEffect(() => {
     let meReq = axios.get('/me')
-    let shelvesReq = axios.get('/usershelves')
+    let userShelvesReq = axios.get('/usershelves')
+    let userBookClubsReq = axios.get('/userclubusers')
     let bookClubsReq = axios.get('/bookclubs')
-    axios.all([meReq,shelvesReq,bookClubsReq])
-      .then(axios.spread((res1,res2,res3) => {
+    axios.all([meReq,userShelvesReq,userBookClubsReq,bookClubsReq,])
+      .then(axios.spread((res1,res2,res3,res4) => {
         setUser(res1.data)
         setUserShelves(res2.data)
-        setBookClubs(res3.data)
+        setUserBookClubs(res3.data)
+        setBookClubs(res4.data)
       }))
   }, [])
 
@@ -55,6 +58,8 @@ export default function App() {
             setUser={setUser}
             userShelves={userShelves}
             setUserShelves={setUserShelves}
+            userBookClubs={userBookClubs}
+            setUserBookClubs={setUserBookClubs}
           />} />
         <Route path='/community' element={
           <Community
@@ -62,6 +67,8 @@ export default function App() {
             setUser={setUser}
             bookClubs={bookClubs}
             setBookClubs={setBookClubs}
+            userBookClubs={userBookClubs}
+            setUserBookClubs={setUserBookClubs}
           />} />
         <Route path='/bookclub/:id' element={
           <BookClub

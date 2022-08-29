@@ -34,40 +34,6 @@
     padding: 3px;
   }
 
-  &.addNew {
-    img {
-      height: 100px;
-      width: 100px;
-      border: 0px solid;
-      filter: invert(100%);
-    }
-    input[type="url"],
-    input[type="text"] {
-      background-color: s.$dark-alt;
-      border: none;
-      color: s.$text;
-      margin-right: 10px;
-      font-size: 16px;
-      padding: 5px;
-      border-radius: calc(s.$radius/1.5);
-      width: 200px;
-      text-align: center;
-      margin-bottom: 5%;
-    }
-
-
-    input[type="url"]{
-      width: 225px;
-    }
-  }
-}
-
-.clubCardBottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
   button {
     width: 50%;
     background-color: s.$dark-alt;
@@ -80,7 +46,6 @@
     margin-right: 0.5%;
     transition: 0.25s;
     margin-bottom: 2.5%;
-
 
     &:hover {
       transform: scale(1.05);
@@ -105,19 +70,53 @@
       }
     }
   }
+
+  &.addNew {
+    img {
+      height: 100px;
+      width: 100px;
+      border: 0px solid;
+      filter: invert(100%);
+    }
+    input[type="url"],
+    input[type="text"] {
+      background-color: s.$dark-alt;
+      border: none;
+      color: s.$text;
+      margin-right: 10px;
+      font-size: 16px;
+      padding: 5px;
+      border-radius: calc(s.$radius/1.5);
+      width: 200px;
+      text-align: center;
+      margin-bottom: 5%;
+    }
+
+    input[type="url"] {
+      width: 225px;
+    }
+  }
+}
+
+.clubCardBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .clubDescription {
   display: flex;
   flex-direction: column;
-
+  height: 100px;
+  width: 200px;
   background-color: rgb(241, 116, 158);
   background-color: s.$dark;
-  padding: 5%;
+  padding: 15px;
   justify-content: center;
   align-content: center;
   border-radius: s.$radius;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   align-items: center;
   text-align: center;
 }

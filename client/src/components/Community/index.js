@@ -1,9 +1,17 @@
+import axios from "axios";
 import { useState } from "react";
 import BookClubCard from "../BookClubCard";
 import SideBar from "../Sidebar";
 
-export default function Community({ user, setUser, bookClubs, setBookClubs }) {
+export default function Community({ user, setUser, bookClubs, setBookClubs,userBookClubs,setUserBookClubs }) {
     document.title = 'Scholar - Book Clubs'
+    let [clickedCreate, setClickedCreate] = useState(false)
+    function handleClickCreate() {
+        setClickedCreate(!clickedCreate)
+    }
+    let [newImage, setNewImage] = useState('')
+    let [newName, setNewName] = useState('')
+    let [newDescription, setNewDescription] = useState('')
 
     let bookClubsToDisplay = bookClubs.map(club => {
 
@@ -14,9 +22,40 @@ export default function Community({ user, setUser, bookClubs, setBookClubs }) {
         )
     })
 
-    let [clickedCreate, setClickedCreate] = useState(false)
-    function handleClickCreate() {
-        setClickedCreate(!clickedCreate)
+    function handleSubmit() {
+        let newBookClub = {}
+        newBookClub['host'] = user
+        if (newName) { newBookClub['name'] = newName }
+        if (newImage) { newBookClub['image'] = newName }
+        if (newDescription) { newBookClub['description'] = newDescription }
+        // console.log(newBookClub)
+        if (newBookClub.name && newBookClub.description) {
+            axios.post('/bookclubs', newBookClub)
+                .then(r => {
+                    setBookClubs([...bookClubs, r.data])
+                    // console.log(r.data)
+                    let newClubUser = {
+                        id:r.data.clubusers[0].id,
+                        user:user,
+                        bookclub:r.data
+                    }
+                    console.log(newClubUser)
+                    setUserBookClubs([...userBookClubs,newClubUser])
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.data.errors);
+                        let msg = '';
+                        error.response.data.errors.map(error => { msg += error + '\n' })
+                        alert(msg)
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+                });        
+        }
+
     }
 
     return (
@@ -26,6 +65,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs }) {
                 setUser={setUser}
                 pageData={{}}
                 page={'community'}
+                userBookClubs={userBookClubs}
             />
             <div className="communityDisplay">
                 <div className="commContainer">
@@ -37,29 +77,33 @@ export default function Community({ user, setUser, bookClubs, setBookClubs }) {
                             <input
                                 type='url'
                                 placeholder="Image Link"
+                                value={newImage}
+                                onChange={(e) => { setNewImage(e.target.value) }}
                             />
                             <input
                                 type='text'
                                 placeholder="Name"
+                                value={newName}
+                                onChange={(e) => { setNewName(e.target.value) }}
                             />
                             <hr></hr>
                             <div className="clubCardBottom">
                                 <input
                                     type='text'
                                     placeholder="Description"
+                                    value={newDescription}
+                                    onChange={(e) => { setNewDescription(e.target.value) }}
                                 />
+                                <button onClick={handleSubmit}>Submit</button>
                                 <button onClick={handleClickCreate}>Cancel</button>
-                                <button onClick={handleClickCreate}>Submit</button>
                             </div>
                         </div> :
                             <div className="bookClubCard addNew">
                                 <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
                                 <h2>New Club</h2>
                                 <hr></hr>
-                                <div className="clubCardBottom">
-                                    <div className="clubDescription">Click below to create a book club!</div>
-                                    <button onClick={handleClickCreate}>Create</button>
-                                </div>
+                                <div className="clubDescription">Click below to create a book club!</div>
+                                <button onClick={handleClickCreate}>Create</button>
                             </div>}
                     </div>
                 </div>
