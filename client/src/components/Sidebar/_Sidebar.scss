@@ -1,3 +1,32 @@
-@use '../../styles' as s;
+@use "../../styles" as s;
 
 
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(67, 174, 219);
+    background-color: s.$primary;
+    height: 125%;
+    width: 20%;
+    align-items: center;
+    overflow-y: scroll;
+  
+    h2 {
+      color: s.$text;
+    }
+  }
+
+.sideBarBookClubsTitle {
+  margin-bottom: 0%;
+  background-color: s.$dark-alt;
+  padding: 10px;
+  border-radius: s.$radius s.$radius 0px 0px;
+}
+
+.sideBarBookClubsContainer {
+  background-color: s.$dark;
+  padding: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px 0px s.$radius s.$radius;
+}

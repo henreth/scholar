@@ -7,6 +7,7 @@
 @use "./components/FeaturedBook/FeaturedBook";
 @use "./components/SearchPage/SearchPage";
 @use "./components/BookReview/BookReview";
+@use "./components/SideBar/SideBar";
 @use "./components/SideBarBookClub/SideBarBookClub";
 @use "./components/HomeShelfContainer/HomeShelfContainer";
 @use "./components/Auth/Auth";
@@ -57,20 +58,6 @@ body {
   align-content: center;
   // align-items: center;
   height: 745px;
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(67, 174, 219);
-  background-color: s.$primary;
-  height: 100vh;
-  width: 20%;
-  align-items: center;
-
-  h2 {
-    color: s.$text;
-  }
 }
 
 .display {
