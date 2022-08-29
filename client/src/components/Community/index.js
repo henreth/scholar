@@ -3,8 +3,12 @@ import { useState } from "react";
 import BookClubCard from "../BookClubCard";
 import SideBar from "../Sidebar";
 
-export default function Community({ user, setUser, bookClubs, setBookClubs,userBookClubs,setUserBookClubs }) {
+export default function Community({ user, setUser, bookClubs, setBookClubs, userBookClubs, setUserBookClubs }) {
     document.title = 'Scholar - Book Clubs'
+    let [search,setSearch] = useState('')
+    function handleSearchChange(e){
+        setSearch(e.target.value)
+    }
     let [clickedCreate, setClickedCreate] = useState(false)
     function handleClickCreate() {
         setClickedCreate(!clickedCreate)
@@ -13,7 +17,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs,userB
     let [newName, setNewName] = useState('')
     let [newDescription, setNewDescription] = useState('')
 
-    let bookClubsToDisplay = bookClubs.map(club => {
+    let bookClubsToDisplay = bookClubs.filter(club=>club.name.toLowerCase().includes(search.toLowerCase())).map(club => {
 
         return (
             <BookClubCard
@@ -28,19 +32,18 @@ export default function Community({ user, setUser, bookClubs, setBookClubs,userB
         if (newName) { newBookClub['name'] = newName }
         if (newImage) { newBookClub['image'] = newName }
         if (newDescription) { newBookClub['description'] = newDescription }
-        // console.log(newBookClub)
         if (newBookClub.name && newBookClub.description) {
             axios.post('/bookclubs', newBookClub)
                 .then(r => {
                     setBookClubs([...bookClubs, r.data])
                     // console.log(r.data)
                     let newClubUser = {
-                        id:r.data.clubusers[0].id,
-                        user:user,
-                        bookclub:r.data
+                        id: r.data.clubusers[0].id,
+                        user: user,
+                        bookclub: r.data
                     }
                     console.log(newClubUser)
-                    setUserBookClubs([...userBookClubs,newClubUser])
+                    setUserBookClubs([...userBookClubs, newClubUser])
                 })
                 .catch(function (error) {
                     if (error.response) {
@@ -53,7 +56,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs,userB
                     } else {
                         console.log('Error', error.message);
                     }
-                });        
+                });
         }
 
     }
@@ -69,7 +72,16 @@ export default function Community({ user, setUser, bookClubs, setBookClubs,userB
             />
             <div className="communityDisplay">
                 <div className="commContainer">
-                    <h1>Book Clubs:</h1>
+                    <div className="communityTitle">
+                        <h1>Book Clubs:</h1>
+                        <input
+                            className="searchBar"
+                            type='text'
+                            placeholder="Search by Name"
+                            value={search}
+                            onChange={handleSearchChange}
+                        />
+                    </div>
                     <div className="clubsContainer">
                         {bookClubsToDisplay}
                         {clickedCreate ? <div className="bookClubCard addNew">
