@@ -1,9 +1,9 @@
 import SideBarBookClub from "../SideBarBookClub"
 
-export default function SideBar({user,setUser,pageData,page}) {
+export default function SideBar({user,setUser,pageData,page,userBookClubs}) {
 
     if (!user.username) return null 
-    let bookClubs = user.clubusers ? user.clubusers.map(clubuser => clubuser.bookclub) : []
+    let bookClubs = userBookClubs ? userBookClubs.map(clubuser => clubuser.bookclub) : []
 
     let bookClubsToDisplay = bookClubs.length ? bookClubs.map(club => {
         return (

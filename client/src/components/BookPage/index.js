@@ -9,7 +9,7 @@ import SideBar from "../Sidebar"
 
 // ! CREATE WAY TO SORT REVIEWS BY DATE/RATING
 
-export default function BookPage({ user, setUser, userShelves, setUserShelves }) {
+export default function BookPage({ user, setUser, userShelves, setUserShelves,userBookClubs }) {
     let params = useParams()
     let id = params.id
     let [pageData, setPageData] = useState({})
@@ -192,6 +192,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves })
                 setUser={setUser}
                 pageData={pageData}
                 page={'bookpage'}
+                userBookClubs={userBookClubs}
             />
             <div className="display">
                 <FeaturedBook

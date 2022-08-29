@@ -10,12 +10,10 @@ export default function BookClubCard({ club }) {
         <div className="bookClubCard">
             <img src={club.image} />
             <h2>{club.name}</h2>
-            <div>Host: {club.host.username}</div>
+            <div><b>Host:</b> <span>{club.host.username}</span></div>
             <hr></hr>
-            <div className="clubCardBottom">
                 <div className="clubDescription">{club.description}</div>
                 <button onClick={handleClickVisit}>Visit</button>
-            </div>
         </div>
     )
 }

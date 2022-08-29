@@ -1,5 +1,9 @@
 class ClubusersController < ApplicationController
 
+    def user_clubusers
+        render json: @current_user.clubusers
+    end
+
     def create
         clubuser = Clubuser.create!(clubuser_params)
         clubuser.save

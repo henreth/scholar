@@ -1349,16 +1349,17 @@
 .communityDisplay {
   display: flex;
   flex-direction: column;
-  background-color: pink;
   height: 130%;
   width: 80%;
   align-items: center;
   justify-content: flex-start;
+  overflow-y: hidden;
 }
 .commContainer {
-  height: 80%;
+  height: 100%;
   width: 100%;
   background-color: maroon;
+  background-color: rgb(15, 15, 15);
   padding: 30px;
   padding-top: 10px;
   color: rgb(216, 216, 216);
@@ -1366,12 +1367,26 @@
 
 .clubsContainer {
   background-color: skyblue;
-  height: 100%;
+  background-color: rgb(45, 45, 45);
+  height: 87.5%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 30px;
+  overflow-y: scroll;
+  border-radius: 5px;
+}
+
+.communityTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.communityTitle .searchBar {
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 .bookClubCard {
@@ -1381,31 +1396,30 @@
   padding: 30px;
   padding-bottom: 10px;
   background-color: rgb(128, 180, 128);
-  height: 350px;
-  width: 250px;
+  background: rgba(128, 128, 128, 0.467);
+  height: 375px;
+  width: 275px;
   border-radius: 7.5px;
   margin-bottom: 30px;
 }
 .bookClubCard h2 {
   margin-bottom: 0px;
+  color: white;
+}
+.bookClubCard span {
+  color: white;
 }
 .bookClubCard hr {
   width: 100%;
 }
 .bookClubCard img {
-  height: 100px;
-  width: 100px;
+  height: 90px;
+  width: 90px;
   border: 3px solid;
-  border-radius: 15px;
+  border-radius: 100px;
+  padding: 3px;
 }
-
-.clubCardBottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.clubCardBottom button {
+.bookClubCard button {
   width: 50%;
   background-color: rgb(65, 65, 65);
   color: rgb(216, 216, 216);
@@ -1416,35 +1430,70 @@
   cursor: pointer;
   margin-right: 0.5%;
   transition: 0.25s;
+  margin-bottom: 2.5%;
 }
-.clubCardBottom button:hover {
+.bookClubCard button:hover {
   transform: scale(1.05);
   background-color: rgba(128, 128, 128, 0.467);
 }
-.clubCardBottom button:active {
+.bookClubCard button:active {
   transform: scale(0.95);
 }
-.clubCardBottom button:disabled {
+.bookClubCard button:disabled {
   opacity: 0.35;
 }
-.clubCardBottom button:disabled:hover {
+.bookClubCard button:disabled:hover {
   transform: scale(1);
   cursor: default;
   background-color: rgb(65, 65, 65);
 }
-.clubCardBottom button:disabled:active {
+.bookClubCard button:disabled:active {
   transform: scale(1);
+}
+.bookClubCard.addNew img {
+  height: 100px;
+  width: 100px;
+  border: 0px solid;
+  filter: invert(100%);
+}
+.bookClubCard.addNew input[type=url],
+.bookClubCard.addNew input[type=text] {
+  background-color: rgb(65, 65, 65);
+  border: none;
+  color: rgb(216, 216, 216);
+  margin-right: 10px;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 3.3333333333px;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 5%;
+}
+.bookClubCard.addNew input[type=url] {
+  width: 225px;
+}
+
+.clubCardBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .clubDescription {
   display: flex;
   flex-direction: column;
+  height: 100px;
+  width: 200px;
   background-color: rgb(241, 116, 158);
-  padding: 5%;
-  justify-content: flex-start;
+  background-color: rgb(45, 45, 45);
+  padding: 15px;
+  justify-content: center;
   align-content: center;
   border-radius: 5px;
-  margin-bottom: 15%;
+  margin-bottom: 30px;
+  align-items: center;
+  text-align: center;
 }
 
 body {
