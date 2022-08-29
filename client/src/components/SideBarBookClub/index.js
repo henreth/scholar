@@ -1,7 +1,9 @@
 import axios from "axios"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function SideBarBookClub({ club, setUser, book, page }) {
+    let navigate = useNavigate()
     let inClub = club.books.length ? club.books.map(clubBook => clubBook.id).includes(book.id) : false
 
     let [clickedDropDown, setClickedDropDown] = useState(false)
@@ -10,13 +12,21 @@ export default function SideBarBookClub({ club, setUser, book, page }) {
         setClickedDropDown(!clickedDropDown)
     }
 
+    function handleClickVisit() {
+        navigate('/bookclub/' + club.id)
+    }
+
     let showOptions = clickedDropDown && <div>
-        <div className="clubOption">
-            <div>Visit Club Page</div>
+        {/* <hr></hr> */}
+        <div className="sideBarBookClubContent">
+            <div className="clubOption">
+                <div onClick={handleClickVisit}>Visit Club Page</div>
+            </div>
+            <div className="clubOption">
+                {page === 'bookpage' && <div onClick={handleSubmit}>{inClub ? 'Remove from' : 'Add to'} Reading List</div>}
+            </div>
         </div>
-        <div className="clubOption">
-            {page === 'bookpage' && <div onClick={handleSubmit}>{inClub ? 'Remove from' : 'Add to'} Reading List</div>}
-        </div>
+        {/* <hr></hr> */}
     </div>
 
 

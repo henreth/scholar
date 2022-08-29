@@ -11,6 +11,7 @@
   height: 375px;
   width: 275px;
   border-radius: calc(s.$radius * 1.5);
+  margin-right: 5px;
   margin-bottom: 30px;
 
   h2 {
@@ -72,6 +73,8 @@
   }
 
   &.addNew {
+    background-color: darkgreen;
+    background-color: rgba(s.$primary, 1);
     img {
       height: 100px;
       width: 100px;

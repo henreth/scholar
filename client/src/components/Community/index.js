@@ -113,8 +113,8 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
                         />
                     </div>
                     <div className="clubsContainer">
-                        {bookClubsToDisplay}
                         {displayCreateNewBookClub}
+                        {bookClubsToDisplay}
                     </div>
                 </div>
 

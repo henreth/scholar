@@ -12,6 +12,8 @@
     }
 
     .clubname{
+        padding-top: 5px;
+        padding-bottom: 5px;
         &:hover{
             color: white;
             cursor: pointer;
@@ -19,7 +21,7 @@
     }
 
     .dropdown{
-        font-size: 23.5px;
+        font-size: 15px;
         &:hover{
             color: white;
             cursor: pointer;
@@ -51,4 +53,11 @@
         border: none;
 
     }
+}
+
+.sideBarBookClubContent{
+    background-color: s.$dark-alt;
+    border-radius: 0px 0px s.$radius s.$radius;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
