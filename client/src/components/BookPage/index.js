@@ -52,6 +52,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves, u
             .then(axios.spread((res1, res2) => {
                 document.title = 'Scholar - ' + res1.data.volumeInfo.title
                 setPageData(res1.data)
+                console.log(res1.data)
                 setBookReviews(res2.data)
             }))
     }, [user])

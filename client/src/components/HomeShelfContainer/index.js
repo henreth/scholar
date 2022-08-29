@@ -1,21 +1,27 @@
 import { useState } from "react";
 import BookContainer from "../BookContainer";
+import BookClubCard from "../BookClubCard";
 
-export default function HomeShelfContainer({ shelf }) {
+export default function HomeShelfContainer({ shelf, type }) {
     let [clickedTitle, setClickedTitle] = useState(true)
     function handleClickShelfName() {
         setClickedTitle(!clickedTitle)
     }
+    let displayBookClub = type === 'club' ? <BookClubCard club={shelf} /> : null
+
     let displayBooksInShelf = clickedTitle ? <div className="homeshelfrow">
+        {displayBookClub}
         <BookContainer
-            books={shelf.books} />
+            books={shelf.books}
+        />
     </div> : null;
 
     let dropDownTriangle = clickedTitle ? '▼' : '▲'
 
+
     return (
         <div className="homeshelfcontainer">
-                <h1 onClick={handleClickShelfName}>{shelf.name}: <span>{dropDownTriangle}</span></h1>
+            <h2 onClick={handleClickShelfName}>{shelf.name}: <span>{dropDownTriangle}</span></h2>
             {displayBooksInShelf}
         </div>
     )

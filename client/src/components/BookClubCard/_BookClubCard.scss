@@ -17,6 +17,8 @@
   h2 {
     margin-bottom: 0px;
     color: white;
+    text-align: center;
+    cursor: default;
   }
 
   span {
@@ -43,7 +45,7 @@
     font-size: 15px;
     padding: 3.5px 7.5px;
     border-radius: calc(s.$radius/1.5);
-    cursor: pointer;
+    cursor: pointer !important;
     margin-right: 0.5%;
     transition: 0.25s;
     margin-bottom: 2.5%;

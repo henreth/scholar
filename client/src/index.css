@@ -948,17 +948,21 @@
   background-color: rgb(0, 0, 0);
   border-radius: 5px;
 }
-.homeshelfcontainer h1 {
+.homeshelfcontainer h2 {
+  color: rgba(216, 216, 216, 0.75);
   background-color: rgb(15, 15, 15);
   margin-bottom: -1%;
   transition: 0.5s;
 }
-.homeshelfcontainer h1:hover {
+.homeshelfcontainer h2:hover {
   cursor: pointer;
   color: white;
 }
-.homeshelfcontainer h1 span {
+.homeshelfcontainer h2 span {
   font-size: 20px;
+}
+.homeshelfcontainer .bookClubCard h2 {
+  background-color: transparent;
 }
 
 * {
@@ -1555,6 +1559,8 @@
 .bookClubCard h2 {
   margin-bottom: 0px;
   color: white;
+  text-align: center;
+  cursor: default;
 }
 .bookClubCard span {
   color: white;
@@ -1577,7 +1583,7 @@
   font-size: 15px;
   padding: 3.5px 7.5px;
   border-radius: 3.3333333333px;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-right: 0.5%;
   transition: 0.25s;
   margin-bottom: 2.5%;
