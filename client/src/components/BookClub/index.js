@@ -177,6 +177,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
         {yourClub && !clickedEdit ? <button onClick={handleDeleteClick}>Delete Club</button> : null}
         {yourClub ? null : <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>}
     </div>
+    
     let bookClubButtons = inClub ? buttonOptions : <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>
 
     let displayBookClubButtons = user.username ? bookClubButtons : null

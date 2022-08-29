@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookClubCard from "../BookClubCard";
 import SideBar from "../Sidebar";
 
@@ -17,8 +17,15 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
     let [newName, setNewName] = useState('')
     let [newDescription, setNewDescription] = useState('')
 
-    let bookClubsToDisplay = bookClubs.filter(club => club.name.toLowerCase().includes(search.toLowerCase())).sort((a,b)=>a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map(club => {
+    useEffect(() => {
+        let bookClubsReq = axios.get('/bookclubs')
+        axios.all([bookClubsReq,])
+          .then(axios.spread((res1) => {
+            setBookClubs(res1.data)
+          }))
+      }, [])
 
+    let bookClubsToDisplay = bookClubs.filter(club => club.name.toLowerCase().includes(search.toLowerCase())).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map(club => {
         return (
             <BookClubCard
                 club={club}
@@ -60,7 +67,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
             });
     }
 
-    let displayCreateNewBookClub = clickedCreate ? <div className="bookClubCard addNew">
+    let newBookClubInputCard = <div className="bookClubCard addNew">
         <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
         <input
             type='url'
@@ -82,14 +89,18 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleClickCreate}>Cancel</button>
         </div>
-    </div> :
-        <div className="bookClubCard addNew">
-            <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
-            <h2>New Club</h2>
-            <hr></hr>
-            <div className="clubDescription">Click below to create a new book club!</div>
-            <button onClick={handleClickCreate}>Create</button>
-        </div>;
+    </div>;
+
+    let newBookClubCard = user.username ? <div className="bookClubCard addNew">
+        <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
+        <h2>New Club</h2>
+        <hr></hr>
+        <div className="clubDescription">Click below to create a new book club!</div>
+        <button onClick={handleClickCreate}>Create</button>
+    </div> : null
+
+    let displayCreateNewBookClub = clickedCreate ? newBookClubInputCard :
+        newBookClubCard;
 
     return (
         <div className="mainContainer">

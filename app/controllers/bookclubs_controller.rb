@@ -1,4 +1,6 @@
 class BookclubsController < ApplicationController
+  skip_before_action :authorize, only: :index
+
   def index
     @bookclubs = Bookclub.all
     render json: @bookclubs, include: ["clubusers.user"]
@@ -26,7 +28,7 @@ class BookclubsController < ApplicationController
     books << params[:book]
     bookclub.update!(books: books)
     clubuser = bookclub.clubusers.find_by(user_id: @current_user.id)
-    render json: clubuser 
+    render json: clubuser
   end
 
   def remove_book

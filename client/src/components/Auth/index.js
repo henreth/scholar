@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function Auth({ setUser, setUserShelves }) {
+export default function Auth({ setUser, setUserShelves, setUserBookClubs }) {
 
     const [formType, setFormType] = useState(true)
     function onFormClick() {
@@ -33,9 +33,12 @@ export default function Auth({ setUser, setUserShelves }) {
                 setUser(r.data)
                 alert('Your account has been created and you are now been logged in!')
                 let shelvesReq = axios.get('/usershelves')
-                axios.all([shelvesReq])
-                    .then(axios.spread((res1) => {
+                let userBookClubsReq = axios.get('/userclubusers')
+                axios.all([shelvesReq, userBookClubsReq])
+                    .then(axios.spread((res1, res2) => {
                         setUserShelves(res1.data)
+                        setUserBookClubs(res2.data)
+                        console.log(res2.data)
                     }))
             })
             .catch(function (error) {
@@ -64,9 +67,11 @@ export default function Auth({ setUser, setUserShelves }) {
                 setUser(r.data)
                 alert('You are now logged in!')
                 let shelvesReq = axios.get('/usershelves')
-                axios.all([shelvesReq])
-                    .then(axios.spread((res1) => {
+                let userBookClubsReq = axios.get('/userclubusers')
+                axios.all([shelvesReq, userBookClubsReq])
+                    .then(axios.spread((res1, res2) => {
                         setUserShelves(res1.data)
+                        setUserBookClubs(res2.data)
                     }))
             })
             .catch(function (error) {
@@ -93,9 +98,11 @@ export default function Auth({ setUser, setUserShelves }) {
             .then((r) => {
                 setUser(r.data)
                 let shelvesReq = axios.get('/usershelves')
-                axios.all([shelvesReq])
-                    .then(axios.spread((res1) => {
+                let userBookClubsReq = axios.get('/userclubusers')
+                axios.all([shelvesReq, userBookClubsReq])
+                    .then(axios.spread((res1, res2) => {
                         setUserShelves(res1.data)
+                        setUserBookClubs(res2.data)
                     }))
             })
             .catch(function (error) {
