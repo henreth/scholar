@@ -60,6 +60,37 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
             });
     }
 
+    let displayCreateNewBookClub = clickedCreate ? <div className="bookClubCard addNew">
+        <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
+        <input
+            type='url'
+            placeholder="Image Link"
+            value={newImage}
+            onChange={(e) => { setNewImage(e.target.value); }} />
+        <input
+            type='text'
+            placeholder="Name"
+            value={newName}
+            onChange={(e) => { setNewName(e.target.value); }} />
+        <hr></hr>
+        <div className="clubCardBottom">
+            <input
+                type='text'
+                placeholder="Description"
+                value={newDescription}
+                onChange={(e) => { setNewDescription(e.target.value); }} />
+            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleClickCreate}>Cancel</button>
+        </div>
+    </div> :
+        <div className="bookClubCard addNew">
+            <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
+            <h2>New Club</h2>
+            <hr></hr>
+            <div className="clubDescription">Click below to create a new book club!</div>
+            <button onClick={handleClickCreate}>Create</button>
+        </div>;
+
     return (
         <div className="mainContainer">
             <SideBar
@@ -83,39 +114,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
                     </div>
                     <div className="clubsContainer">
                         {bookClubsToDisplay}
-                        {clickedCreate ? <div className="bookClubCard addNew">
-                            <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
-                            <input
-                                type='url'
-                                placeholder="Image Link"
-                                value={newImage}
-                                onChange={(e) => { setNewImage(e.target.value) }}
-                            />
-                            <input
-                                type='text'
-                                placeholder="Name"
-                                value={newName}
-                                onChange={(e) => { setNewName(e.target.value) }}
-                            />
-                            <hr></hr>
-                            <div className="clubCardBottom">
-                                <input
-                                    type='text'
-                                    placeholder="Description"
-                                    value={newDescription}
-                                    onChange={(e) => { setNewDescription(e.target.value) }}
-                                />
-                                <button onClick={handleSubmit}>Submit</button>
-                                <button onClick={handleClickCreate}>Cancel</button>
-                            </div>
-                        </div> :
-                            <div className="bookClubCard addNew">
-                                <img className='addNew' src={"https://img.icons8.com/ios-glyphs/100/000000/plus--v1.png"} />
-                                <h2>New Club</h2>
-                                <hr></hr>
-                                <div className="clubDescription">Click below to create a book club!</div>
-                                <button onClick={handleClickCreate}>Create</button>
-                            </div>}
+                        {displayCreateNewBookClub}
                     </div>
                 </div>
 
