@@ -5,16 +5,6 @@ import HomeShelfContainer from "../HomeShelfContainer";
 
 export default function Home({ user, setUser, userShelves,setUserShelves, setBookClubs }) {
     document.title = 'Scholar'
-
-    const handleLogIn = () => {
-        axios.post('/login', {
-            "username": "demouser",
-            "password": "12345"
-        })
-            .then(r => setUser(r.data))
-
-    }
-
     if (!user.username) return (
         <>
             <Auth setUser={setUser} setUserShelves={setUserShelves} setBookClubs={setBookClubs}/>

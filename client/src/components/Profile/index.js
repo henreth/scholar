@@ -174,23 +174,23 @@ export default function Profile({ user, setUser }) {
         }
 
         axios.patch('/users/' + user.id, updatedDetails)
-          .then(r => {
-            setUser(r.data)
-            setProfileUser(r.data)
-            alert('Your account has been updated!')
-          })
-          .catch(function (error) {
-            if (error.response) {
-              console.log(error.response.data.errors);
-              let msg = '';
-              error.response.data.errors.map(error => { msg += error + '\n' })
-              alert(msg)
-            } else if (error.request) {
-              console.log(error.request);
-            } else {
-              console.log('Error', error.message);
-            }
-          });
+            .then(r => {
+                setUser(r.data)
+                setProfileUser(r.data)
+                alert('Your account has been updated!')
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    console.log(error.response.data.errors);
+                    let msg = '';
+                    error.response.data.errors.map(error => { msg += error + '\n' })
+                    alert(msg)
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+            });
     }
 
 
@@ -203,7 +203,10 @@ export default function Profile({ user, setUser }) {
                         {clickedEdit ? <button onClick={handleSubmitChanges}>Submit Changes</button> : null}
                         {yourProfile ? <button onClick={handleClickEdit}>{clickedEdit ? 'Stop Editing' : 'Edit Profile'}</button> : null}
                     </div>
-                    <div className="profilecardsubtitle"> a Scholar since: {profileDateMSG}</div>
+                    <div className="northLower">
+                        <div className="profilecardsubtitle"> a Scholar since: {profileDateMSG}</div>
+                    </div>
+                    <div></div>
                 </div>
                 <hr></hr>
                 <div className="south">

@@ -287,6 +287,56 @@
   margin-right: 3%;
 }
 
+.allReviewsTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sortFilter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1%;
+  margin-right: 2.5%;
+}
+.sortFilter select {
+  margin-top: 0.25%;
+  background-color: rgb(65, 65, 65);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.sortFilter select:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.sortFilter select:active {
+  transform: scale(0.95);
+}
+.sortFilter select:disabled {
+  opacity: 0.35;
+}
+.sortFilter select:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.sortFilter select:disabled:active {
+  transform: scale(1);
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+
 .reviewForm {
   display: flex;
   flex-direction: column;
@@ -805,7 +855,7 @@
   background-color: rgb(67, 174, 219);
   background-color: rgba(128, 128, 128, 0.467);
   height: 125%;
-  width: 20%;
+  width: 25%;
   align-items: center;
   overflow-y: scroll;
 }
@@ -1288,11 +1338,20 @@
 .profilecardtitle button:disabled:active {
   transform: scale(1);
 }
-
 .profilecardsubtitle {
   margin-left: 100px;
-  margin-top: -20px;
   color: rgba(216, 216, 216, 0.85);
+}
+
+.north {
+  display: flex;
+  flex-direction: column;
+}
+
+.northLower {
+  display: flex;
+  flex-direction: column;
+  margin-top: -20px;
 }
 
 .south {
@@ -1377,7 +1436,7 @@
   width: 150px;
 }
 .inputColumn input[type=url] {
-  width: 750px;
+  width: 650px;
 }
 .inputColumn.url {
   align-items: flex-start;
@@ -1539,6 +1598,57 @@
   margin-bottom: 30px;
   align-items: center;
   text-align: center;
+}
+
+.bookClubDescription {
+  margin-left: 100px;
+  color: rgba(216, 216, 216, 0.55);
+}
+.bookClubDescription span {
+  color: rgb(216, 216, 216);
+}
+
+.bookClub {
+  background-color: rgb(15, 15, 15);
+}
+.bookClub .users {
+  background-color: black;
+  padding: 10px;
+}
+
+.bookClubcontainer {
+  margin-top: -5%;
+  background-color: rgb(65, 65, 65);
+  border-radius: 0px 0px 5px 5px;
+}
+.bookClubcontainer h1 {
+  background-color: rgba(128, 128, 128, 0.467);
+  margin-bottom: -1%;
+  padding-left: 25px;
+  transition: 0.5s;
+}
+.bookClubcontainer h1:hover {
+  cursor: pointer;
+  color: white;
+}
+.bookClubcontainer h1 span {
+  font-size: 20px;
+}
+
+.bookclubshelfrow {
+  display: flex;
+  justify-content: flex-start;
+  transform: scale(0.9);
+}
+.bookclubshelfrow h1 {
+  transform: scale(1);
+}
+.bookclubshelfrow .bookContainer {
+  justify-content: flex-start;
+  margin-left: 0%;
+  margin-right: 0%;
+  border-radius: 5px;
+  background-color: rgb(15, 15, 15);
 }
 
 body {

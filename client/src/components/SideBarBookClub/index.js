@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function SideBarBookClub({ club, setUser, book, page }) {
+export default function SideBarBookClub({ club, setUser, book, page, userBookClubs, setUserBookClubs }) {
     let navigate = useNavigate()
     let inClub = club.books.length ? club.books.map(clubBook => clubBook.id).includes(book.id) : false
 
@@ -17,7 +17,6 @@ export default function SideBarBookClub({ club, setUser, book, page }) {
     }
 
     let showOptions = clickedDropDown && <div>
-        {/* <hr></hr> */}
         <div className="sideBarBookClubContent">
             <div className="clubOption">
                 <div onClick={handleClickVisit}>Visit Club Page</div>
@@ -26,7 +25,6 @@ export default function SideBarBookClub({ club, setUser, book, page }) {
                 {page === 'bookpage' && <div onClick={handleSubmit}>{inClub ? 'Remove from' : 'Add to'} Reading List</div>}
             </div>
         </div>
-        {/* <hr></hr> */}
     </div>
 
 
@@ -40,9 +38,10 @@ export default function SideBarBookClub({ club, setUser, book, page }) {
             }
             axios.post('/removebookfromclub', clubUpdate)
                 .then(r => {
-                    setUser(r.data)
+                    let updatedBookClubs = userBookClubs.filter(clubuser => clubuser.id !== r.data.id)
+                    setUserBookClubs([...updatedBookClubs, r.data])
                 })
-            alert('This book has been removed from ' + club.name + '\s reading list.')
+            alert('This book has been removed from the reading list of ' + club.name)
         } else {
             let clubUpdate = {
                 "club_id": club.id,
@@ -50,9 +49,10 @@ export default function SideBarBookClub({ club, setUser, book, page }) {
             }
             axios.post('/addbooktoclub', clubUpdate)
                 .then(r => {
-                    setUser(r.data)
+                    let updatedBookClubs = userBookClubs.filter(clubuser => clubuser.id !== r.data.id)
+                    setUserBookClubs([...updatedBookClubs, r.data])
                 })
-            alert('This book has been added to ' + club.name + '\s reading list')
+            alert('This book has been added to the reading list for ' + club.name)
         }
     }
 

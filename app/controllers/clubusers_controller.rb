@@ -13,7 +13,7 @@ class ClubusersController < ApplicationController
     def destroy
         clubuser = Clubuser.find(params[:id])
         clubuser.destroy
-        header :no_content
+        render json: clubuser
     end
 
     private

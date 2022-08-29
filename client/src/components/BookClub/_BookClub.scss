@@ -1,1 +1,56 @@
 @use "../../styles" as s;
+
+.bookClubDescription {
+  margin-left: 100px;
+  color: rgba(s.$text, 0.55);
+  span{
+    color: s.$text;
+  }
+}
+
+.bookClub {
+  background-color: s.$bg;
+
+  .users {
+    background-color: black;
+    padding: 10px;
+  }
+}
+
+.bookClubcontainer {
+  margin-top: -5%;
+  background-color: s.$dark-alt;
+  border-radius:0px 0px s.$radius s.$radius;
+  h1 {
+    background-color: s.$primary;
+    margin-bottom: -1%;
+    padding-left: 25px;
+    transition: 0.5s;
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
+
+    span {
+      font-size: 20px;
+    }
+  }
+}
+
+
+.bookclubshelfrow {
+    display: flex;
+    justify-content: flex-start;
+    transform: scale(0.9);
+    h1 {
+      transform: scale(1);
+    }
+  
+    .bookContainer {
+      justify-content: flex-start;
+      margin-left: 0%;
+      margin-right: 0%;
+      border-radius: s.$radius;
+      background-color: s.$bg;
+    }
+  }
