@@ -1338,11 +1338,20 @@
 .profilecardtitle button:disabled:active {
   transform: scale(1);
 }
-
 .profilecardsubtitle {
   margin-left: 100px;
-  margin-top: -20px;
   color: rgba(216, 216, 216, 0.85);
+}
+
+.north {
+  display: flex;
+  flex-direction: column;
+}
+
+.northLower {
+  display: flex;
+  flex-direction: column;
+  margin-top: -20px;
 }
 
 .south {
@@ -1589,6 +1598,57 @@
   margin-bottom: 30px;
   align-items: center;
   text-align: center;
+}
+
+.bookClubDescription {
+  margin-left: 100px;
+  color: rgba(216, 216, 216, 0.55);
+}
+.bookClubDescription span {
+  color: rgb(216, 216, 216);
+}
+
+.bookClub {
+  background-color: rgb(15, 15, 15);
+}
+.bookClub .users {
+  background-color: black;
+  padding: 10px;
+}
+
+.bookClubcontainer {
+  margin-top: -5%;
+  background-color: rgb(65, 65, 65);
+  border-radius: 0px 0px 5px 5px;
+}
+.bookClubcontainer h1 {
+  background-color: rgba(128, 128, 128, 0.467);
+  margin-bottom: -1%;
+  padding-left: 25px;
+  transition: 0.5s;
+}
+.bookClubcontainer h1:hover {
+  cursor: pointer;
+  color: white;
+}
+.bookClubcontainer h1 span {
+  font-size: 20px;
+}
+
+.bookclubshelfrow {
+  display: flex;
+  justify-content: flex-start;
+  transform: scale(0.9);
+}
+.bookclubshelfrow h1 {
+  transform: scale(1);
+}
+.bookclubshelfrow .bookContainer {
+  justify-content: flex-start;
+  margin-left: 0%;
+  margin-right: 0%;
+  border-radius: 5px;
+  background-color: rgb(15, 15, 15);
 }
 
 body {

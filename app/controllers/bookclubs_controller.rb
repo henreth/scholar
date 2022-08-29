@@ -4,6 +4,11 @@ class BookclubsController < ApplicationController
     render json: @bookclubs, include: ["clubusers.user"]
   end
 
+  def club_users
+    bookclub = Bookclub.find(params[:id])
+    render json: bookclub.clubusers
+  end
+
   def show
     bookclub = Bookclub.find(params[:id])
     render json: bookclub, include: ["clubusers.user"]
