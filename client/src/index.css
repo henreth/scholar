@@ -3,6 +3,7 @@
   padding-top: 0px;
   background-color: rgb(15, 15, 15);
   height: 87.5vh;
+  border-radius: 5px;
 }
 
 .bookContainer {
