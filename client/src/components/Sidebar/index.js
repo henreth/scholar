@@ -1,13 +1,21 @@
 import SideBarBookClub from "../SideBarBookClub"
 
-export default function SideBar({ user, setUser, pageData, page, userBookClubs }) {
+export default function SideBar({ user, setUser, pageData, page, userBookClubs, setUserBookClubs }) {
 
     if (!user.username) return null
     let bookClubs = userBookClubs ? userBookClubs.map(clubuser => clubuser.bookclub) : []
 
-    let bookClubsToDisplay = bookClubs.length ? bookClubs.map(club => {
+    let bookClubsToDisplay = bookClubs.length ? bookClubs.sort((a,b)=>a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map(club => {
         return (
-            <SideBarBookClub club={club} key={club.id} setUser={setUser} book={pageData} page={page} />
+            <SideBarBookClub
+                club={club}
+                setUser={setUser}
+                book={pageData}
+                page={page}
+                userBookClubs={userBookClubs}
+                setUserBookClubs={setUserBookClubs}
+            />
+
         )
     }) : null
 

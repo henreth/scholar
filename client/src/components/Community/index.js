@@ -17,7 +17,7 @@ export default function Community({ user, setUser, bookClubs, setBookClubs, user
     let [newName, setNewName] = useState('')
     let [newDescription, setNewDescription] = useState('')
 
-    let bookClubsToDisplay = bookClubs.filter(club => club.name.toLowerCase().includes(search.toLowerCase())).map(club => {
+    let bookClubsToDisplay = bookClubs.filter(club => club.name.toLowerCase().includes(search.toLowerCase())).sort((a,b)=>a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map(club => {
 
         return (
             <BookClubCard

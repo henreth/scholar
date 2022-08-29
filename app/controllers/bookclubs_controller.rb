@@ -20,7 +20,8 @@ class BookclubsController < ApplicationController
     books = bookclub.books
     books << params[:book]
     bookclub.update!(books: books)
-    render json: @current_user, include: ["clubusers.bookclub"]
+    clubuser = bookclub.clubusers.find_by(user_id: @current_user.id)
+    render json: clubuser 
   end
 
   def remove_book
@@ -29,7 +30,8 @@ class BookclubsController < ApplicationController
     books = bookclub.books
     filteredBooks = books.filter { |book| book["id"] != bookToRemove }
     bookclub.update!(books: filteredBooks)
-    render json: @current_user, include: ["clubusers.bookclub"]
+    clubuser = bookclub.clubusers.find_by(user_id: @current_user.id)
+    render json: clubuser
   end
 
   def create
