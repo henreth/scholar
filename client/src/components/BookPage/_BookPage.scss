@@ -42,6 +42,66 @@
   }
 }
 
+.allReviewsTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sortFilter {
+  display: flex;
+  flex-direction: column;
+  // justify-content: flex-start;
+  align-items: flex-start;
+  // margin-left: -5%;
+  margin-bottom: 1%;
+  margin-right: 2.5%;
+
+  select {
+    margin-top: 0.25%;
+    // width: 15%;
+    background-color: s.$dark-alt;
+    color: s.$text;
+    border: none;
+    font-size: 15px;
+    padding: 3.5px 7.5px;
+    border-radius: calc(s.$radius/1.5);
+    cursor: pointer;
+    // margin-right: 0.5%;
+    transition: 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: s.$primary;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: (0.35);
+
+      &:hover {
+        transform: scale(1);
+        cursor: default;
+        background-color: s.$dark-alt;
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.filter{
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+
 .reviewForm {
   display: flex;
   flex-direction: column;
@@ -62,7 +122,7 @@
     padding: 3.5px 7.5px;
     border-radius: calc(s.$radius/1.5);
     cursor: pointer;
-    transition: .25s;
+    transition: 0.25s;
 
     &:hover {
       transform: scale(1.05);

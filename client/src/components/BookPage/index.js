@@ -9,7 +9,7 @@ import SideBar from "../Sidebar"
 
 // ! CREATE WAY TO SORT REVIEWS BY DATE/RATING
 
-export default function BookPage({ user, setUser, userShelves, setUserShelves,userBookClubs, setUserBookClubs }) {
+export default function BookPage({ user, setUser, userShelves, setUserShelves, userBookClubs, setUserBookClubs }) {
     let params = useParams()
     let id = params.id
     let [pageData, setPageData] = useState({})
@@ -22,6 +22,16 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
     let [selectedReview, setSelectedReview] = useState('')
 
     let [reviewText, setReviewText] = useState('')
+
+    let [sortTerm, setSortTerm] = useState(1)
+    function handleSortTermChange(e) {
+        setSortTerm(e.target.value)
+    }
+
+    let [filter, setFilter] = useState(true)
+    function handleFilterChange(e) {
+        setFilter(!filter)
+    }
 
     function truncateDecimals(num, digits) {
         let numS = num.toString(),
@@ -83,7 +93,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
         let date = new Date()
         let review = {
             "book_author": pageData.volumeInfo.authors.length ? pageData.volumeInfo.authors[0] : '',
-            "book_name":pageData.volumeInfo.title,
+            "book_name": pageData.volumeInfo.title,
             "book_id": id,
             "user_id": user.id,
             "rating": clickedStars,
@@ -107,8 +117,18 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
     function handleReviewTextChange(e) {
         setReviewText(e.target.value)
     }
-    // bookReviews.sort((a,b)=>b.id-a.id)
-    let reviewsToDisplay = bookReviews.sort((a, b) => b.id - a.id).map(review => {
+
+    let reviewsToDisplay = bookReviews.filter(review => review.text || filter).sort((a, b) => {
+        if (sortTerm == 1) {
+            return b.id - a.id
+        } else if (sortTerm == 2) {
+            return a.id - b.id
+        } else if (sortTerm == 3) {
+            return b.rating - a.rating
+        } else if (sortTerm == 4) {
+            return a.rating - b.rating
+        }
+    }).map(review => {
         function handleClickEdit() {
             if (clickedEdit && review.id === selectedReview) {
                 setClickedStars(0)
@@ -149,7 +169,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
     }
 
 
-    let disableSubmitButton = (clickedStars) && (reviewText)
+    let disableSubmitButton = clickedStars
 
     let bookReviewsRating = bookReviews.reduce((tot, review) => tot + review.rating, 0) / bookReviews.length //average rating of book reviews in the backend
     let calculateBookRating = bookReviews.length ? truncateDecimals(((avgRating * numRatings) + (bookReviewsRating * bookReviews.length)) / (numRatings + bookReviews.length), 2) : avgRating
@@ -187,7 +207,7 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
 
     return (
         <div className="mainContainer">
-            <SideBar 
+            <SideBar
                 user={user}
                 setUser={setUser}
                 pageData={pageData}
@@ -206,10 +226,25 @@ export default function BookPage({ user, setUser, userShelves, setUserShelves,us
                 <div className="reviewContainer">
                     <div className="reviewInfo">
                         <h2>Average Rating: {calculateBookRating} ★ ({totalNumBookReviews})</h2>
-                        {/* <h4>Number of ratings: {numRatings + bookReviews.length}</h4> */}
                         <hr></hr>
                         {displayReviewForm}
-                        <h3>All Reviews: </h3>
+                        <div className="allReviewsTitle">
+                            <h3>All Reviews: </h3>
+                            <div className="sortFilter">
+                                <select
+                                    onChange={handleSortTermChange}
+                                >
+                                    <option value={1}>Latest</option>
+                                    <option value={2}>Earliest</option>
+                                    <option value={3}>Highest Rating</option>
+                                    <option value={4}>Lowest Rating</option>
+                                </select>
+                                {bookReviews.length ? <div className="filter">
+                                    <div>Include No Text: </div>
+                                    <input type='checkbox' checked={filter} onClick={handleFilterChange} />
+                                </div> : null}
+                            </div>
+                        </div>
                         <div className="userReviews">
                             {bookReviewsToDisplay}
                         </div>

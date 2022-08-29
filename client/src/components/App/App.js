@@ -12,18 +12,18 @@ import BookClub from '../BookClub';
 
 export default function App() {
   let [user, setUser] = useState({})
-  let [userShelves,setUserShelves] = useState([])
-  let [userBookClubs,setUserBookClubs] = useState([])
+  let [userShelves, setUserShelves] = useState([])
+  let [userBookClubs, setUserBookClubs] = useState([])
   let [searchResults, setSearchResults] = useState({})
-  let [bookClubs,setBookClubs] = useState([])
+  let [bookClubs, setBookClubs] = useState([])
 
   useEffect(() => {
     let meReq = axios.get('/me')
     let userShelvesReq = axios.get('/usershelves')
     let userBookClubsReq = axios.get('/userclubusers')
     let bookClubsReq = axios.get('/bookclubs')
-    axios.all([meReq,userShelvesReq,userBookClubsReq,bookClubsReq,])
-      .then(axios.spread((res1,res2,res3,res4) => {
+    axios.all([meReq, userShelvesReq, userBookClubsReq, bookClubsReq,])
+      .then(axios.spread((res1, res2, res3, res4) => {
         setUser(res1.data)
         setUserShelves(res2.data)
         setUserBookClubs(res3.data)
@@ -76,6 +76,8 @@ export default function App() {
             setUser={setUser}
             bookClubs={bookClubs}
             setBookClubs={setBookClubs}
+            userBookClubs={userBookClubs}
+            setUserBookClubs={setUserBookClubs}
           />} />
         <Route path='/search/:searchTerm' element={
           <SearchPage
