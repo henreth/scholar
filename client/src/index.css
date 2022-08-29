@@ -210,7 +210,7 @@
   position: absolute;
   text-align: right;
   top: 8.5%;
-  left: 90%;
+  left: 85%;
   background-color: rgba(65, 65, 65, 0.95);
   z-index: 1;
   -webkit-animation: dropDown 0.45s ease-in-out forwards;
@@ -226,6 +226,7 @@
   padding-left: 25px;
   font-size: 17px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 175px;
 }
 
 @-webkit-keyframes dropDown {
@@ -949,9 +950,6 @@
   border-radius: 5px;
 }
 .homeshelfcontainer h2 {
-  color: rgba(216, 216, 216, 0.75);
-  background-color: rgb(15, 15, 15);
-  margin-bottom: -1%;
   transition: 0.5s;
 }
 .homeshelfcontainer h2:hover {
@@ -963,6 +961,54 @@
 }
 .homeshelfcontainer .bookClubCard h2 {
   background-color: transparent;
+}
+
+.homeShelfTitle {
+  color: rgba(216, 216, 216, 0.75);
+  background-color: rgb(15, 15, 15);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.homeShelfTitle button {
+  margin-top: 0.25%;
+  width: 100px;
+  background-color: rgb(65, 65, 65);
+  color: rgba(216, 216, 216, 0.75);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  margin-right: 0.5%;
+  transition: 0.25s;
+}
+.homeShelfTitle button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+  color: rgb(216, 216, 216);
+}
+.homeShelfTitle button:active {
+  transform: scale(0.95);
+}
+.homeShelfTitle button:disabled {
+  opacity: 0.35;
+}
+.homeShelfTitle button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.homeShelfTitle button:disabled:active {
+  transform: scale(1);
+}
+
+.homeShelfButtons {
+  display: flex;
+  flex-direction: row;
+  width: 320px;
+  align-items: center;
 }
 
 * {
@@ -1410,6 +1456,7 @@
   margin-bottom: 1%;
 }
 .profileDisplayAllShelves::-webkit-scrollbar {
+  display: none;
   height: 5px;
 }
 

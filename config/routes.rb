@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get "/usershelves", to: "shelves#user_shelves"
   post "/addbook", to: "shelves#add_book"
   post "/removebook", to: "shelves#remove_book"
-  post "/deleteshelf", to: "shelves#destroy"
+  post "/removeshelf", to: "shelves#destroy"
   post "/clearstatus", to: "shelves#clear_status"
   post "/updatestatus", to: "shelves#update_status"
 

@@ -196,6 +196,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
                 navigate('/community')
             })
     }
+    
     return (
         <div className='profileContainer'>
             <div className="profileCardTop">

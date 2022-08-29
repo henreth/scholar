@@ -17,9 +17,6 @@
   background-color: rgb(0, 0, 0);
   border-radius: s.$radius;
   h2 {
-    color: rgba(s.$text,0.75);
-    background-color: s.$bg;
-    margin-bottom: -1%;
     transition: .5s;
     &:hover {
         cursor: pointer;
@@ -36,4 +33,59 @@
       background-color: transparent;
     }
   }
+}
+
+
+.homeShelfTitle{
+  color: rgba(s.$text,0.75);
+  background-color: s.$bg;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    margin-top: 0.25%;
+    width: 100px;
+    background-color: s.$dark-alt;
+    color: rgba(s.$text,.75);
+    border: none;
+    font-size: 15px;
+    padding: 3.5px 7.5px;
+    border-radius: calc(s.$radius/1.5);
+    cursor: pointer;
+    margin-right: 0.5%;
+    transition: 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: s.$primary;
+      color: s.$text;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: (0.35);
+
+      &:hover {
+        transform: scale(1);
+        cursor: default;
+        background-color: s.$dark-alt;
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.homeShelfButtons{
+  display: flex;
+  flex-direction: row;
+  width: 320px;
+  align-items: center;
 }

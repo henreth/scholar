@@ -16,15 +16,15 @@ export default function Home({ user, setUser, userShelves, setUserShelves, userB
     )
 
 
-    let bookShelvesToDisplay = userShelves.sort((a, b) => a.id - b.id).map(shelf => {
+    let bookShelvesToDisplay = userShelves.sort((a, b) => a.id - b.id).map((shelf,idx) => {
         return (
-            <HomeShelfContainer shelf={shelf} type='shelf' />
+            <HomeShelfContainer shelf={shelf} type='shelf' userShelves={userShelves} setUserShelves={setUserShelves} idx={idx}/>
         )
     })
 
-    let bookClubsToDisplay = userBookClubs.sort((a, b) => a.id - b.id).map(club => {
+    let bookClubsToDisplay = userBookClubs.sort((a, b) => a.id - b.id).map((club,idx) => {
         return (
-            <HomeShelfContainer shelf={club.bookclub} type='club' />
+            <HomeShelfContainer shelf={club.bookclub} type='club' userShelves={userShelves} setUserShelves={setUserShelves} idx={idx}/>
         )
     })
 
