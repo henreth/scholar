@@ -1347,6 +1347,37 @@
   display: flex;
   flex-direction: column;
 }
+.north button {
+  margin-top: 0.25%;
+  width: 15%;
+  background-color: rgb(65, 65, 65);
+  color: rgb(216, 216, 216);
+  border: none;
+  font-size: 15px;
+  padding: 3.5px 7.5px;
+  border-radius: 3.3333333333px;
+  cursor: pointer;
+  margin-right: 0.5%;
+  transition: 0.25s;
+}
+.north button:hover {
+  transform: scale(1.05);
+  background-color: rgba(128, 128, 128, 0.467);
+}
+.north button:active {
+  transform: scale(0.95);
+}
+.north button:disabled {
+  opacity: 0.35;
+}
+.north button:disabled:hover {
+  transform: scale(1);
+  cursor: default;
+  background-color: rgb(65, 65, 65);
+}
+.north button:disabled:active {
+  transform: scale(1);
+}
 
 .northLower {
   display: flex;
@@ -1363,6 +1394,9 @@
 }
 .south h3 {
   border-bottom: 2px solid grey;
+}
+.south.bookClub h3 {
+  margin-top: 0px;
 }
 
 .profileDisplayAllShelves {
@@ -1392,6 +1426,13 @@
   margin-bottom: 2.5%;
 }
 
+.clubUserCard {
+  cursor: pointer;
+}
+.clubUserCard:hover {
+  color: rgba(216, 216, 216, 0.5);
+}
+
 .profileShelfBookToDisplay .bookCard {
   height: 180.5px;
   width: 125px;
@@ -1411,6 +1452,15 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+}
+.inputCard.bookClubPage .inputColumn {
+  align-items: flex-start;
+}
+.inputCard.bookClubPage .inputColumn div {
+  margin-left: 35px;
+}
+.inputCard.bookClubPage .inputColumn input[type=text] {
+  width: 650px;
 }
 
 .inputRow {
@@ -1649,6 +1699,12 @@
   margin-right: 0%;
   border-radius: 5px;
   background-color: rgb(15, 15, 15);
+}
+
+.bookClubButtons {
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 body {

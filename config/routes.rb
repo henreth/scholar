@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post 'addbooktoclub', to: "bookclubs#add_book"
   post 'removebookfromclub', to: "bookclubs#remove_book"
   post 'bookclubusers', to: "bookclubs#club_users"
+  post 'removebookclub', to: "bookclubs#destroy"
 
   #Clubuser
   get 'userclubusers', to: "clubusers#user_clubusers"

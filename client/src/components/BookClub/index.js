@@ -8,11 +8,34 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
     let [bookClub, setBookClub] = useState({})
     let [clubUsers, setClubUsers] = useState([])
     let [clickedEdit, setClickedEdit] = useState(false)
+    let [clickedDelete, setClickedDelete] = useState(false)
+
     const [newName, setNewName] = useState(bookClub.name ? bookClub.name : '')
     const [image, setImage] = useState(bookClub.image ? bookClub.image : '')
+    const [newDescription, setNewDescription] = useState(bookClub.description ? bookClub.description : '')
 
+    function handleConfirmDelete() {
+        let bookClubToDelete = { "id": id }
+        axios.post('/removebookclub', bookClubToDelete)
+            .then(r => {
+                let updatedBookClubs = bookClubs.filter(clubs => clubs.id !== id)
+                setBookClubs(updatedBookClubs)
+                alert(bookClub + ' has been deleted!')
+                setClickedDelete(false)
+                navigate('/community')
+            })
+    }
+
+    function handleDeleteClick() {
+        setClickedDelete(!clickedDelete)
+    }
+
+    function handleClickCancel() {
+        setClickedDelete(false)
+    }
 
     function handleClickEdit() {
+        setClickedDelete(false)
         setClickedEdit(!clickedEdit)
         if (clickedEdit) {
             setNewName(bookClub.name)
@@ -41,7 +64,13 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
         <h1>{bookClub.name}</h1>
     </>
 
-    let editingClubInformatoin = <div className="inputCard">
+    let editClubInfoTop = <div className="inputCard bookClubPage">
+        <div className="inputRow">
+            <div className="inputColumn url">
+                <div>Image URL:</div>
+                <input type='url' className='userInfoInput' placeholder="Image Link" value={image} onChange={(e) => { setImage(e.target.value) }} />
+            </div>
+        </div>
         <div className="inputRow">
             <div className="inputColumn">
                 <div>Name:</div>
@@ -49,12 +78,11 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
             </div>
         </div>
         <div className="inputRow">
-            <div className="inputColumn url">
-                <div>Image URL:</div>
-                <input type='url' className='userInfoInput' placeholder="Image Link" value={image} onChange={(e) => { setImage(e.target.value) }} />
+            <div className="inputColumn descript">
+                <div>Description:</div>
+                <input type='text' className='userInfoInput' placeholder="Description" value={newDescription} onChange={(e) => { setNewDescription(e.target.value) }} />
             </div>
         </div>
-
     </div>
 
     let clubCreationDate = new Date(bookClub.created_at)
@@ -71,16 +99,22 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
             updatedDetails['name'] = newName
         }
 
-
         if (image === '' || image === bookClub.image) {
             setImage(bookClub.image)
         } else {
             updatedDetails['image'] = image
         }
 
+        if (newDescription === '' || newDescription === bookClub.description) {
+            setNewDescription(bookClub.description)
+        } else {
+            updatedDetails['description'] = newDescription
+        }
+
         axios.patch('/bookclubs/' + id, updatedDetails)
             .then(r => {
                 setBookClub(r.data)
+                setClickedEdit(false)
                 alert('Your bookclub has been updated!')
             })
             .catch(function (error) {
@@ -108,7 +142,7 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
         return (
             <div className="profileShelfBookCard">
                 <img src={user.profile_picture} />
-                <div className="profileShelfBookCardTitle" onClick={handleClickProfile}>{user.username}</div>
+                <div className="profileShelfBookCardTitle clubUserCard" onClick={handleClickProfile}>{user.username}</div>
                 <div className="profileShelfBookCardSubTitle" >{user.first_name} {user.last_name}</div>
             </div>
         )
@@ -125,50 +159,59 @@ export default function BookClub({ user, setUser, bookClubs, setBookClubs, userB
 
     function handleClickMembershipButton() {
         if (inClub) {
-            let clubUserId = userBookClubs.find(clubUser=> clubUser.bookclub.id == id).id
-            axios.post('/removeclubuser', {
-                "id":clubUserId
-            })
-            .then(r=>{
-                let updatedClubUsers = clubUsers.filter(clubUser => clubUser != r.data.id)
-                let updatedUserBookClubs= userBookClubs.filter(clubUser=> clubUser != r.data.id)
-                setUserBookClubs(updatedUserBookClubs)
-                setClubUsers(updatedClubUsers)
-            })
+            let clubUserId = userBookClubs.find(clubUser => clubUser.bookclub.id == id).id
+            axios.post('/removeclubuser', { "id": clubUserId })
+                .then(r => {
+                    let updatedClubUsers = clubUsers.filter(clubUser => clubUser.id != r.data.id)
+                    let updatedUserBookClubs = userBookClubs.filter(clubUser => clubUser.id != r.data.id)
+                    setUserBookClubs(updatedUserBookClubs)
+                    setClubUsers(updatedClubUsers)
+                    alert('You have left ' + bookClub.name + '.')
+                })
         } else {
             axios.post('/clubusers', {
                 "bookclub_id": id,
                 "user_id": user.id
             })
-            .then(r=>{
-                setClubUsers([...clubUsers,r.data])
-                setUserBookClubs([...userBookClubs,r.data])
-            })
+                .then(r => {
+                    setClubUsers([...clubUsers, r.data])
+                    setUserBookClubs([...userBookClubs, r.data])
+                    alert('You have joined ' + bookClub.name + '!')
+                })
         }
     }
+    let buttonOptions = clickedDelete ? <div className="bookClubDescription">
+        <span className="reviewbuttonlabel">Are you sure?</span>
+        <button onClick={handleClickCancel}>Cancel</button>
+        <button onClick={handleConfirmDelete}>Confirm</button>
+    </div> : <div>
+        {yourClub ? <button onClick={handleClickEdit}>{clickedEdit ? 'Stop Editing' : 'Edit Information'}</button> : null}
+        {yourClub && !clickedEdit ? <button onClick={handleDeleteClick}>Delete Club</button> : null}
+        {yourClub ? null : <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>}
+    </div>
+    let bookClubButtons = inClub ? buttonOptions : <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>
 
+    let displayBookClubButtons = user.username ? bookClubButtons : null
     return (
         <div className='profileContainer'>
             <div className="profileCardTop">
                 <div className="north">
                     <div className="profilecardtitle">
-                        {clickedEdit ? editingClubInformatoin : clubInformation}
+                        {clickedEdit ? editClubInfoTop : clubInformation}
                         {clickedEdit ? <button onClick={handleSubmitChanges}>Submit Changes</button> : null}
                     </div>
-                    <div className="northLower">
-                        <div className="bookClubDescription"><span>Host:</span> {host.username}</div>
+                    {clickedEdit ? null : <div className="northLower">
+                        <div className="bookClubDescription"><span>Host:</span> {host.first_name} {host.last_name} {'(' + host.username + ')'}</div>
                         <div className="bookClubDescription"><span>Description:</span> {bookClub.description}</div>
                         <div className="bookClubDescription"><span>Since:</span> {clubDateMSG}</div>
-                    </div>
-                    <div>
-                        {yourClub ? <button onClick={handleClickEdit}>{clickedEdit ? 'Stop Editing' : 'Edit Information'}</button> : null}
-                        {yourClub ? <button onClick={handleClickEdit}>{clickedEdit ? 'Stop Editing' : 'Edit Information'}</button> : null}
-                        <button onClick={handleClickMembershipButton}>{inClub ? 'Leave Club' : 'Join Club'}</button>
+                    </div>}
+                    <div className="bookClubButtons">
+                        {displayBookClubButtons}
                     </div>
 
                 </div >
                 <div className="south bookClub">
-                    <h3>Users: {bookClub.clubusers ? bookClub.clubusers.length : 0}</h3>
+                    <h3>Users: {bookClub.clubusers ? clubUsers.length : 0}</h3>
                     <div className="profileDisplayAllShelves users">
                         {displayShelves}
                     </div>
