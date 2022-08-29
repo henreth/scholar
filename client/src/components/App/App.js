@@ -47,6 +47,7 @@ export default function App() {
             setUser={setUser}
             userShelves={userShelves}
             setUserShelves={setUserShelves}
+            userBookClubs={userBookClubs}
             setUserBookClubs={setUserBookClubs}
           />} />
         <Route path='/profile/:username' element={

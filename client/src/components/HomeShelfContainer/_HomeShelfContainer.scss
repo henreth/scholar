@@ -16,7 +16,8 @@
 .homeshelfcontainer {
   background-color: rgb(0, 0, 0);
   border-radius: s.$radius;
-  h1 {
+  h2 {
+    color: rgba(s.$text,0.75);
     background-color: s.$bg;
     margin-bottom: -1%;
     transition: .5s;
@@ -27,6 +28,12 @@
 
     span{
         font-size: 20px;
+    }
+  }
+
+  .bookClubCard{
+    h2{
+      background-color: transparent;
     }
   }
 }
